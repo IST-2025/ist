@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+ {% include "partials/title-meta.html" %}
+ {% include "partials/head-css.html" %}
+</head>
+
+<body class="dark-scheme">
+    <div id="wrapper">
+
+        {% include "partials/preloader.html" %}
+        {% include "partials/header.html" %}
+
+        {% block content %} {% endblock content %}
+               </div>
+            {% include "partials/footer.html" %}
+        </div>
+        {% include "partials/vendor-scripts.html" %}
+        {% block js %} {% endblock js %}
+        
+    </body>
+</html>
