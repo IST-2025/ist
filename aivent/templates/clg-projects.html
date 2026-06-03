@@ -1,379 +1,712 @@
-{% extends "partials/layouts/main.html" %}
+{% extends "partials/layouts/main.html" %} {% block content %}
 
-{% block content %}
+<!-- College Projects Intro Section (Parallax Background) -->
+<section
+  id="section-clg-projects-intro"
+  class="section-dark text-light pb-60 relative jarallax"
+  style="padding-top: 160px"
+>
+  <!-- Background Elements -->
+  <img
+    src="/static/assets/images/background/3.webp"
+    class="jarallax-img"
+    alt="College Projects"
+  />
+  <div class="gradient-edge-top"></div>
+  <div class="gradient-edge-bottom"></div>
+  <div class="sw-overlay op-8"></div>
 
-        <!-- College Projects Intro Section (Parallax Background) -->
-        <section id="section-clg-projects-intro" class="section-dark text-light pb-60 relative jarallax" style="padding-top: 160px;">
-            <!-- Background Elements -->
-            <img src="/static/assets/images/background/3.webp" class="jarallax-img" alt="College Projects">
-            <div class="gradient-edge-top"></div>
-            <div class="gradient-edge-bottom"></div>
-            <div class="sw-overlay op-8"></div>
-            
-            <div class="container relative z-4">
-                <div class="row mb-5 text-center">
-                    <div class="col-md-8 offset-md-2">
-                        <div class="subtitle wow fadeInUp mb-3">Academic Excellence</div>
-                        <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Final Year & College Projects</h2>
-                        <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">Elevate your academic portfolio with industry-standard, scalable, and innovative projects. We provide end-to-end guidance, source code, and deployment support across cutting-edge technologies.</p>
-                    </div>
-                </div>
+  <div class="container relative z-4">
+    <div class="row mb-5 text-center">
+      <div class="col-md-8 offset-md-2">
+        <div class="subtitle wow fadeInUp mb-3">Academic Excellence</div>
+        <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">
+          Final Year & College Projects
+        </h2>
+        <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">
+          Elevate your academic portfolio with industry-standard, scalable, and
+          innovative projects. We provide end-to-end guidance, source code, and
+          deployment support across cutting-edge technologies.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Project Domains Section (Redesigned Premium App-Style UI) -->
+<section
+  id="section-project-domains"
+  class="bg-dark-2 section-dark text-light pt-80 pb-80"
+>
+  <div class="container">
+    <div class="row mb-5 text-center">
+      <div class="col-md-8 offset-md-2">
+        <h3 class="fs-32 mb-3 wow fadeInUp">Explore Project Domains</h3>
+        <p class="text-white-50 wow fadeInUp" data-wow-delay=".2s">
+          Choose from a wide variety of trending technology domains for your
+          mini and major academic projects.
+        </p>
+        <div class="spacer-half"></div>
+      </div>
+    </div>
+
+    <div class="row g-4">
+      <!-- Domain 1: Full Stack -->
+      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
+        <div
+          class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
+        >
+          <!-- Background Watermark -->
+          <i
+            class="icofont-code-alt position-absolute bottom-0 end-0 mb-3 me-3 text-white"
+            style="
+              font-size: 100px;
+              opacity: 0.02;
+              z-index: 0;
+              transform: rotate(-15deg);
+            "
+          ></i>
+
+          <!-- Icon -->
+          <div class="mb-4 position-relative z-2">
+            <div
+              class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
+            >
+              <i class="fs-32 text-white m-0 icofont-code-alt"></i>
             </div>
-        </section>
+          </div>
 
-        <!-- Project Domains Section (Redesigned Premium App-Style UI) -->
-        <section id="section-project-domains" class="bg-dark-2 section-dark text-light pt-80 pb-80">
-            <div class="container">
-                <div class="row mb-5 text-center">
-                    <div class="col-md-8 offset-md-2">
-                        <h3 class="fs-32 mb-3 wow fadeInUp">Explore Project Domains</h3>
-                        <p class="text-white-50 wow fadeInUp" data-wow-delay=".2s">Choose from a wide variety of trending technology domains for your mini and major academic projects.</p>
-                        <div class="spacer-half"></div>
-                    </div>
-                </div>
+          <!-- Title -->
+          <h4 class="mb-3 fs-24 text-white position-relative z-2">
+            Full Stack Applications
+          </h4>
 
-                <div class="row g-4">
-                    <!-- Domain 1: Full Stack -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
-                        <div class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden">
-                            <!-- Background Watermark -->
-                            <i class="icofont-code-alt position-absolute bottom-0 end-0 mb-3 me-3 text-white" style="font-size: 100px; opacity: 0.02; z-index: 0; transform: rotate(-15deg);"></i>
-                            
-                            <!-- Icon -->
-                            <div class="mb-4 position-relative z-2">
-                                <div class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25">
-                                    <i class="fs-32 text-white m-0 icofont-code-alt"></i>
-                                </div>
-                            </div>
-                            
-                            <!-- Title -->
-                            <h4 class="mb-3 fs-24 text-white position-relative z-2">Full Stack Applications</h4>
-                            
-                            <!-- Description (Fixed Text Wrap) -->
-                            <div class="flex-grow-1 position-relative z-2">
-                                <p class="text-white-50 fs-15 lh-base text-wrap" style="white-space: normal; word-wrap: break-word;">Build comprehensive web platforms from scratch. Master both client-side interfaces and server-side logic, creating scalable solutions like booking engines, ERP dashboards, and social networks.</p>
-                            </div>
-                            
-                            <!-- Divider -->
-                            <hr class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2">
-                            
-                            <!-- Badges -->
-                            <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">React / Next.js</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Node.js</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Django</span>
-                            </div>
+          <!-- Description (Fixed Text Wrap) -->
+          <div class="flex-grow-1 position-relative z-2">
+            <p
+              class="text-white-50 fs-15 lh-base text-wrap"
+              style="white-space: normal; word-wrap: break-word"
+            >
+              Build comprehensive web platforms from scratch. Master both
+              client-side interfaces and server-side logic, creating scalable
+              solutions like booking engines, ERP dashboards, and social
+              networks.
+            </p>
+          </div>
 
-                            <!-- Link -->
-                            <a href="#request-project" class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2">
-                                Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
-                            </a>
-                        </div>
-                    </div>
+          <!-- Divider -->
+          <hr
+            class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
+          />
 
-                    <!-- Domain 2: Mobile Applications -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                        <div class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden">
-                            <!-- Background Watermark -->
-                            <i class="icofont-smart-phone position-absolute bottom-0 end-0 mb-3 me-3 text-white" style="font-size: 100px; opacity: 0.02; z-index: 0; transform: rotate(-15deg);"></i>
-                            
-                            <!-- Icon -->
-                            <div class="mb-4 position-relative z-2">
-                                <div class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25">
-                                    <i class="fs-32 text-white m-0 icofont-smart-phone"></i>
-                                </div>
-                            </div>
-                            
-                            <!-- Title -->
-                            <h4 class="mb-3 fs-24 text-white position-relative z-2">Mobile Applications</h4>
-                            
-                            <!-- Description (Fixed Text Wrap) -->
-                            <div class="flex-grow-1 position-relative z-2">
-                                <p class="text-white-50 fs-15 lh-base text-wrap" style="white-space: normal; word-wrap: break-word;">Design and deploy high-performance apps for iOS and Android. Focus on seamless user experiences, real-time cloud syncing, and device hardware integration for modern app ecosystems.</p>
-                            </div>
-                            
-                            <!-- Divider -->
-                            <hr class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2">
-                            
-                            <!-- Badges -->
-                            <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Flutter</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">React Native</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Firebase</span>
-                            </div>
+          <!-- Badges -->
+          <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >React / Next.js</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Node.js</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Django</span
+            >
+          </div>
 
-                            <!-- Link -->
-                            <a href="#request-project" class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2">
-                                Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
-                            </a>
-                        </div>
-                    </div>
+          <!-- Link -->
+          <a
+            href="#request-project"
+            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+          >
+            Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
+          </a>
+        </div>
+      </div>
 
-                    <!-- Domain 3: AI & Machine Learning -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-                        <div class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden">
-                            <!-- Background Watermark -->
-                            <i class="icofont-robot position-absolute bottom-0 end-0 mb-3 me-3 text-white" style="font-size: 100px; opacity: 0.02; z-index: 0; transform: rotate(-15deg);"></i>
-                            
-                            <!-- Icon -->
-                            <div class="mb-4 position-relative z-2">
-                                <div class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25">
-                                    <i class="fs-32 text-white m-0 icofont-robot"></i>
-                                </div>
-                            </div>
-                            
-                            <!-- Title -->
-                            <h4 class="mb-3 fs-24 text-white position-relative z-2">Artificial Intelligence</h4>
-                            
-                            <!-- Description (Fixed Text Wrap) -->
-                            <div class="flex-grow-1 position-relative z-2">
-                                <p class="text-white-50 fs-15 lh-base text-wrap" style="white-space: normal; word-wrap: break-word;">Dive into the future of technology by developing intelligent systems. Train machine learning models for predictive analysis, facial recognition, and automated NLP-driven chatbots.</p>
-                            </div>
-                            
-                            <!-- Divider -->
-                            <hr class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2">
-                            
-                            <!-- Badges -->
-                            <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Python</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">TensorFlow</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">OpenCV</span>
-                            </div>
+      <!-- Domain 2: Mobile Applications -->
+      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+        <div
+          class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
+        >
+          <!-- Background Watermark -->
+          <i
+            class="icofont-smart-phone position-absolute bottom-0 end-0 mb-3 me-3 text-white"
+            style="
+              font-size: 100px;
+              opacity: 0.02;
+              z-index: 0;
+              transform: rotate(-15deg);
+            "
+          ></i>
 
-                            <!-- Link -->
-                            <a href="#request-project" class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2">
-                                Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Domain 4: Cloud Computing -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                        <div class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden">
-                            <!-- Background Watermark -->
-                            <i class="icofont-cloud position-absolute bottom-0 end-0 mb-3 me-3 text-white" style="font-size: 100px; opacity: 0.02; z-index: 0; transform: rotate(-15deg);"></i>
-                            
-                            <!-- Icon -->
-                            <div class="mb-4 position-relative z-2">
-                                <div class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25">
-                                    <i class="fs-32 text-white m-0 icofont-cloud"></i>
-                                </div>
-                            </div>
-                            
-                            <!-- Title -->
-                            <h4 class="mb-3 fs-24 text-white position-relative z-2">Cloud Computing</h4>
-                            
-                            <!-- Description (Fixed Text Wrap) -->
-                            <div class="flex-grow-1 position-relative z-2">
-                                <p class="text-white-50 fs-15 lh-base text-wrap" style="white-space: normal; word-wrap: break-word;">Architect resilient, highly available systems using leading cloud providers. Learn to deploy microservices, manage CI/CD pipelines, and secure enterprise-grade serverless environments.</p>
-                            </div>
-                            
-                            <!-- Divider -->
-                            <hr class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2">
-                            
-                            <!-- Badges -->
-                            <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">AWS / Azure</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Docker</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Kubernetes</span>
-                            </div>
-
-                            <!-- Link -->
-                            <a href="#request-project" class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2">
-                                Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Domain 5: Data Science -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-                        <div class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden">
-                            <!-- Background Watermark -->
-                            <i class="icofont-data position-absolute bottom-0 end-0 mb-3 me-3 text-white" style="font-size: 100px; opacity: 0.02; z-index: 0; transform: rotate(-15deg);"></i>
-                            
-                            <!-- Icon -->
-                            <div class="mb-4 position-relative z-2">
-                                <div class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25">
-                                    <i class="fs-32 text-white m-0 icofont-data"></i>
-                                </div>
-                            </div>
-                            
-                            <!-- Title -->
-                            <h4 class="mb-3 fs-24 text-white position-relative z-2">Data Science & Analytics</h4>
-                            
-                            <!-- Description (Fixed Text Wrap) -->
-                            <div class="flex-grow-1 position-relative z-2">
-                                <p class="text-white-50 fs-15 lh-base text-wrap" style="white-space: normal; word-wrap: break-word;">Extract powerful insights from complex datasets. Build academic projects centered around big data processing, statistical modeling, and interactive business intelligence dashboards.</p>
-                            </div>
-                            
-                            <!-- Divider -->
-                            <hr class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2">
-                            
-                            <!-- Badges -->
-                            <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Pandas</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Power BI</span>
-                                <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13">Big Data</span>
-                            </div>
-
-                            <!-- Link -->
-                            <a href="#request-project" class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2">
-                                Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                    <!-- Domain 6: Custom Projects -->
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                        <div class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden border-top border-4 border-primary">
-                            <!-- Background Watermark -->
-                            <i class="icofont-magic position-absolute bottom-0 end-0 mb-3 me-3 text-white" style="font-size: 100px; opacity: 0.02; z-index: 0; transform: rotate(-15deg);"></i>
-                            
-                            <!-- Icon -->
-                            <div class="mb-4 position-relative z-2">
-                                <div class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25">
-                                    <i class="fs-32 text-white m-0 icofont-magic"></i>
-                                </div>
-                            </div>
-                            
-                            <!-- Title -->
-                            <h4 class="mb-3 fs-24 text-white position-relative z-2">Custom / Open Domain</h4>
-                            
-                            <!-- Description (Fixed Text Wrap) -->
-                            <div class="flex-grow-1 position-relative z-2">
-                                <p class="text-white-50 fs-15 lh-base text-wrap" style="white-space: normal; word-wrap: break-word;">Bring your own innovative concept to life. Whether your base paper explores IoT, Cyber Security, Blockchain, or Web3, we provide the technical expertise to execute your unique vision.</p>
-                            </div>
-                            
-                            <!-- Divider -->
-                            <hr class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2">
-                            
-                            <!-- Badges -->
-                            <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-                                <span class="badge bg-primary text-white border border-primary px-2 py-1 rounded-2 fw-normal fs-13">Your Idea</span>
-                                <span class="badge bg-primary text-white border border-primary px-2 py-1 rounded-2 fw-normal fs-13">Custom Tech Stack</span>
-                            </div>
-
-                            <!-- Link -->
-                            <a href="#request-project" class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2">
-                                Consult With Us <i class="icofont-arrow-right ms-2 fs-18"></i>
-                            </a>
-                        </div>
-                    </div>
-
-                </div>
+          <!-- Icon -->
+          <div class="mb-4 position-relative z-2">
+            <div
+              class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
+            >
+              <i class="fs-32 text-white m-0 icofont-smart-phone"></i>
             </div>
-        </section>
+          </div>
 
-        <!-- Project Inquiry Form Section (Glassmorphism + Parallax UI) -->
-        <section id="request-project" class="section-dark text-light pt-80 pb-100 relative jarallax">
-            <!-- Background Elements -->
-            <img src="/static/assets/images/background/5.webp" class="jarallax-img" alt="">
-            <div class="gradient-edge-top"></div>
-            <div class="gradient-edge-bottom"></div>
-            <div class="sw-overlay op-8"></div>
-            
-            <div class="container relative z-4">
-                <div class="row align-items-center justify-content-between g-5">
-                    
-                    <!-- Left Content -->
-                    <div class="col-lg-5">
-                        <div class="subtitle wow fadeInUp mb-3">Let's Build It</div>
-                        <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Request Your Project</h2>
-                        <p class="text-white-50 mb-4 wow fadeInUp fs-16 lh-lg" data-wow-delay=".3s">Tell us about your academic project requirements. Our technical mentors will reach out to discuss feasibility, technology stacks, and timelines to help you secure top grades.</p>
+          <!-- Title -->
+          <h4 class="mb-3 fs-24 text-white position-relative z-2">
+            Mobile Applications
+          </h4>
 
-                        <div class="bg-dark bg-opacity-50 p-4 rounded-4 border border-secondary border-opacity-25 mt-5 wow fadeInUp" data-wow-delay=".4s">
-                            <h4 class="mb-3 fs-20 text-white"><i class="icofont-star id-color me-2"></i> What You Get</h4>
-                            <ul class="text-white-50 fs-15 lh-lg mb-0 ps-3">
-                                <li>Complete Source Code & Database</li>
-                                <li>Live Deployment & Hosting Support</li>
-                                <li>Project Report & Documentation Assistance</li>
-                                <li>1-on-1 Code Explanation Sessions</li>
-                                <li>On-Time Delivery Guarantee</li>
-                            </ul>
-                        </div>
-                    </div>
+          <!-- Description (Fixed Text Wrap) -->
+          <div class="flex-grow-1 position-relative z-2">
+            <p
+              class="text-white-50 fs-15 lh-base text-wrap"
+              style="white-space: normal; word-wrap: break-word"
+            >
+              Design and deploy high-performance apps for iOS and Android. Focus
+              on seamless user experiences, real-time cloud syncing, and device
+              hardware integration for modern app ecosystems.
+            </p>
+          </div>
 
-                    <!-- Right Form (Glassmorphism UI) -->
-                    <div class="col-lg-6 wow fadeInRight" data-wow-delay=".4s">
-                        <div class="p-5 rounded-4 shadow-lg position-relative overflow-hidden" style="background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1);">
-                            <form name="projectRequestForm" id="project_form" method="post" action="#">
-                                
-                                <h3 class="mb-4 text-white">Submit Requirements</h3>
+          <!-- Divider -->
+          <hr
+            class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
+          />
 
-                                <div class="row g-4">
-                                    <!-- Full Name -->
-                                    <div class="col-md-6">
-                                        <div class="field-set">
-                                            <label class="text-white fs-14 mb-2 fw-bold">Full Name *</label>
-                                            <input type="text" name="name" id="name" class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4" placeholder="Student Name" required>
-                                        </div>
-                                    </div>
+          <!-- Badges -->
+          <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Flutter</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >React Native</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Firebase</span
+            >
+          </div>
 
-                                    <!-- Email -->
-                                    <div class="col-md-6">
-                                        <div class="field-set">
-                                            <label class="text-white fs-14 mb-2 fw-bold">Email Address *</label>
-                                            <input type="email" name="email" id="email" class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4" placeholder="student@college.edu" required>
-                                        </div>
-                                    </div>
+          <!-- Link -->
+          <a
+            href="#request-project"
+            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+          >
+            Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
+          </a>
+        </div>
+      </div>
 
-                                    <!-- Phone -->
-                                    <div class="col-md-6">
-                                        <div class="field-set">
-                                            <label class="text-white fs-14 mb-2 fw-bold">Phone / WhatsApp *</label>
-                                            <input type="text" name="phone" id="phone" class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4" placeholder="+91 98765 43210" required>
-                                        </div>
-                                    </div>
+      <!-- Domain 3: AI & Machine Learning -->
+      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+        <div
+          class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
+        >
+          <!-- Background Watermark -->
+          <i
+            class="icofont-robot position-absolute bottom-0 end-0 mb-3 me-3 text-white"
+            style="
+              font-size: 100px;
+              opacity: 0.02;
+              z-index: 0;
+              transform: rotate(-15deg);
+            "
+          ></i>
 
-                                    <!-- College Name -->
-                                    <div class="col-md-6">
-                                        <div class="field-set">
-                                            <label class="text-white fs-14 mb-2 fw-bold">College / University *</label>
-                                            <input type="text" name="college" id="college" class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4" placeholder="Institution Name" required>
-                                        </div>
-                                    </div>
-
-                                    <!-- Domain Selection -->
-                                    <div class="col-12">
-                                        <div class="field-set">
-                                            <label class="text-white fs-14 mb-2 fw-bold">Select Project Domain *</label>
-                                            <select name="domain" id="domain" class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4" required>
-                                                <option value="" disabled selected class="bg-dark text-white">Choose a domain...</option>
-                                                <option value="Full Stack Web" class="bg-dark text-white">Full Stack Web Application</option>
-                                                <option value="Mobile App" class="bg-dark text-white">Mobile Application</option>
-                                                <option value="Artificial Intelligence" class="bg-dark text-white">Artificial Intelligence / ML</option>
-                                                <option value="Cloud Computing" class="bg-dark text-white">Cloud Computing / DevOps</option>
-                                                <option value="Data Science" class="bg-dark text-white">Data Science & Analytics</option>
-                                                <option value="Custom Idea" class="bg-dark text-white">I have a Custom Idea</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <!-- Project Description -->
-                                    <div class="col-12">
-                                        <div class="field-set mt-2">
-                                            <label class="text-white fs-14 mb-2 fw-bold">Project Description / Idea Details *</label>
-                                            <textarea name="description" id="description" class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4 h-100px" placeholder="Describe what you want to build or paste your base paper topic..." required></textarea>
-                                        </div>
-                                    </div>
-                                </div>
-                                    
-                                <div class="mt-4 pt-3">
-                                    <button type="submit" id="submit_project_form" class="btn-main w-100 py-3 fs-16 rounded-3">Request Consultation</button>
-                                </div>
-
-                                <!-- Success/Error Messages -->
-                                <div id="success_message" class='success mt-3 d-none p-3 bg-success bg-opacity-25 border border-success rounded-3 text-white'>
-                                    <i class="icofont-check-circled me-2"></i> Request submitted successfully! Our mentors will contact you soon.
-                                </div>
-                                <div id="error_message" class='error mt-3 d-none p-3 bg-danger bg-opacity-25 border border-danger rounded-3 text-white'>
-                                    <i class="icofont-exclamation-circle me-2"></i> Sorry, there was an error submitting your request.
-                                </div>
-                            </form>
-                        </div>
-                    </div>
-                </div>
+          <!-- Icon -->
+          <div class="mb-4 position-relative z-2">
+            <div
+              class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
+            >
+              <i class="fs-32 text-white m-0 icofont-robot"></i>
             </div>
-        </section>        
+          </div>
+
+          <!-- Title -->
+          <h4 class="mb-3 fs-24 text-white position-relative z-2">
+            Artificial Intelligence
+          </h4>
+
+          <!-- Description (Fixed Text Wrap) -->
+          <div class="flex-grow-1 position-relative z-2">
+            <p
+              class="text-white-50 fs-15 lh-base text-wrap"
+              style="white-space: normal; word-wrap: break-word"
+            >
+              Dive into the future of technology by developing intelligent
+              systems. Train machine learning models for predictive analysis,
+              facial recognition, and automated NLP-driven chatbots.
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <hr
+            class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
+          />
+
+          <!-- Badges -->
+          <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Python</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >TensorFlow</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >OpenCV</span
+            >
+          </div>
+
+          <!-- Link -->
+          <a
+            href="#request-project"
+            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+          >
+            Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Domain 4: Cloud Computing -->
+      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
+        <div
+          class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
+        >
+          <!-- Background Watermark -->
+          <i
+            class="icofont-cloud position-absolute bottom-0 end-0 mb-3 me-3 text-white"
+            style="
+              font-size: 100px;
+              opacity: 0.02;
+              z-index: 0;
+              transform: rotate(-15deg);
+            "
+          ></i>
+
+          <!-- Icon -->
+          <div class="mb-4 position-relative z-2">
+            <div
+              class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
+            >
+              <i class="fs-32 text-white m-0 icofont-cloud"></i>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <h4 class="mb-3 fs-24 text-white position-relative z-2">
+            Cloud Computing
+          </h4>
+
+          <!-- Description (Fixed Text Wrap) -->
+          <div class="flex-grow-1 position-relative z-2">
+            <p
+              class="text-white-50 fs-15 lh-base text-wrap"
+              style="white-space: normal; word-wrap: break-word"
+            >
+              Architect resilient, highly available systems using leading cloud
+              providers. Learn to deploy microservices, manage CI/CD pipelines,
+              and secure enterprise-grade serverless environments.
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <hr
+            class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
+          />
+
+          <!-- Badges -->
+          <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >AWS / Azure</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Docker</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Kubernetes</span
+            >
+          </div>
+
+          <!-- Link -->
+          <a
+            href="#request-project"
+            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+          >
+            Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Domain 5: Data Science -->
+      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+        <div
+          class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
+        >
+          <!-- Background Watermark -->
+          <i
+            class="icofont-data position-absolute bottom-0 end-0 mb-3 me-3 text-white"
+            style="
+              font-size: 100px;
+              opacity: 0.02;
+              z-index: 0;
+              transform: rotate(-15deg);
+            "
+          ></i>
+
+          <!-- Icon -->
+          <div class="mb-4 position-relative z-2">
+            <div
+              class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
+            >
+              <i class="fs-32 text-white m-0 icofont-data"></i>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <h4 class="mb-3 fs-24 text-white position-relative z-2">
+            Data Science & Analytics
+          </h4>
+
+          <!-- Description (Fixed Text Wrap) -->
+          <div class="flex-grow-1 position-relative z-2">
+            <p
+              class="text-white-50 fs-15 lh-base text-wrap"
+              style="white-space: normal; word-wrap: break-word"
+            >
+              Extract powerful insights from complex datasets. Build academic
+              projects centered around big data processing, statistical
+              modeling, and interactive business intelligence dashboards.
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <hr
+            class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
+          />
+
+          <!-- Badges -->
+          <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Pandas</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Power BI</span
+            >
+            <span
+              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
+              >Big Data</span
+            >
+          </div>
+
+          <!-- Link -->
+          <a
+            href="#request-project"
+            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+          >
+            Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
+          </a>
+        </div>
+      </div>
+
+      <!-- Domain 6: Custom Projects -->
+      <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
+        <div
+          class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden border-top border-4 border-primary"
+        >
+          <!-- Background Watermark -->
+          <i
+            class="icofont-magic position-absolute bottom-0 end-0 mb-3 me-3 text-white"
+            style="
+              font-size: 100px;
+              opacity: 0.02;
+              z-index: 0;
+              transform: rotate(-15deg);
+            "
+          ></i>
+
+          <!-- Icon -->
+          <div class="mb-4 position-relative z-2">
+            <div
+              class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
+            >
+              <i class="fs-32 text-white m-0 icofont-magic"></i>
+            </div>
+          </div>
+
+          <!-- Title -->
+          <h4 class="mb-3 fs-24 text-white position-relative z-2">
+            Custom / Open Domain
+          </h4>
+
+          <!-- Description (Fixed Text Wrap) -->
+          <div class="flex-grow-1 position-relative z-2">
+            <p
+              class="text-white-50 fs-15 lh-base text-wrap"
+              style="white-space: normal; word-wrap: break-word"
+            >
+              Bring your own innovative concept to life. Whether your base paper
+              explores IoT, Cyber Security, Blockchain, or Web3, we provide the
+              technical expertise to execute your unique vision.
+            </p>
+          </div>
+
+          <!-- Divider -->
+          <hr
+            class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
+          />
+
+          <!-- Badges -->
+          <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
+            <span
+              class="badge bg-primary text-white border border-primary px-2 py-1 rounded-2 fw-normal fs-13"
+              >Your Idea</span
+            >
+            <span
+              class="badge bg-primary text-white border border-primary px-2 py-1 rounded-2 fw-normal fs-13"
+              >Custom Tech Stack</span
+            >
+          </div>
+
+          <!-- Link -->
+          <a
+            href="#request-project"
+            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+          >
+            Consult With Us <i class="icofont-arrow-right ms-2 fs-18"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Project Inquiry Form Section (Glassmorphism + Parallax UI) -->
+<section
+  id="request-project"
+  class="section-dark text-light pt-80 pb-100 relative jarallax"
+>
+  <!-- Background Elements -->
+  <img
+    src="/static/assets/images/background/5.webp"
+    class="jarallax-img"
+    alt=""
+  />
+  <div class="gradient-edge-top"></div>
+  <div class="gradient-edge-bottom"></div>
+  <div class="sw-overlay op-8"></div>
+
+  <div class="container relative z-4">
+    <div class="row align-items-center justify-content-between g-5">
+      <!-- Left Content -->
+      <div class="col-lg-5">
+        <div class="subtitle wow fadeInUp mb-3">Let's Build It</div>
+        <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">
+          Request Your Project
+        </h2>
+        <p
+          class="text-white-50 mb-4 wow fadeInUp fs-16 lh-lg"
+          data-wow-delay=".3s"
+        >
+          Tell us about your academic project requirements. Our technical
+          mentors will reach out to discuss feasibility, technology stacks, and
+          timelines to help you secure top grades.
+        </p>
+
+        <div
+          class="bg-dark bg-opacity-50 p-4 rounded-4 border border-secondary border-opacity-25 mt-5 wow fadeInUp"
+          data-wow-delay=".4s"
+        >
+          <h4 class="mb-3 fs-20 text-white">
+            <i class="icofont-star id-color me-2"></i> What You Get
+          </h4>
+          <ul class="text-white-50 fs-15 lh-lg mb-0 ps-3">
+            <li>Complete Source Code & Database</li>
+            <li>Live Deployment & Hosting Support</li>
+            <li>Project Report & Documentation Assistance</li>
+            <li>1-on-1 Code Explanation Sessions</li>
+            <li>On-Time Delivery Guarantee</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Right Form (Glassmorphism UI) -->
+      <div class="col-lg-6 wow fadeInRight" data-wow-delay=".4s">
+        <div
+          class="p-5 rounded-4 shadow-lg position-relative overflow-hidden"
+          style="
+            background: rgba(20, 20, 20, 0.7);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+          "
+        >
+          {% with messages = get_flashed_messages(with_categories=true) %} {% if
+          messages %} {% for category, message in messages %}
+          <div
+            class="alert alert-{{ 'success' if category == 'success' else 'danger' }} mb-4 rounded-3 text-white bg-{{ 'success' if category == 'success' else 'danger' }} bg-opacity-25 border border-{{ 'success' if category == 'success' else 'danger' }} p-3"
+          >
+            <i
+              class="icofont-{{ 'check-circled' if category == 'success' else 'exclamation-circle' }} me-2"
+            ></i>
+            {{ message }}
+          </div>
+          {% endfor %} {% endif %} {% endwith %}
+
+          <form
+            name="projectRequestForm"
+            id="project_form"
+            method="POST"
+            action="{{ url_for('public_pages.projects') }}"
+          >
+            <h3 class="mb-4 text-white">Submit Requirements</h3>
+
+            <div class="row g-4">
+              <div class="col-md-6">
+                <div class="field-set">
+                  <label class="text-white fs-14 mb-2 fw-bold"
+                    >Full Name *</label
+                  >
+                  <input
+                    type="text"
+                    name="name"
+                    id="name"
+                    class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
+                    placeholder="Student Name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="field-set">
+                  <label class="text-white fs-14 mb-2 fw-bold"
+                    >Email Address *</label
+                  >
+                  <input
+                    type="email"
+                    name="email"
+                    id="email"
+                    class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
+                    placeholder="student@college.edu"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="field-set">
+                  <label class="text-white fs-14 mb-2 fw-bold"
+                    >Phone / WhatsApp *</label
+                  >
+                  <input
+                    type="text"
+                    name="phone"
+                    id="phone"
+                    class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
+                    placeholder="+91 98765 43210"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="col-md-6">
+                <div class="field-set">
+                  <label class="text-white fs-14 mb-2 fw-bold"
+                    >College / University *</label
+                  >
+                  <input
+                    type="text"
+                    name="college"
+                    id="college"
+                    class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
+                    placeholder="Institution Name"
+                    required
+                  />
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field-set">
+                  <label class="text-white fs-14 mb-2 fw-bold"
+                    >Select Project Domain *</label
+                  >
+                  <select
+                    name="domain"
+                    id="domain"
+                    class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
+                    required
+                  >
+                    <option
+                      value=""
+                      disabled
+                      selected
+                      class="bg-dark text-white"
+                    >
+                      Choose a domain...
+                    </option>
+                    <option value="Full Stack Web" class="bg-dark text-white">
+                      Full Stack Web Application
+                    </option>
+                    <option value="Mobile App" class="bg-dark text-white">
+                      Mobile Application
+                    </option>
+                    <option
+                      value="Artificial Intelligence"
+                      class="bg-dark text-white"
+                    >
+                      Artificial Intelligence / ML
+                    </option>
+                    <option value="Cloud Computing" class="bg-dark text-white">
+                      Cloud Computing / DevOps
+                    </option>
+                    <option value="Data Science" class="bg-dark text-white">
+                      Data Science & Analytics
+                    </option>
+                    <option value="Custom Idea" class="bg-dark text-white">
+                      I have a Custom Idea
+                    </option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="col-12">
+                <div class="field-set mt-2">
+                  <label class="text-white fs-14 mb-2 fw-bold"
+                    >Project Description / Idea Details *</label
+                  >
+                  <textarea
+                    name="description"
+                    id="description"
+                    class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4 h-100px"
+                    placeholder="Describe what you want to build or paste your base paper topic..."
+                    required
+                  ></textarea>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-4 pt-3">
+              <button
+                type="submit"
+                id="submit_project_form"
+                class="btn-main w-100 py-3 fs-16 rounded-3"
+              >
+                Request Consultation
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
 {% endblock content %}
