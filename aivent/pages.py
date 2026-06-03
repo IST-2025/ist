@@ -1,11 +1,13 @@
 import os
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash  # <-- Added for passwords
+from flask_login import login_user, logout_user, current_user              # <-- Added for login sessions
 import uuid
 import requests
 
 # Import your models
-from .models import Contact, ProjectRequest, JobApplication, InternshipApplication
+from .models import Contact, ProjectRequest, JobApplication, InternshipApplication, User
 from . import db
 
 # Define the Blueprint
@@ -225,3 +227,48 @@ def privacy_policy():
 @public_pages.route('/terms')
 def terms():
     return render_template('terms.html')
+
+# -----------------------------------------------------------
+# Admin & Authentication Routes
+# -----------------------------------------------------------
+@public_pages.route('/setup-admin')
+def setup_admin():
+    try:
+        # Check if admin already exists
+        admin_exists = User.query.filter_by(username='admin').first()
+        if not admin_exists:
+            # Securely hash the password
+            hashed_pw = generate_password_hash('admin123')
+            new_admin = User(username='admin', email='admin@ist.com', password=hashed_pw)
+            db.session.add(new_admin)
+            db.session.commit()
+            return "<h3>Admin user created!</h3><p>Username: <b>admin</b> | Password: <b>admin123</b></p><br><a href='/login'>Go to Login</a>"
+        return "<h3>Admin already exists.</h3><a href='/login'>Go to Login</a>"
+    
+    except Exception as e:
+        # If Vercel crashes here, it will print the exact error to your screen!
+        return f"<h3>Database Error:</h3><p>{str(e)}</p>"
+
+@public_pages.route('/login', methods=['GET', 'POST'])
+def login():
+    if current_user.is_authenticated:
+        return redirect('/admin')
+
+    if request.method == 'POST':
+        username = request.form.get('username')
+        password = request.form.get('password')
+        
+        user = User.query.filter_by(username=username).first()
+        
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            return redirect('/admin')
+        else:
+            flash('Invalid username or password', 'error')
+            
+    return render_template('admin_login.html')
+
+@public_pages.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('public_pages.login'))
