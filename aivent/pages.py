@@ -5,7 +5,7 @@ from werkzeug.security import generate_password_hash, check_password_hash  # <--
 from flask_login import login_user, logout_user, current_user              # <-- Added for login sessions
 import uuid
 import requests
-
+from sqlalchemy import text
 # Import your models
 from .models import Contact, ProjectRequest, JobApplication, InternshipApplication, User
 from . import db
@@ -234,7 +234,11 @@ def terms():
 @public_pages.route('/setup-admin')
 def setup_admin():
     try:
-        # Check if admin already exists
+        # 1. Expand the database column to fit the long password hash
+        db.session.execute(text('ALTER TABLE "user" ALTER COLUMN password TYPE VARCHAR(255);'))
+        db.session.commit()
+
+        # 2. Check if admin already exists
         admin_exists = User.query.filter_by(username='admin').first()
         if not admin_exists:
             # Securely hash the password
@@ -243,11 +247,14 @@ def setup_admin():
             db.session.add(new_admin)
             db.session.commit()
             return "<h3>Admin user created!</h3><p>Username: <b>admin</b> | Password: <b>admin123</b></p><br><a href='/login'>Go to Login</a>"
+        
         return "<h3>Admin already exists.</h3><a href='/login'>Go to Login</a>"
     
     except Exception as e:
-        # If Vercel crashes here, it will print the exact error to your screen!
+        db.session.rollback() # Safely rollback if something goes wrong
         return f"<h3>Database Error:</h3><p>{str(e)}</p>"
+
+
 
 @public_pages.route('/login', methods=['GET', 'POST'])
 def login():
