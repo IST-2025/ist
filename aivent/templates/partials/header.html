@@ -4,7 +4,6 @@
             <div class="col-md-12">
                 <div class="de-flex">
                     
-                    <!-- Logo Column -->
                     <div class="de-flex-col">
                         <div id="logo">
                             <a href="/">
@@ -15,36 +14,28 @@
                         </div>
                     </div>
 
-                    <!-- Navigation Menu Column -->
                     <div class="de-flex-col header-col-mid">
                         <ul id="mainmenu">
-                            <li><a class="menu-item active" href="/">Home</a></li>
+                            <li><a class="menu-item" href="/">Home</a></li>
                             <li><a class="menu-item" href="about">About</a></li>
- <li><a class="menu-item" href="#">Services</a>
+                            <li><a class="menu-item" href="#">Services</a>
                                 <ul>
                                     <li><a class="menu-item" href="services">Core Services</a></li>
                                     <li><a class="menu-item" href="projects">College - Final Year Projects</a></li>
-                                    
                                 </ul>
                             </li>
-
-
                             <li><a class="menu-item" href="products">Products</a></li>
                             
-                            <!-- Careers Dropdown -->
                             <li><a class="menu-item" href="#">Careers</a>
                                 <ul>
                                     <li><a class="menu-item" href="join-us">Join Us</a></li>
                                     <li><a class="menu-item" href="interns">Interns</a></li>
-                                    
                                 </ul>
                             </li>
                         </ul>
                     </div>
 
-                    <!-- Call to Action / Mobile Menu Column -->
                     <div class="de-flex-col">
-                        <!-- Changed "Buy Tickets" to "Get In Touch" -->
                         <a class="btn-main fx-slide ms-3" href="contact"><span>Get In Touch</span></a>
 
                         <div class="menu_side_area">
@@ -57,3 +48,33 @@
         </div>
     </div>
 </header>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        // Get the full URL of the current page
+        const currentLocation = window.location.href;
+        
+        // Select all links inside the main menu
+        const menuItems = document.querySelectorAll("#mainmenu a.menu-item");
+
+        menuItems.forEach(item => {
+            // Check if the link's href matches the current URL
+            if (item.href === currentLocation) {
+                // Add the active class to the current page's link
+                item.classList.add("active");
+                
+                // If this is a submenu item (like "Interns"), make the parent ("Careers") active too
+                const parentUl = item.closest("ul");
+                if (parentUl && parentUl.id !== "mainmenu") {
+                    const parentLi = parentUl.closest("li");
+                    if (parentLi) {
+                        const parentLink = parentLi.querySelector("a.menu-item");
+                        if (parentLink) {
+                            parentLink.classList.add("active");
+                        }
+                    }
+                }
+            }
+        });
+    });
+</script>
