@@ -2,287 +2,333 @@
 
 {% block content %}
 
-
+<!-- Custom CSS for Premium Project List UI -->
+<style>
+    /* Subtle hover effect for project rows */
+    .custom-project-row {
+        background-color: transparent;
+        border-radius: 12px;
+        transition: all 0.3s ease;
+    }
+    .custom-project-row:hover {
+        background-color: rgba(122, 90, 248, 0.05); /* Very subtle purple tint */
+        transform: translateY(-3px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        border-color: rgba(122, 90, 248, 0.2) !important;
+    }
+    
+    /* Modern badges for the tech stack */
+    .tech-badge {
+        background-color: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        color: #a1a1a1;
+        font-size: 12px;
+        padding: 4px 10px;
+        border-radius: 6px;
+        font-weight: 400;
+        letter-spacing: 0.5px;
+    }
+</style>
 
 <!-- Completed Projects Portfolio (Redesigned Premium List UI) -->
-<section id="section-portfolio" class="bg-dark-2 section-dark text-light pt-120 pb-80">
+<section id="section-portfolio" class="bg-dark-2 section-dark text-light pb-80" style="padding-top: 160px;">
     <div class="container">
+        
+        <!-- Updated Header Section -->
         <div class="row mb-5 text-center">
-            <div class="col-md-12">
-                <div class="subtitle wow fadeInUp mb-3">Our Work</div>
-                <h2 class="wow fadeInUp" data-wow-delay=".2s">Completed Web Platforms</h2>
-                <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">A diverse directory of live websites and
-                    applications built by our expert team.</p>
+            <div class="col-md-8 offset-md-2">
+              
+                <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Completed Projects</h2>
+                <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">
+                    A diverse directory of live mobile applications, web platforms, and custom digital solutions engineered by our expert team.
+                </p>
             </div>
         </div>
 
         <!-- Interactive List Container -->
-        <div class="border-top border-secondary border-opacity-25 mt-4">
+        <div class="border-top border-secondary border-opacity-25 mt-2">
 
-
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Banking Mobile App</div>
-                    <h4 class="fs-20 mb-0">SBI</h4>
+            <!-- Item: SBI -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Banking Mobile App</div>
+                    <h4 class="fs-22 mb-0 text-white">SBI</h4>
                 </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i>A highly secure,
-                        robust mobile banking software service tailored for SBI. Features seamless financial
-                        transactions, multi-factor authentication, and an intuitive user interface for modern banking.
-
-                    </span>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <p class="text-white-50 fs-15 mb-2 lh-lg">
+                        A highly secure, robust mobile banking software service tailored for SBI. Features seamless financial transactions, multi-factor authentication, and an intuitive user interface for modern banking.
+                    </p>
                 </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.sbi.com" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
+                <div class="col-lg-2 text-lg-end mt-2 mt-lg-0">
+                    <a href="https://www.sbi.com" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
                 </div>
             </div>
 
-
-
-
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">School Exam Application</div>
-                    <h4 class="fs-20 mb-0">GOVT School</h4>
+            <!-- Item: GOVT School -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">School Exam App</div>
+                    <h4 class="fs-22 mb-0 text-white">GOVT School</h4>
                 </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i>A comprehensive
-                        digital assessment platform for educational institutions. Supports real-time grading, secure
-                        exam environments (anti-cheat functionalities), and detailed student performance analytics.
-
-                    </span>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <p class="text-white-50 fs-15 mb-2 lh-lg">
+                        A comprehensive digital assessment platform for educational institutions. Supports real-time grading, secure exam environments (anti-cheat functionalities), and detailed student performance analytics.
+                    </p>
                 </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.sbi.com" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
+                <div class="col-lg-2 text-lg-end mt-2 mt-lg-0">
+                    <a href="https://www.sbi.com" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
                 </div>
             </div>
 
-
-
-
-
-            <!-- Item 1 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Robotics & AI Academy</div>
-                    <h4 class="fs-20 mb-0">Otomatiks</h4>
+            <!-- Item 1: Otomatiks -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Robotics & AI Academy</div>
+                    <h4 class="fs-22 mb-0 text-white">Otomatiks</h4>
                 </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> Next.js, Tailwind
-                        CSS, Google App Script, Contentful CMS, Pabbly Connect, SEO</span>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">Next.js</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                        <span class="tech-badge">Google App Script</span>
+                        <span class="tech-badge">Contentful CMS</span>
+                        <span class="tech-badge">Pabbly Connect</span>
+                        <span class="tech-badge">SEO</span>
+                    </div>
                 </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.otomatiks.com" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
-                </div>
-            </div>
-
-            <!-- Item 2 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Corporate Website</div>
-                    <h4 class="fs-20 mb-0">Firstchoice Supplies</h4>
-                </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> Next.js, Tailwind
-                        CSS, Google App Script</span>
-                </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.firstchoice.supplies" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.otomatiks.com" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
                 </div>
             </div>
 
-            <!-- Item 3 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Library and Organization</div>
-                    <h4 class="fs-20 mb-0">Book Buddy</h4>
+            <!-- Item 2: Firstchoice Supplies -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Corporate Website</div>
+                    <h4 class="fs-22 mb-0 text-white">Firstchoice Supplies</h4>
                 </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> Django,
-                        Cloudinary, Render, Admin Panel (CMS), User Auth</span>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">Next.js</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                        <span class="tech-badge">Google App Script</span>
+                    </div>
                 </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.book-buddy.in" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
-                </div>
-            </div>
-
-            <!-- Item 4 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Robotica Event</div>
-                    <h4 class="fs-20 mb-0">Otomatiks Eval</h4>
-                </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> Flask, Python,
-                        Neon, User Auth, Admin Panel Control (CMS)</span>
-                </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.arun-evaluation.vercel.app" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.firstchoice.supplies" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
                 </div>
             </div>
 
-            <!-- Item 5 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">FlipBook</div>
-                    <h4 class="fs-20 mb-0">Book Buddy Reader</h4>
+            <!-- Item 3: Book Buddy -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Library & Organization</div>
+                    <h4 class="fs-22 mb-0 text-white">Book Buddy</h4>
                 </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> Node.js, Python,
-                        Blob Storage, Neon, Vercel</span>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">Django</span>
+                        <span class="tech-badge">Cloudinary</span>
+                        <span class="tech-badge">Render</span>
+                        <span class="tech-badge">Admin Panel (CMS)</span>
+                        <span class="tech-badge">User Auth</span>
+                    </div>
                 </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.flip-book-frontend.vercel.app" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
-                </div>
-            </div>
-
-            <!-- Item 6 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Event Website</div>
-                    <h4 class="fs-20 mb-0">Robotica 2026</h4>
-                </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> HTML, CSS, JS,
-                        Tailwind CSS, Google App Script</span>
-                </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.robotica.org.in" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.book-buddy.in" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
                 </div>
             </div>
 
-            <!-- Item 7 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Academy Portal</div>
-                    <h4 class="fs-20 mb-0">Qbee Academy</h4>
+            <!-- Item 4: Otomatiks Eval -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Robotica Event</div>
+                    <h4 class="fs-22 mb-0 text-white">Otomatiks Eval</h4>
                 </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> React.js,
-                        Bootstrap, Google App Script</span>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Neon DB</span>
+                        <span class="tech-badge">User Auth</span>
+                        <span class="tech-badge">Admin Panel (CMS)</span>
+                    </div>
                 </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.qbeeacademy.in" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
-                </div>
-            </div>
-
-            <!-- Item 8 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Play School</div>
-                    <h4 class="fs-20 mb-0">SK Kids</h4>
-                </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> HTML, CSS, JS,
-                        Tailwind CSS, Google App Script</span>
-                </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.skkidsplayschool.com" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.arun-evaluation.vercel.app" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
                 </div>
             </div>
 
-            <!-- Item 9 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">E-Learning Platform</div>
-                    <h4 class="fs-20 mb-0">Otomatiks Course</h4>
+            <!-- Item 5: Book Buddy Reader -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">FlipBook Application</div>
+                    <h4 class="fs-22 mb-0 text-white">Book Buddy Reader</h4>
                 </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> React.js,
-                        Bootstrap, Clerk, User Based Authentication</span>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">Node.js</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Azure Blob Storage</span>
+                        <span class="tech-badge">Neon DB</span>
+                        <span class="tech-badge">Vercel</span>
+                    </div>
                 </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.otomatikscourse.shop" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
-                </div>
-            </div>
-
-            <!-- Item 10 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Digital Coding Platform</div>
-                    <h4 class="fs-20 mb-0">Copack Online</h4>
-                </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> Flask, Python,
-                        Admin Panel (CMS), User Auth</span>
-                </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.copack.online" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.flip-book-frontend.vercel.app" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
                 </div>
             </div>
 
-            <!-- Item 11 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Event Portal</div>
-                    <h4 class="fs-20 mb-0">Dreamland Entertainment</h4>
+            <!-- Item 6: Robotica 2026 -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Event Website</div>
+                    <h4 class="fs-22 mb-0 text-white">Robotica 2026</h4>
                 </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> Flask, Python,
-                        Admin Panel (CMS), User Auth</span>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                        <span class="tech-badge">Google App Script</span>
+                    </div>
                 </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.dreamlandentertainment.org" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
-                </div>
-            </div>
-
-            <!-- Item 12 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Community Platform</div>
-                    <h4 class="fs-20 mb-0">Eco Challenge Hub</h4>
-                </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> Flask, Python,
-                        Admin Panel (CMS), User Auth</span>
-                </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.ecochallengehub.online" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.robotica.org.in" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
                 </div>
             </div>
 
-            <!-- Item 13 -->
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center hover-bg-color transition-all px-2 px-lg-4 wow fadeInUp"
-                data-wow-delay=".1s">
-                <div class="col-lg-4 mb-3 mb-lg-0">
-                    <div class="text-white-50 fs-12 text-uppercase letter-spacing-1 mb-1">Car Service Portal</div>
-                    <h4 class="fs-20 mb-0">Mech Zone</h4>
+            <!-- Item 7: Qbee Academy -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Academy Portal</div>
+                    <h4 class="fs-22 mb-0 text-white">Qbee Academy</h4>
                 </div>
-                <div class="col-lg-5 mb-3 mb-lg-0">
-                    <span class="text-white-50 fs-14"><i class="icofont-code id-color me-2 fs-18"></i> Flask, Python,
-                        Admin Panel (CMS), User Auth</span>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">React.js</span>
+                        <span class="tech-badge">Bootstrap 5</span>
+                        <span class="tech-badge">Google App Script</span>
+                    </div>
                 </div>
-                <div class="col-lg-3 text-lg-end">
-                    <a href="https://www.mechzoneautomotive.shop" target="_blank"
-                        class="btn-main btn-sm btn-line bg-white text-dark fx-slide"><span>View Live</span></a>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.qbeeacademy.in" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
+                </div>
+            </div>
+
+            <!-- Item 8: SK Kids -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Play School</div>
+                    <h4 class="fs-22 mb-0 text-white">SK Kids</h4>
+                </div>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">HTML5</span>
+                        <span class="tech-badge">CSS3</span>
+                        <span class="tech-badge">JavaScript</span>
+                        <span class="tech-badge">Tailwind CSS</span>
+                        <span class="tech-badge">Google App Script</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.skkidsplayschool.com" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
+                </div>
+            </div>
+
+            <!-- Item 9: Otomatiks Course -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">E-Learning Platform</div>
+                    <h4 class="fs-22 mb-0 text-white">Otomatiks Course</h4>
+                </div>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">React.js</span>
+                        <span class="tech-badge">Bootstrap 5</span>
+                        <span class="tech-badge">Clerk Auth</span>
+                        <span class="tech-badge">User Database</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.otomatikscourse.shop" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
+                </div>
+            </div>
+
+            <!-- Item 10: Copack Online -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Digital Coding Platform</div>
+                    <h4 class="fs-22 mb-0 text-white">Copack Online</h4>
+                </div>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Admin Panel (CMS)</span>
+                        <span class="tech-badge">User Auth</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.copack.online" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
+                </div>
+            </div>
+
+            <!-- Item 11: Dreamland Entertainment -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Event Portal</div>
+                    <h4 class="fs-22 mb-0 text-white">Dreamland Entertainment</h4>
+                </div>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Admin Panel (CMS)</span>
+                        <span class="tech-badge">User Auth</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.dreamlandentertainment.org" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
+                </div>
+            </div>
+
+            <!-- Item 12: Eco Challenge Hub -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Community Platform</div>
+                    <h4 class="fs-22 mb-0 text-white">Eco Challenge Hub</h4>
+                </div>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Admin Panel (CMS)</span>
+                        <span class="tech-badge">User Auth</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.ecochallengehub.online" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
+                </div>
+            </div>
+
+            <!-- Item 13: Mech Zone -->
+            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row px-3 px-lg-4 wow fadeInUp" data-wow-delay=".1s">
+                <div class="col-lg-3 mb-3 mb-lg-0">
+                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">Car Service Portal</div>
+                    <h4 class="fs-22 mb-0 text-white">Mech Zone</h4>
+                </div>
+                <div class="col-lg-7 mb-3 mb-lg-0">
+                    <div class="d-flex flex-wrap gap-2">
+                        <span class="tech-badge">Flask</span>
+                        <span class="tech-badge">Python</span>
+                        <span class="tech-badge">Admin Panel (CMS)</span>
+                        <span class="tech-badge">User Auth</span>
+                    </div>
+                </div>
+                <div class="col-lg-2 text-lg-end mt-3 mt-lg-0">
+                    <a href="https://www.mechzoneautomotive.shop" target="_blank" class="btn-main btn-sm text-white border-0" style="background-color: #7A5AF8;"><span>View Live <i class="icofont-external-link ms-1"></i></span></a>
                 </div>
             </div>
 
@@ -290,13 +336,13 @@
     </div>
 </section>
 
-<!-- Call to Action Banner -->
-<section class="bg-color text-light pt-60 pb-60">
-    <div class="container">
+<!-- Call to Action Banner (Z-index fixed) -->
+<section class="bg-color text-light pt-60 pb-60 position-relative z-1">
+    <div class="container position-relative z-2">
         <div class="row align-items-center">
             <div class="col-lg-8 mb-sm-30 text-center text-lg-start wow fadeInLeft">
                 <h3 class="mb-0">Ready to start your next project?</h3>
-                <p class="mb-0 text-white-50 mt-2">Let our expert development team turn your vision into a reality.</p>
+                <p class="mb-0 text-white-50 mt-2">Let our expert development team turn your vision into a scalable digital reality.</p>
             </div>
             <div class="col-lg-4 text-center text-lg-end wow fadeInRight">
                 <a href="contact" class="btn-main btn-line bg-white text-dark fx-slide"><span>Start a Project</span></a>

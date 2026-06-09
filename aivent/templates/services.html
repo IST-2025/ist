@@ -2,7 +2,6 @@
 
 {% block content %}
 
-        <!-- Core Services Section (Redesigned Premium Card UI) -->
         <section id="section-core-services" class="bg-dark-2 section-dark text-light pb-80 relative jarallax" style="padding-top: 160px;">
 
             <img src="/static/assets/images/background/1.webp" class="jarallax-img" alt="">
@@ -13,17 +12,15 @@
             <div class="container relative z-4">
                 <div class="row mb-5 text-center">
                     <div class="col-md-8 offset-md-2">
-                        <div class="subtitle wow fadeInUp mb-3">What We Do</div>
+                     
                         <h2 class="wow fadeInUp" data-wow-delay=".2s">Our Core Services</h2>
                         <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">Expert, tailored technology solutions designed to optimize your operations and drive your business forward in the digital landscape.</p>
                     </div>
                 </div>
 
                 <div class="row g-4">
-                    <!-- Service 1 -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
                         <div class="bg-dark p-5 rounded-4 h-100 position-relative overflow-hidden border border-secondary border-opacity-10 transition-all hover-scale-1-1">
-                            <!-- Background Watermark -->
                             <i class="icofont-code position-absolute top-0 end-0 mt-3 me-3 text-white" style="font-size: 80px; opacity: 0.03; z-index: 0; transform: rotate(15deg);"></i>
                             
                             <div class="position-relative z-2">
@@ -32,15 +29,13 @@
                                 </div>
                                 <h4 class="mb-3 fs-22 text-white">Software Development</h4>
                                 <p class="mb-4 text-white-50 fs-15 lh-lg">We engineer custom, highly scalable software solutions tailored precisely to meet your unique operational workflows and industry requirements.</p>
-                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
+                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1" data-bs-toggle="modal" data-bs-target="#serviceModal1" style="cursor: pointer;">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Service 2 -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                         <div class="bg-dark p-5 rounded-4 h-100 position-relative overflow-hidden border border-secondary border-opacity-10 transition-all hover-scale-1-1">
-                            <!-- Background Watermark -->
                             <i class="icofont-cloud position-absolute top-0 end-0 mt-3 me-3 text-white" style="font-size: 80px; opacity: 0.03; z-index: 0; transform: rotate(15deg);"></i>
                             
                             <div class="position-relative z-2">
@@ -49,15 +44,13 @@
                                 </div>
                                 <h4 class="mb-3 fs-22 text-white">Cloud Solutions</h4>
                                 <p class="mb-4 text-white-50 fs-15 lh-lg">Experience seamless cloud migration, secure deployment, and ongoing infrastructure management for maximum business agility and speed.</p>
-                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
+                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1" data-bs-toggle="modal" data-bs-target="#serviceModal2" style="cursor: pointer;">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Service 3 -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                         <div class="bg-dark p-5 rounded-4 h-100 position-relative overflow-hidden border border-secondary border-opacity-10 transition-all hover-scale-1-1">
-                            <!-- Background Watermark -->
                             <i class="icofont-refresh position-absolute top-0 end-0 mt-3 me-3 text-white" style="font-size: 80px; opacity: 0.03; z-index: 0; transform: rotate(15deg);"></i>
                             
                             <div class="position-relative z-2">
@@ -66,33 +59,28 @@
                                 </div>
                                 <h4 class="mb-3 fs-22 text-white">Digital Transformation</h4>
                                 <p class="mb-4 text-white-50 fs-15 lh-lg">Empower your entire enterprise by modernizing legacy systems with intelligent automation and sustainable, long-term innovation.</p>
-                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
+                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1" data-bs-toggle="modal" data-bs-target="#serviceModal3" style="cursor: pointer;">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Service 4 -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
                         <div class="bg-dark p-5 rounded-4 h-100 position-relative overflow-hidden border border-secondary border-opacity-10 transition-all hover-scale-1-1">
-                            <!-- Background Watermark - CHANGED TO icofont-data -->
                             <i class="icofont-data position-absolute top-0 end-0 mt-3 me-3 text-white" style="font-size: 80px; opacity: 0.03; z-index: 0; transform: rotate(15deg);"></i>
                             
                             <div class="position-relative z-2">
                                 <div class="bg-color-2 d-inline-flex align-items-center justify-content-center rounded-circle mb-4" style="width: 70px; height: 70px;">
-                                    <!-- Main Icon - CHANGED TO icofont-data -->
                                     <i class="fs-32 text-white m-0 icofont-data"></i>
                                 </div>
                                 <h4 class="mb-3 fs-22 text-white">Data Analytics & AI</h4>
                                 <p class="mb-4 text-white-50 fs-15 lh-lg">Turn raw data into actionable insights and deploy intelligent algorithmic solutions that are specifically designed to accelerate your growth.</p>
-                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
+                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1" data-bs-toggle="modal" data-bs-target="#serviceModal4" style="cursor: pointer;">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Service 5 -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
                         <div class="bg-dark p-5 rounded-4 h-100 position-relative overflow-hidden border border-secondary border-opacity-10 transition-all hover-scale-1-1">
-                            <!-- Background Watermark -->
                             <i class="icofont-smart-phone position-absolute top-0 end-0 mt-3 me-3 text-white" style="font-size: 80px; opacity: 0.03; z-index: 0; transform: rotate(15deg);"></i>
                             
                             <div class="position-relative z-2">
@@ -101,15 +89,13 @@
                                 </div>
                                 <h4 class="mb-3 fs-22 text-white">Web & Mobile Dev</h4>
                                 <p class="mb-4 text-white-50 fs-15 lh-lg">Engage your audience with intuitive, user-friendly, and high-performance websites and native or cross-platform mobile applications.</p>
-                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
+                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1" data-bs-toggle="modal" data-bs-target="#serviceModal5" style="cursor: pointer;">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
                             </div>
                         </div>
                     </div>
 
-                    <!-- Service 6 -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
                         <div class="bg-dark p-5 rounded-4 h-100 position-relative overflow-hidden border border-secondary border-opacity-10 transition-all hover-scale-1-1">
-                            <!-- Background Watermark -->
                             <i class="icofont-monitor position-absolute top-0 end-0 mt-3 me-3 text-white" style="font-size: 80px; opacity: 0.03; z-index: 0; transform: rotate(15deg);"></i>
                             
                             <div class="position-relative z-2">
@@ -118,7 +104,7 @@
                                 </div>
                                 <h4 class="mb-3 fs-22 text-white">Managed IT Services</h4>
                                 <p class="mb-4 text-white-50 fs-15 lh-lg">Ensure complete peace of mind with proactive, 24/7 IT support and monitoring for perfectly smooth operations and absolute reliability.</p>
-                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
+                                <div class="id-color fw-bold text-uppercase fs-12 letter-spacing-1" data-bs-toggle="modal" data-bs-target="#serviceModal6" style="cursor: pointer;">Explore Service <i class="icofont-arrow-right ms-1"></i></div>
                             </div>
                         </div>
                     </div>
@@ -126,18 +112,18 @@
             </div>
         </section>
 
-        <!-- Industries We Serve Section (Redesigned Image Cards) -->
         <section class="bg-dark section-dark text-light pt-80 pb-80">
             <div class="container">
                 <div class="row mb-5 text-center">
                     <div class="col-md-12">
-                        <div class="subtitle wow fadeInUp mb-3">Our Expertise</div>
+                      
                         <h2 class="wow fadeInUp" data-wow-delay=".2s">Industries We Serve</h2>
+                          <p class="lead mb-0 wow fadeInUp">Tailored technology solutions for diverse industries and business needs.</p>
+       
                     </div>
                 </div>
 
                 <div class="row g-4">
-                    <!-- Retail & E-commerce -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
                         <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
                             <img src="https://i.pinimg.com/1200x/3c/13/74/3c1374c261b990ff74ab5b2f66cab1f2.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Retail & E-commerce">
@@ -148,7 +134,6 @@
                         </div>
                     </div>
 
-                    <!-- Healthcare -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
                         <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
                             <img src="https://i.pinimg.com/1200x/18/09/aa/1809aadd8b5554064cf10b16c7d9577a.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Healthcare">
@@ -159,7 +144,6 @@
                         </div>
                     </div>
 
-                    <!-- Education -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
                         <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
                             <img src="https://i.pinimg.com/1200x/2f/93/12/2f931213a4340577ffa0d5fd4e2ae151.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Education">
@@ -170,7 +154,6 @@
                         </div>
                     </div>
 
-                    <!-- Finance & Banking -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
                         <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
                             <img src="https://i.pinimg.com/1200x/94/5f/72/945f7237a4da62d7a354bda5172f230a.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Finance & Banking">
@@ -181,7 +164,6 @@
                         </div>
                     </div>
 
-                    <!-- Manufacturing -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
                         <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
                             <img src="https://i.pinimg.com/1200x/6b/d8/06/6bd80608076329c5c7bb21cb147b59f7.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Manufacturing">
@@ -192,7 +174,6 @@
                         </div>
                     </div>
 
-                    <!-- Logistics & Supply Chain -->
                     <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
                         <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
                             <img src="https://i.pinimg.com/1200x/24/e1/1e/24e11e3e8bc7a3d374f055ff86eb6dc5.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Logistics & Supply Chain">
@@ -206,7 +187,6 @@
             </div>
         </section>
 
-        <!-- Call to Action Banner -->
         <section class="bg-color text-light pt-60 pb-60">
             <div class="container">
                 <div class="row align-items-center">
@@ -220,5 +200,131 @@
                 </div>
             </div>
         </section>
+
+        <div class="modal fade" id="serviceModal1" tabindex="-1" aria-labelledby="serviceModal1Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-dark text-light border border-secondary">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title fs-24" id="serviceModal1Label">Software Development</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <p class="text-white-50 fs-16 mb-4">We build robust, scalable, and secure software applications customized to your business needs. From planning to deployment, our agile development methodology ensures high-quality deliverables that enhance productivity and streamline your workflows.</p>
+                        <h6 class="text-white mb-3">Key Offerings:</h6>
+                        <ul class="text-white-50 lh-lg">
+                            <li>Custom Enterprise Applications</li>
+                            <li>API Integration & Architecture</li>
+                            <li>Legacy System Modernization</li>
+                            <li>SaaS Product Development</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="serviceModal2" tabindex="-1" aria-labelledby="serviceModal2Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-dark text-light border border-secondary">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title fs-24" id="serviceModal2Label">Cloud Solutions</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <p class="text-white-50 fs-16 mb-4">Transition to the cloud seamlessly and securely. We specialize in designing infrastructure that is highly available, fault-tolerant, and cost-effective using leading platforms like AWS, Azure, and Google Cloud.</p>
+                        <h6 class="text-white mb-3">Key Offerings:</h6>
+                        <ul class="text-white-50 lh-lg">
+                            <li>Cloud Migration & Strategy</li>
+                            <li>CI/CD Pipeline Automation (DevOps)</li>
+                            <li>Serverless Architecture & Microservices</li>
+                            <li>Cloud Security & Cost Optimization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="serviceModal3" tabindex="-1" aria-labelledby="serviceModal3Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-dark text-light border border-secondary">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title fs-24" id="serviceModal3Label">Digital Transformation</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <p class="text-white-50 fs-16 mb-4">Reimagine your business for the digital age. We guide enterprises through fundamental shifts in operations, integrating digital technology into all areas of business to fundamentally change how you operate and deliver value to customers.</p>
+                        <h6 class="text-white mb-3">Key Offerings:</h6>
+                        <ul class="text-white-50 lh-lg">
+                            <li>Technology Consulting & Strategy</li>
+                            <li>Business Process Automation</li>
+                            <li>IoT Integration & Smart Workflows</li>
+                            <li>Customer Experience (CX) Modernization</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="serviceModal4" tabindex="-1" aria-labelledby="serviceModal4Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-dark text-light border border-secondary">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title fs-24" id="serviceModal4Label">Data Analytics & AI</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <p class="text-white-50 fs-16 mb-4">Unlock the true potential of your data. We help you collect, analyze, and visualize data to make informed decisions, while leveraging Artificial Intelligence to automate tasks and predict market trends.</p>
+                        <h6 class="text-white mb-3">Key Offerings:</h6>
+                        <ul class="text-white-50 lh-lg">
+                            <li>Business Intelligence & Dashboards</li>
+                            <li>Machine Learning & Predictive Modeling</li>
+                            <li>Natural Language Processing (NLP)</li>
+                            <li>Data Warehousing & ETL Pipelines</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="serviceModal5" tabindex="-1" aria-labelledby="serviceModal5Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-dark text-light border border-secondary">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title fs-24" id="serviceModal5Label">Web & Mobile Development</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <p class="text-white-50 fs-16 mb-4">Deliver exceptional user experiences across all devices. We design and develop responsive web applications and native/cross-platform mobile apps that keep your customers engaged anywhere, anytime.</p>
+                        <h6 class="text-white mb-3">Key Offerings:</h6>
+                        <ul class="text-white-50 lh-lg">
+                            <li>iOS & Android Native App Development</li>
+                            <li>Cross-Platform Apps (Flutter, React Native)</li>
+                            <li>Progressive Web Apps (PWA)</li>
+                            <li>UI/UX Design & Prototyping</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal fade" id="serviceModal6" tabindex="-1" aria-labelledby="serviceModal6Label" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-lg">
+                <div class="modal-content bg-dark text-light border border-secondary">
+                    <div class="modal-header border-secondary">
+                        <h5 class="modal-title fs-24" id="serviceModal6Label">Managed IT Services</h5>
+                        <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body p-4">
+                        <p class="text-white-50 fs-16 mb-4">Focus on your core business while we handle your technology. We provide comprehensive IT support, continuous network monitoring, and robust cybersecurity defenses to ensure your infrastructure never fails.</p>
+                        <h6 class="text-white mb-3">Key Offerings:</h6>
+                        <ul class="text-white-50 lh-lg">
+                            <li>24/7 Network Monitoring & Support</li>
+                            <li>Disaster Recovery & Backup Solutions</li>
+                            <li>Cybersecurity & Compliance Management</li>
+                            <li>IT Infrastructure Maintenance</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
 
 {% endblock content %}

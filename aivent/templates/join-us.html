@@ -2,8 +2,52 @@
 
 {% block content %}
 
+<!-- Custom Premium CSS for Careers Page Styles -->
+<style>
+    /* Makes the input placeholder text light and subtle */
+    #application_form .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.4) !important;
+        font-weight: 400 !important;
+        opacity: 1 !important; /* Firefox support */
+    }
+    
+    /* Makes the unselected dropdown value look like a placeholder */
+    #application_form select:invalid,
+    #application_form select option[value=""][disabled] {
+        color: rgba(255, 255, 255, 0.4) !important;
+    }
+
+    /* Interactive style tracking for the custom file upload area */
+    .upload-zone {
+        position: relative;
+        overflow: hidden;
+        border: 2px dashed rgba(255, 255, 255, 0.15) !important;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    .upload-zone:hover {
+        border-color: #7A5AF8 !important;
+        background-color: rgba(122, 90, 248, 0.05) !important;
+    }
+
+    /* Global back-to-top layout sync */
+    #back-to-top, 
+    .scroll-to-top, 
+    .back-to-top,
+    #totop {
+        color: #ffffff !important;
+    }
+    #back-to-top i, 
+    .scroll-to-top i, 
+    .back-to-top i,
+    #totop i {
+        color: #ffffff !important;
+    }
+</style>
+
+<!-- Intro Hero Section -->
 <section id="section-careers-intro" class="section-dark text-light pb-60 relative jarallax" style="padding-top: 160px;">
-    <img src="/static/assets/images/background/1.webp" class="jarallax-img" alt="">
+    <img src="/static/assets/images/background/1.webp" class="jarallax-img" alt="Careers at IST">
     <div class="gradient-edge-top"></div>
     <div class="gradient-edge-bottom"></div>
     <div class="sw-overlay op-8"></div>
@@ -11,16 +55,16 @@
     <div class="container relative z-4">
         <div class="row mb-5 text-center">
             <div class="col-md-8 offset-md-2">
-                <div class="subtitle wow fadeInUp mb-3">Join Our Team</div>
-                <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Build the Future with IST</h2>
-                <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">We are always looking for passionate,
-                    driven, and innovative minds to join our growing team. Explore our open roles and take the next step
-                    in your career.</p>
+                   <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Build the Future with IST</h2>
+                <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">
+                    We are always looking for passionate, driven, and innovative minds to join our growing team. Explore our open roles and take the next step in your career.
+                </p>
             </div>
         </div>
     </div>
 </section>
 
+<!-- Open Positions Grid Section -->
 <section id="section-open-positions" class="bg-dark-2 section-dark text-light pt-80 pb-80">
     <div class="container">
         <div class="row mb-5">
@@ -31,46 +75,43 @@
         </div>
 
         <div class="row g-5 justify-content-center">
+            <!-- Position 1: Flutter Developer -->
             <div class="col-lg-6 wow fadeInUp" data-wow-delay=".1s">
-                <div
-                    class="bg-dark p-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden">
+                <div class="bg-dark p-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden">
 
                     <i class="icofont-smart-phone position-absolute top-0 end-0 mt-3 me-3 text-white"
                         style="font-size: 100px; opacity: 0.02; z-index: 0; transform: rotate(15deg);"></i>
 
                     <div class="position-relative z-2 h-100 d-flex flex-column">
                         <div class="d-flex align-items-center mb-4">
-                            <div class="bg-color-2 p-3 rounded-circle me-3 d-inline-flex shadow">
-                                <i class="fs-24 text-white m-0 icofont-smart-phone"></i>
+                            <div class="p-3 rounded-circle me-3 d-inline-flex shadow" style="background-color: rgba(122, 90, 248, 0.15);">
+                                <i class="fs-24 m-0 icofont-smart-phone" style="color: #7A5AF8;"></i>
                             </div>
                             <h3 class="fs-26 mb-0 text-white">Flutter Developer</h3>
                         </div>
 
                         <div class="d-flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="badge bg-dark-2 text-primary border border-primary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13"><i
-                                    class="icofont-clock-time me-1"></i>0 - 2 Years Exp</span>
-                            <span
-                                class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13"><i
-                                    class="icofont-briefcase me-1"></i>Full-Time</span>
-                            <span
-                                class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13"><i
-                                    class="icofont-location-pin me-1"></i>Madurai / Remote</span>
+                            <span class="badge bg-dark-2 border border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13" style="color: #7A5AF8; border-color: #7A5AF8;">
+                                <i class="icofont-clock-time me-1"></i>0 - 2 Years Exp
+                            </span>
+                            <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13">
+                                <i class="icofont-briefcase me-1"></i>Full-Time
+                            </span>
+                            <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13">
+                                <i class="icofont-location-pin me-1"></i>Madurai / Remote
+                            </span>
                         </div>
 
                         <hr class="border-secondary border-opacity-25 w-100 mb-4 mt-0">
 
                         <div class="flex-grow-1">
                             <h5 class="text-white fs-18 mb-2">Role Overview</h5>
-                            <p class="text-white-50 fs-15 lh-base mb-4 text-wrap"
-                                style="white-space: normal; word-wrap: break-word;">We are looking for a highly
-                                motivated Flutter Developer to build cross-platform mobile applications for iOS and
-                                Android. You will collaborate closely with UI/UX designers and backend engineers to
-                                deliver high-quality, responsive, and intuitive mobile experiences.</p>
+                            <p class="text-white-50 fs-15 lh-base mb-4 text-wrap" style="white-space: normal; word-wrap: break-word;">
+                                We are looking for a highly motivated Flutter Developer to build cross-platform mobile applications for iOS and Android. You will collaborate closely with UI/UX designers and backend engineers to deliver high-quality, responsive, and intuitive mobile experiences.
+                            </p>
 
                             <h5 class="text-white fs-18 mb-2">Key Requirements</h5>
-                            <ul class="ul-check fs-15 text-white-50 lh-base mb-5 text-wrap"
-                                style="white-space: normal; word-wrap: break-word;">
+                            <ul class="ul-check fs-15 text-white-50 lh-base mb-5 text-wrap" style="white-space: normal; word-wrap: break-word;">
                                 <li>Strong knowledge of Dart and the Flutter framework.</li>
                                 <li>Familiarity with state management (Provider, Riverpod, etc.).</li>
                                 <li>Experience integrating RESTful APIs and third-party libraries.</li>
@@ -78,53 +119,49 @@
                         </div>
 
                         <div class="mt-auto">
-                            <a href="#apply-form" class="btn-main w-100 text-center rounded-3 py-3">Apply for this
-                                role</a>
+                            <a href="#apply-form" class="btn-main w-100 text-center rounded-3 py-3 text-white border-0" style="background-color: #7A5AF8;">Apply for this role</a>
                         </div>
                     </div>
                 </div>
             </div>
 
+            <!-- Position 2: Senior Software Engineer -->
             <div class="col-lg-6 wow fadeInUp" data-wow-delay=".3s">
-                <div
-                    class="bg-dark p-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden">
+                <div class="bg-dark p-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden">
 
                     <i class="icofont-computer position-absolute top-0 end-0 mt-3 me-3 text-white"
                         style="font-size: 100px; opacity: 0.02; z-index: 0; transform: rotate(15deg);"></i>
 
                     <div class="position-relative z-2 h-100 d-flex flex-column">
                         <div class="d-flex align-items-center mb-4">
-                            <div class="bg-color-2 p-3 rounded-circle me-3 d-inline-flex shadow">
-                                <i class="fs-24 text-white m-0 icofont-computer"></i>
+                            <div class="p-3 rounded-circle me-3 d-inline-flex shadow" style="background-color: rgba(122, 90, 248, 0.15);">
+                                <i class="fs-24 m-0 icofont-computer" style="color: #7A5AF8;"></i>
                             </div>
                             <h3 class="fs-26 mb-0 text-white">Senior Software Engineer</h3>
                         </div>
 
                         <div class="d-flex flex-wrap gap-2 mb-4">
-                            <span
-                                class="badge bg-dark-2 text-primary border border-primary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13"><i
-                                    class="icofont-clock-time me-1"></i>4 - 6 Years Exp</span>
-                            <span
-                                class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13"><i
-                                    class="icofont-briefcase me-1"></i>Full-Time</span>
-                            <span
-                                class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13"><i
-                                    class="icofont-location-pin me-1"></i>Madurai / Remote</span>
+                            <span class="badge bg-dark-2 border border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13" style="color: #7A5AF8; border-color: #7A5AF8;">
+                                <i class="icofont-clock-time me-1"></i>4 - 6 Years Exp
+                            </span>
+                            <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13">
+                                <i class="icofont-briefcase me-1"></i>Full-Time
+                            </span>
+                            <span class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-3 py-2 rounded-pill fw-normal fs-13">
+                                <i class="icofont-location-pin me-1"></i>Madurai / Remote
+                            </span>
                         </div>
 
                         <hr class="border-secondary border-opacity-25 w-100 mb-4 mt-0">
 
                         <div class="flex-grow-1">
                             <h5 class="text-white fs-18 mb-2">Role Overview</h5>
-                            <p class="text-white-50 fs-15 lh-base mb-4 text-wrap"
-                                style="white-space: normal; word-wrap: break-word;">We are seeking an experienced Senior
-                                Software Engineer to architect and develop scalable, high-performance web applications.
-                                You will be responsible for system architecture, leading technical projects, mentoring
-                                developers, and ensuring code quality.</p>
+                            <p class="text-white-50 fs-15 lh-base mb-4 text-wrap" style="white-space: normal; word-wrap: break-word;">
+                                We are seeking an experienced Senior Software Engineer to architect and develop scalable, high-performance web applications. You will be responsible for system architecture, leading technical projects, mentoring developers, and ensuring code quality.
+                            </p>
 
                             <h5 class="text-white fs-18 mb-2">Key Requirements</h5>
-                            <ul class="ul-check fs-15 text-white-50 lh-base mb-5 text-wrap"
-                                style="white-space: normal; word-wrap: break-word;">
+                            <ul class="ul-check fs-15 text-white-50 lh-base mb-5 text-wrap" style="white-space: normal; word-wrap: break-word;">
                                 <li>Extensive full-stack experience (Python/React/Next.js).</li>
                                 <li>Proven expertise in system design and database architecture.</li>
                                 <li>Strong knowledge of cloud platforms & CI/CD pipelines.</li>
@@ -132,8 +169,7 @@
                         </div>
 
                         <div class="mt-auto">
-                            <a href="#apply-form" class="btn-main w-100 text-center rounded-3 py-3">Apply for this
-                                role</a>
+                            <a href="#apply-form" class="btn-main w-100 text-center rounded-3 py-3 text-white border-0" style="background-color: #7A5AF8;">Apply for this role</a>
                         </div>
                     </div>
                 </div>
@@ -142,6 +178,7 @@
     </div>
 </section>
 
+<!-- Application Intake Form Section -->
 <section id="apply-form" class="section-dark text-light pt-80 pb-100 relative jarallax">
     <img src="/static/assets/images/background/5.webp" class="jarallax-img" alt="">
     <div class="gradient-edge-top"></div>
@@ -151,16 +188,16 @@
     <div class="container relative z-4">
         <div class="row align-items-center justify-content-between g-5">
 
+            <!-- Left Promotional Column -->
             <div class="col-lg-5">
-                <div class="subtitle wow fadeInUp mb-3">Take the next step</div>
-                <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Submit Your Application</h2>
-                <p class="text-white-50 mb-4 wow fadeInUp fs-16 lh-lg" data-wow-delay=".3s">Ready to join our dynamic
-                    team? Fill out the form with your details, select the role you are applying for, and upload your
-                    latest resume. Our HR team will review your application and get back to you shortly.</p>
+                  <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Submit Your Application</h2>
+                <p class="text-white-50 mb-4 wow fadeInUp fs-16 lh-lg" data-wow-delay=".3s">
+                    Ready to join our dynamic team? Fill out the form with your details, select the role you are applying for, and upload your latest resume. Our HR team will review your application and get back to you shortly.
+                </p>
 
-                <div class="bg-dark bg-opacity-50 p-4 rounded-4 border border-secondary border-opacity-25 mt-5 wow fadeInUp"
-                    data-wow-delay=".4s">
-                    <h4 class="mb-3 fs-20 text-white"><i class="icofont-steps id-color me-2"></i> Our Hiring Process
+                <div class="bg-dark bg-opacity-50 p-4 rounded-4 border border-secondary border-opacity-25 mt-5 wow fadeInUp" data-wow-delay=".4s">
+                    <h4 class="mb-3 fs-20 text-white">
+                        <i class="icofont-steps me-2" style="color: #7A5AF8;"></i> Our Hiring Process
                     </h4>
                     <ol class="text-white-50 fs-15 lh-lg mb-0 ps-3">
                         <li>Application Review & Shortlisting</li>
@@ -172,39 +209,38 @@
                 </div>
             </div>
 
+            <!-- Right Glassmorphism Form Wrapper -->
             <div class="col-lg-6 wow fadeInRight" data-wow-delay=".4s">
                 <div class="p-5 rounded-4 shadow-lg position-relative overflow-hidden"
                     style="background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1);">
-                    <!-- Flask Flash Messages for Success/Error Alerts -->
+                    
+                    <!-- Flash Feedback Messages -->
                     {% with messages = get_flashed_messages(with_categories=true) %}
                     {% if messages %}
                     {% for category, message in messages %}
-                    <div
-                        class="alert alert-{{ 'success' if category == 'success' else 'danger' }} mb-4 rounded-3 text-white bg-{{ 'success' if category == 'success' else 'danger' }} bg-opacity-25 border border-{{ 'success' if category == 'success' else 'danger' }} p-3">
-                        <i
-                            class="icofont-{{ 'check-circled' if category == 'success' else 'exclamation-circle' }} me-2"></i>
+                    <div class="alert alert-{{ 'success' if category == 'success' else 'danger' }} mb-4 rounded-3 text-white bg-{{ 'success' if category == 'success' else 'danger' }} bg-opacity-25 border border-{{ 'success' if category == 'success' else 'danger' }} p-3">
+                        <i class="icofont-{{ 'check-circled' if category == 'success' else 'exclamation-circle' }} me-2"></i>
                         {{ message }}
                     </div>
                     {% endfor %}
                     {% endif %}
                     {% endwith %}
 
-                    <!-- Updated Form Setup: action added, enctype kept for file uploads -->
-                    <form name="jobApplicationForm" id="application_form" method="POST"
-                        action="{{ url_for('public_pages.join_us') }}" enctype="multipart/form-data">
-
+                    <form name="jobApplicationForm" id="application_form" method="POST" action="{{ url_for('public_pages.join_us') }}" enctype="multipart/form-data">
                         <h3 class="mb-4 text-white">Apply Now</h3>
 
                         <div class="row g-4">
+                            <!-- Input: Name -->
                             <div class="col-md-6">
                                 <div class="field-set">
                                     <label class="text-white fs-14 mb-2 fw-bold">Full Name *</label>
                                     <input type="text" name="name" id="name"
                                         class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
-                                        placeholder="Name" required>
+                                        placeholder="Enter your name" required>
                                 </div>
                             </div>
 
+                            <!-- Input: Email -->
                             <div class="col-md-6">
                                 <div class="field-set">
                                     <label class="text-white fs-14 mb-2 fw-bold">Email Address *</label>
@@ -214,6 +250,7 @@
                                 </div>
                             </div>
 
+                            <!-- Input: Phone -->
                             <div class="col-md-6">
                                 <div class="field-set">
                                     <label class="text-white fs-14 mb-2 fw-bold">Phone Number *</label>
@@ -223,38 +260,37 @@
                                 </div>
                             </div>
 
+                            <!-- Input: Dropdown Position Selection -->
                             <div class="col-md-6">
                                 <div class="field-set">
                                     <label class="text-white fs-14 mb-2 fw-bold">Position *</label>
                                     <select name="position" id="position"
                                         class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
                                         required>
-                                        <option value="" class="bg-dark text-white" disabled selected>Select a role...
-                                        </option>
-                                        <option value="Flutter Developer" class="bg-dark text-white">Flutter Developer
-                                        </option>
-                                        <option value="Senior Software Engineer" class="bg-dark text-white">Senior
-                                            Software Engineer</option>
-                                        <option value="Open Application" class="bg-dark text-white">Open Application
-                                        </option>
+                                        <option value="" class="bg-dark text-white" disabled selected>Select a role...</option>
+                                        <option value="Flutter Developer" class="bg-dark text-white">Flutter Developer</option>
+                                        <option value="Senior Software Engineer" class="bg-dark text-white">Senior Software Engineer</option>
+                                        <option value="Open Application" class="bg-dark text-white">Open Application</option>
                                     </select>
                                 </div>
                             </div>
 
+                            <!-- Input: Redesigned Premium File Upload Container -->
                             <div class="col-12 mt-4">
-                                <div
-                                    class="field-set bg-dark bg-opacity-50 p-4 rounded-3 border border-secondary border-opacity-25 border-dashed text-center transition-all hover-border-primary">
-                                    <i class="icofont-cloud-upload fs-40 id-color mb-2 d-block"></i>
-                                    <label for="resume" class="text-white mb-2 fs-16 fw-bold cursor-pointer">Click to
-                                        Upload Resume/CV *</label>
-                                    <p class="text-white-50 fs-13 mb-3">Accepted formats: .pdf, .doc, .docx (Max 5MB)
-                                    </p>
-                                    <input type="file" name="resume" id="resume" class="form-control"
-                                        accept=".pdf,.doc,.docx" required
-                                        style="background: transparent; color: white;">
+                                <div class="field-set upload-zone bg-dark bg-opacity-50 p-4 rounded-3 text-center">
+                                    <i class="icofont-cloud-upload fs-40 mb-2 d-block" style="color: #7A5AF8;"></i>
+                                    <label for="resume" class="text-white mb-1 fs-16 fw-bold d-block cursor-pointer">
+                                        Choose File or Drag Here *
+                                    </label>
+                                    <p class="text-white-50 fs-13 mb-0">Accepted formats: .pdf, .doc, .docx (Max 5MB)</p>
+                                    
+                                    <!-- Invisible absolute overlay input captures standard click cleanly across total box surface -->
+                                    <input type="file" name="resume" id="resume" class="position-absolute top-0 start-0 w-100 h-100 opacity-0 cursor-pointer"
+                                        accept=".pdf,.doc,.docx" required>
                                 </div>
                             </div>
 
+                            <!-- Input: Textarea Message -->
                             <div class="col-12">
                                 <div class="field-set mt-2">
                                     <label class="text-white fs-14 mb-2 fw-bold">Cover Letter / Portfolio Link</label>
@@ -265,9 +301,10 @@
                             </div>
                         </div>
 
+                        <!-- Submit Button Container -->
                         <div class="mt-4 pt-3">
-                            <button type="submit" id="submit_application"
-                                class="btn-main w-100 py-3 fs-16 rounded-3">Submit Application</button>
+                            <button type="submit" id="submit_application" class="btn-main w-100 py-3 fs-16 rounded-3 text-white border-0"
+                                style="background-color: #7A5AF8;">Submit Application</button>
                         </div>
                     </form>
                 </div>

@@ -3,43 +3,52 @@
         <div class="row g-4 align-items-center">
             <div class="col-md-12">
                 <div class="d-lg-flex align-items-center justify-content-between text-center">
-                    <!-- Address Section -->
+                    
                     <div>
-                        <h3 class="fs-20">Address</h3>
+                        <h3 class="fs-20" style="color: #7A5AF8;">Address</h3>
                         Jankit Nagar, Kadachanenthal<br>
                         Madurai, Tamil Nadu, India
                     </div>
                     
-                    <!-- Logo & Socials Section -->
                     <div>
                         <img src="/static/assets/images/logo.png" class="w-150px" alt="Innovate Solution Technology Logo"><br>
                         <div class="social-icons mb-sm-30 mt-4">
-                          
-                            <a href="#"><i class="fa-brands fa-instagram"></i></a>
-                       
-                            <a href="#"><i class="fa-brands fa-linkedin-in"></i></a>
+                            <a href="#" class="me-3 text-decoration-none">
+                                <i class="fa-brands fa-instagram fa-2x" style="color: #E1306C;"></i>
+                            </a>
+                            <a href="#" class="text-decoration-none">
+                                <i class="fa-brands fa-linkedin-in fa-2x" style="color: #0077b5;"></i>
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Contact Section -->
                     <div>
-                        <h3 class="fs-20">Contact Us</h3>
-                        T. <a href="tel:+918778225183" class="text-light text-decoration-none">+91 8778225183</a><br>
-                        E. <a href="mailto:innovatesolutiontechnology@gmail.com" class="text-light text-decoration-none">innovatesolutiontechnology@gmail.com</a>
+                        <h3 class="fs-20" style="color: #7A5AF8;">Contact Us</h3>
+                        <div class="mb-2">
+                            <i class="fa-solid fa-phone me-2"></i><a href="tel:+918778225183" class="text-light text-decoration-none">+91 8778225183</a>
+                        </div>
+                        <div>
+                            <i class="fa-solid fa-envelope me-2"></i><a href="mailto:innovatesolutiontechnology@gmail.com" class="text-light text-decoration-none">innovatesolutiontechnology@gmail.com</a>
+                        </div>
                     </div>
+                    
                 </div>
             </div>                    
         </div>
     </div>
     
-    <!-- Subfooter / Copyright -->
-    <div class="subfooter">
+    <div class="subfooter mt-5 border-top border-secondary pt-3">
         <div class="container">
             <div class="row">
-                <div class="col-md-12 text-center">
-                    Copyright 2026 - Innovate Solution Technology. All Rights Reserved.
+                <div class="col-md-12 text-center text-white-50">
+                    Copyright &copy; <span id="currentYear"></span> - Innovate Solution Technology. All Rights Reserved.
                 </div>
             </div>
         </div>
     </div>
 </footer>
+
+<script>
+    // Automatically updates the year in the footer
+    document.getElementById('currentYear').textContent = new Date().getFullYear();
+</script>

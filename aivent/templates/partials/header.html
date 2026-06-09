@@ -1,48 +1,195 @@
+<style>
+    /* =========================
+       ACTIVE MENU STYLES
+    ========================== */
+    #mainmenu ul ul li a.sub-active {
+        color: #8b5cf6 !important;
+        font-weight: 600 !important;
+        border: none !important;
+        text-decoration: none !important;
+        box-shadow: none !important;
+    }
+
+    /* =========================
+       DESKTOP
+    ========================== */
+    .menu_side_area {
+        display: none !important;
+    }
+
+    /* =========================
+       HAMBURGER ICON
+    ========================== */
+    #menu-btn {
+        width: 24px;
+        height: 24px;
+        position: relative;
+        cursor: pointer;
+        background: transparent !important;
+    }
+
+    #menu-btn::before,
+    #menu-btn::after {
+        content: "" !important;
+        display: none !important;
+    }
+
+    #menu-btn span {
+        display: block;
+        position: absolute;
+        width: 100%;
+        height: 2px;
+        background: #ffffff;
+        border-radius: 9px;
+        transition: all 0.3s ease;
+        transform-origin: left center;
+    }
+
+    #menu-btn span:nth-child(1) {
+        top: 4px;
+    }
+
+    #menu-btn span:nth-child(2) {
+        top: 11px;
+    }
+
+    #menu-btn span:nth-child(3) {
+        top: 18px;
+    }
+
+    /* OPEN STATE */
+    #menu-btn.open span:nth-child(1) {
+        transform: rotate(45deg);
+        top: 3px;
+        left: 4px;
+    }
+
+    #menu-btn.open span:nth-child(2) {
+        opacity: 0;
+        width: 0;
+    }
+
+    #menu-btn.open span:nth-child(3) {
+        transform: rotate(-45deg);
+        top: 20px;
+        left: 4px;
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+    @media (max-width: 991px) {
+
+        .menu_side_area {
+            display: inline-block !important;
+        }
+
+        .header-col-mid {
+            display: none;
+        }
+
+        .btn-main {
+            display: none;
+        }
+    }
+</style>
+
 <header class="transparent">
-    <div class="container">
+    <div class="container-fluid px-4">
         <div class="row">
             <div class="col-md-12">
-                <div class="de-flex">
-                    
-                    <div class="de-flex-col">
+                <div class="de-flex justify-content-between w-100 align-items-center">
+
+                    <!-- LOGO -->
+                    <div class="de-flex-col p-0 m-0">
                         <div id="logo">
                             <a href="/">
-                                <img class="logo-main" src="/static/assets/images/logo.png" alt="IST Logo">
-                                <img class="logo-scroll" src="/static/assets/images/logo.png" alt="IST Logo">
-                                <img class="logo-mobile" src="/static/assets/images/logo.png" alt="IST Logo">
+                                <img class="logo-main"
+                                    src="/static/assets/images/logo.png"
+                                    alt="IST Logo">
+
+                                <img class="logo-scroll"
+                                    src="/static/assets/images/logo.png"
+                                    alt="IST Logo">
+
+                                <img class="logo-mobile"
+                                    src="/static/assets/images/logo.png"
+                                    alt="IST Logo">
                             </a>
                         </div>
                     </div>
 
+                    <!-- MENU -->
                     <div class="de-flex-col header-col-mid">
-                        <ul id="mainmenu">
-                            <li><a class="menu-item" href="/">Home</a></li>
-                            <li><a class="menu-item" href="about">About</a></li>
-                            <li><a class="menu-item" href="#">Services</a>
+                        <ul id="mainmenu" class="m-0 p-0">
+
+                            <li>
+                                <a class="menu-item" href="/">Home</a>
+                            </li>
+
+                            <li>
+                                <a class="menu-item" href="about">About</a>
+                            </li>
+
+                            <li>
+                                <a class="menu-item" href="#">Services</a>
                                 <ul>
-                                    <li><a class="menu-item" href="services">Core Services</a></li>
-                                    <li><a class="menu-item" href="projects">College - Final Year Projects</a></li>
+                                    <li>
+                                        <a class="menu-item" href="services">
+                                            Core Services
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="menu-item" href="projects">
+                                            College - Final Year Projects
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
-                            <li><a class="menu-item" href="products">Products</a></li>
-                            
-                            <li><a class="menu-item" href="#">Careers</a>
+
+                            <li>
+                                <a class="menu-item" href="products">
+                                    Products
+                                </a>
+                            </li>
+
+                            <li>
+                                <a class="menu-item" href="#">Careers</a>
                                 <ul>
-                                    <li><a class="menu-item" href="join-us">Join Us</a></li>
-                                    <li><a class="menu-item" href="interns">Interns</a></li>
+                                    <li>
+                                        <a class="menu-item" href="join-us">
+                                            Join Us
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a class="menu-item" href="interns">
+                                            Interns
+                                        </a>
+                                    </li>
                                 </ul>
                             </li>
+
                         </ul>
                     </div>
 
-                    <div class="de-flex-col">
-                        <a class="btn-main fx-slide ms-3" href="contact"><span>Get In Touch</span></a>
+                    <!-- RIGHT SIDE -->
+                    <div class="de-flex-col p-0 m-0">
 
+                        <a class="btn-main fx-slide" href="contact">
+                            <span>Get In Touch</span>
+                        </a>
+
+                        <!-- MOBILE HAMBURGER -->
                         <div class="menu_side_area">
-                            <span id="menu-btn"></span>
+                            <div id="menu-btn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
                         </div>
+
                     </div>
-                    
+
                 </div>
             </div>
         </div>
@@ -50,31 +197,51 @@
 </header>
 
 <script>
-    document.addEventListener("DOMContentLoaded", function() {
-        // Get the full URL of the current page
-        const currentLocation = window.location.href;
-        
-        // Select all links inside the main menu
-        const menuItems = document.querySelectorAll("#mainmenu a.menu-item");
+document.addEventListener("DOMContentLoaded", function () {
 
-        menuItems.forEach(item => {
-            // Check if the link's href matches the current URL
-            if (item.href === currentLocation) {
-                // Add the active class to the current page's link
-                item.classList.add("active");
-                
-                // If this is a submenu item (like "Interns"), make the parent ("Careers") active too
-                const parentUl = item.closest("ul");
-                if (parentUl && parentUl.id !== "mainmenu") {
-                    const parentLi = parentUl.closest("li");
-                    if (parentLi) {
-                        const parentLink = parentLi.querySelector("a.menu-item");
-                        if (parentLink) {
-                            parentLink.classList.add("active");
-                        }
+    /* =========================
+       ACTIVE MENU HIGHLIGHT
+    ========================== */
+    const currentLocation = window.location.href;
+    const menuItems = document.querySelectorAll("#mainmenu a.menu-item");
+
+    menuItems.forEach(item => {
+
+        if (item.href === currentLocation) {
+
+            const parentUl = item.closest("ul");
+
+            if (parentUl && parentUl.id !== "mainmenu") {
+
+                item.classList.add("sub-active");
+
+                const parentLi = parentUl.closest("li");
+
+                if (parentLi) {
+                    const parentLink =
+                        parentLi.querySelector("a.menu-item");
+
+                    if (parentLink) {
+                        parentLink.classList.add("active");
                     }
                 }
+
+            } else {
+                item.classList.add("active");
             }
-        });
+        }
     });
+
+    /* =========================
+       HAMBURGER TOGGLE
+    ========================== */
+    const menuBtn = document.getElementById("menu-btn");
+
+    if (menuBtn) {
+        menuBtn.addEventListener("click", function () {
+            this.classList.toggle("open");
+        });
+    }
+
+});
 </script>

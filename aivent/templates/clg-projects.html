@@ -1,12 +1,27 @@
-{% extends "partials/layouts/main.html" %} {% block content %}
+{% extends "partials/layouts/main.html" %} 
 
-<!-- College Projects Intro Section (Parallax Background) -->
+{% block content %}
+
+<style>
+  /* Makes the placeholder text a light, subtle gray/white */
+  #project_form .form-control::placeholder {
+      color: rgba(255, 255, 255, 0.4) !important;
+      font-weight: 400 !important;
+      opacity: 1 !important; /* Firefox support */
+  }
+  
+  /* Makes the unselected state of the dropdown match the light placeholders */
+  #project_form select:invalid,
+  #project_form select option[value=""][disabled] {
+      color: rgba(255, 255, 255, 0.4) !important;
+  }
+</style>
+
 <section
   id="section-clg-projects-intro"
   class="section-dark text-light pb-60 relative jarallax"
   style="padding-top: 160px"
 >
-  <!-- Background Elements -->
   <img
     src="/static/assets/images/background/3.webp"
     class="jarallax-img"
@@ -19,7 +34,6 @@
   <div class="container relative z-4">
     <div class="row mb-5 text-center">
       <div class="col-md-8 offset-md-2">
-        <div class="subtitle wow fadeInUp mb-3">Academic Excellence</div>
         <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">
           Final Year & College Projects
         </h2>
@@ -33,7 +47,6 @@
   </div>
 </section>
 
-<!-- Project Domains Section (Redesigned Premium App-Style UI) -->
 <section
   id="section-project-domains"
   class="bg-dark-2 section-dark text-light pt-80 pb-80"
@@ -51,12 +64,10 @@
     </div>
 
     <div class="row g-4">
-      <!-- Domain 1: Full Stack -->
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
         <div
           class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
         >
-          <!-- Background Watermark -->
           <i
             class="icofont-code-alt position-absolute bottom-0 end-0 mb-3 me-3 text-white"
             style="
@@ -67,7 +78,6 @@
             "
           ></i>
 
-          <!-- Icon -->
           <div class="mb-4 position-relative z-2">
             <div
               class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
@@ -76,12 +86,10 @@
             </div>
           </div>
 
-          <!-- Title -->
           <h4 class="mb-3 fs-24 text-white position-relative z-2">
             Full Stack Applications
           </h4>
 
-          <!-- Description (Fixed Text Wrap) -->
           <div class="flex-grow-1 position-relative z-2">
             <p
               class="text-white-50 fs-15 lh-base text-wrap"
@@ -94,43 +102,30 @@
             </p>
           </div>
 
-          <!-- Divider -->
           <hr
             class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
           />
 
-          <!-- Badges -->
           <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >React / Next.js</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Node.js</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Django</span
-            >
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">React / Next.js</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Node.js</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Django</span>
           </div>
 
-          <!-- Link -->
           <a
             href="#request-project"
-            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            class="text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            style="color: #7A5AF8;"
           >
             Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
           </a>
         </div>
       </div>
 
-      <!-- Domain 2: Mobile Applications -->
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
         <div
           class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
         >
-          <!-- Background Watermark -->
           <i
             class="icofont-smart-phone position-absolute bottom-0 end-0 mb-3 me-3 text-white"
             style="
@@ -141,7 +136,6 @@
             "
           ></i>
 
-          <!-- Icon -->
           <div class="mb-4 position-relative z-2">
             <div
               class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
@@ -150,12 +144,10 @@
             </div>
           </div>
 
-          <!-- Title -->
           <h4 class="mb-3 fs-24 text-white position-relative z-2">
             Mobile Applications
           </h4>
 
-          <!-- Description (Fixed Text Wrap) -->
           <div class="flex-grow-1 position-relative z-2">
             <p
               class="text-white-50 fs-15 lh-base text-wrap"
@@ -167,43 +159,30 @@
             </p>
           </div>
 
-          <!-- Divider -->
           <hr
             class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
           />
 
-          <!-- Badges -->
           <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Flutter</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >React Native</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Firebase</span
-            >
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Flutter</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">React Native</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Firebase</span>
           </div>
 
-          <!-- Link -->
           <a
             href="#request-project"
-            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            class="text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            style="color: #7A5AF8;"
           >
             Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
           </a>
         </div>
       </div>
 
-      <!-- Domain 3: AI & Machine Learning -->
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
         <div
           class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
         >
-          <!-- Background Watermark -->
           <i
             class="icofont-robot position-absolute bottom-0 end-0 mb-3 me-3 text-white"
             style="
@@ -214,7 +193,6 @@
             "
           ></i>
 
-          <!-- Icon -->
           <div class="mb-4 position-relative z-2">
             <div
               class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
@@ -223,12 +201,10 @@
             </div>
           </div>
 
-          <!-- Title -->
           <h4 class="mb-3 fs-24 text-white position-relative z-2">
             Artificial Intelligence
           </h4>
 
-          <!-- Description (Fixed Text Wrap) -->
           <div class="flex-grow-1 position-relative z-2">
             <p
               class="text-white-50 fs-15 lh-base text-wrap"
@@ -240,43 +216,30 @@
             </p>
           </div>
 
-          <!-- Divider -->
           <hr
             class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
           />
 
-          <!-- Badges -->
           <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Python</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >TensorFlow</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >OpenCV</span
-            >
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Python</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">TensorFlow</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">OpenCV</span>
           </div>
 
-          <!-- Link -->
           <a
             href="#request-project"
-            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            class="text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            style="color: #7A5AF8;"
           >
             Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
           </a>
         </div>
       </div>
 
-      <!-- Domain 4: Cloud Computing -->
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
         <div
           class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
         >
-          <!-- Background Watermark -->
           <i
             class="icofont-cloud position-absolute bottom-0 end-0 mb-3 me-3 text-white"
             style="
@@ -287,7 +250,6 @@
             "
           ></i>
 
-          <!-- Icon -->
           <div class="mb-4 position-relative z-2">
             <div
               class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
@@ -296,12 +258,10 @@
             </div>
           </div>
 
-          <!-- Title -->
           <h4 class="mb-3 fs-24 text-white position-relative z-2">
             Cloud Computing
           </h4>
 
-          <!-- Description (Fixed Text Wrap) -->
           <div class="flex-grow-1 position-relative z-2">
             <p
               class="text-white-50 fs-15 lh-base text-wrap"
@@ -313,43 +273,30 @@
             </p>
           </div>
 
-          <!-- Divider -->
           <hr
             class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
           />
 
-          <!-- Badges -->
           <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >AWS / Azure</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Docker</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Kubernetes</span
-            >
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">AWS / Azure</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Docker</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Kubernetes</span>
           </div>
 
-          <!-- Link -->
           <a
             href="#request-project"
-            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            class="text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            style="color: #7A5AF8;"
           >
             Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
           </a>
         </div>
       </div>
 
-      <!-- Domain 5: Data Science -->
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
         <div
           class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
         >
-          <!-- Background Watermark -->
           <i
             class="icofont-data position-absolute bottom-0 end-0 mb-3 me-3 text-white"
             style="
@@ -360,7 +307,6 @@
             "
           ></i>
 
-          <!-- Icon -->
           <div class="mb-4 position-relative z-2">
             <div
               class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
@@ -369,12 +315,10 @@
             </div>
           </div>
 
-          <!-- Title -->
           <h4 class="mb-3 fs-24 text-white position-relative z-2">
             Data Science & Analytics
           </h4>
 
-          <!-- Description (Fixed Text Wrap) -->
           <div class="flex-grow-1 position-relative z-2">
             <p
               class="text-white-50 fs-15 lh-base text-wrap"
@@ -386,43 +330,31 @@
             </p>
           </div>
 
-          <!-- Divider -->
           <hr
             class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
           />
 
-          <!-- Badges -->
           <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Pandas</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Power BI</span
-            >
-            <span
-              class="badge bg-dark-2 text-white-50 border border-secondary border-opacity-25 px-2 py-1 rounded-2 fw-normal fs-13"
-              >Big Data</span
-            >
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Pandas</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Power BI</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Big Data</span>
           </div>
 
-          <!-- Link -->
           <a
             href="#request-project"
-            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            class="text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            style="color: #7A5AF8;"
           >
             Select Domain <i class="icofont-arrow-right ms-2 fs-18"></i>
           </a>
         </div>
       </div>
 
-      <!-- Domain 6: Custom Projects -->
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
         <div
-          class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden border-top border-4 border-primary"
+          class="bg-dark p-4 p-xl-5 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-10 transition-all hover-scale-1-05 shadow-lg position-relative overflow-hidden"
+          style="border-top: 4px solid #7A5AF8 !important;"
         >
-          <!-- Background Watermark -->
           <i
             class="icofont-magic position-absolute bottom-0 end-0 mb-3 me-3 text-white"
             style="
@@ -433,7 +365,6 @@
             "
           ></i>
 
-          <!-- Icon -->
           <div class="mb-4 position-relative z-2">
             <div
               class="bg-color-2 p-3 rounded-4 d-inline-flex shadow-sm border border-secondary border-opacity-25"
@@ -442,12 +373,10 @@
             </div>
           </div>
 
-          <!-- Title -->
           <h4 class="mb-3 fs-24 text-white position-relative z-2">
             Custom / Open Domain
           </h4>
 
-          <!-- Description (Fixed Text Wrap) -->
           <div class="flex-grow-1 position-relative z-2">
             <p
               class="text-white-50 fs-15 lh-base text-wrap"
@@ -459,27 +388,19 @@
             </p>
           </div>
 
-          <!-- Divider -->
           <hr
             class="border-secondary border-opacity-25 w-100 my-4 position-relative z-2"
           />
 
-          <!-- Badges -->
           <div class="d-flex flex-wrap gap-2 mb-4 position-relative z-2">
-            <span
-              class="badge bg-primary text-white border border-primary px-2 py-1 rounded-2 fw-normal fs-13"
-              >Your Idea</span
-            >
-            <span
-              class="badge bg-primary text-white border border-primary px-2 py-1 rounded-2 fw-normal fs-13"
-              >Custom Tech Stack</span
-            >
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Your Idea</span>
+            <span class="badge text-white px-2 py-1 rounded-2 fw-normal fs-13" style="background-color: #7A5AF8; border: 1px solid #7A5AF8;">Custom Tech Stack</span>
           </div>
 
-          <!-- Link -->
           <a
             href="#request-project"
-            class="id-color text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            class="text-decoration-none fw-bold fs-14 mt-auto d-inline-flex align-items-center position-relative z-2"
+            style="color: #7A5AF8;"
           >
             Consult With Us <i class="icofont-arrow-right ms-2 fs-18"></i>
           </a>
@@ -489,12 +410,10 @@
   </div>
 </section>
 
-<!-- Project Inquiry Form Section (Glassmorphism + Parallax UI) -->
 <section
   id="request-project"
   class="section-dark text-light pt-80 pb-100 relative jarallax"
 >
-  <!-- Background Elements -->
   <img
     src="/static/assets/images/background/5.webp"
     class="jarallax-img"
@@ -506,9 +425,8 @@
 
   <div class="container relative z-4">
     <div class="row align-items-center justify-content-between g-5">
-      <!-- Left Content -->
       <div class="col-lg-5">
-        <div class="subtitle wow fadeInUp mb-3">Let's Build It</div>
+       
         <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">
           Request Your Project
         </h2>
@@ -526,7 +444,7 @@
           data-wow-delay=".4s"
         >
           <h4 class="mb-3 fs-20 text-white">
-            <i class="icofont-star id-color me-2"></i> What You Get
+            <i class="icofont-star me-2" style="color: #7A5AF8;"></i> What You Get
           </h4>
           <ul class="text-white-50 fs-15 lh-lg mb-0 ps-3">
             <li>Complete Source Code & Database</li>
@@ -538,7 +456,6 @@
         </div>
       </div>
 
-      <!-- Right Form (Glassmorphism UI) -->
       <div class="col-lg-6 wow fadeInRight" data-wow-delay=".4s">
         <div
           class="p-5 rounded-4 shadow-lg position-relative overflow-hidden"
@@ -697,7 +614,8 @@
               <button
                 type="submit"
                 id="submit_project_form"
-                class="btn-main w-100 py-3 fs-16 rounded-3"
+                class="btn-main w-100 py-3 fs-16 rounded-3 text-white border-0"
+                style="background-color: #7A5AF8;"
               >
                 Request Consultation
               </button>
