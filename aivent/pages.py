@@ -1,8 +1,8 @@
 import os
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
-from werkzeug.security import generate_password_hash, check_password_hash  # <-- Added for passwords
-from flask_login import login_user, logout_user, current_user              # <-- Added for login sessions
+from werkzeug.security import generate_password_hash, check_password_hash  
+from flask_login import login_user, logout_user, current_user              
 import uuid
 import requests
 from sqlalchemy import text
@@ -19,20 +19,26 @@ public_pages = Blueprint('public_pages', __name__, template_folder='templates', 
 def upload_to_vercel_blob(file_obj):
     token = os.getenv('BLOB_READ_WRITE_TOKEN')
     if not token:
-        raise Exception("Vercel Blob Token is missing.")
+        raise Exception("Vercel Blob Token is missing from Environment Variables.")
         
     clean_filename = secure_filename(file_obj.filename)
     unique_filename = f"{str(uuid.uuid4())[:8]}_{clean_filename}"
     
     # Vercel Blob REST API endpoint
     url = f"https://blob.vercel-storage.com/{unique_filename}"
+    
+    # CRITICAL FIX: Vercel's API strictly requires the 'x-api-version' header
     headers = {
         "authorization": f"Bearer {token}",
+        "x-api-version": "7"
     }
     
     # Push the file to Vercel Storage
     response = requests.put(url, data=file_obj.read(), headers=headers)
-    response.raise_for_status() # Will trigger an error if the upload fails
+    
+    # If the upload fails, raise the exact Vercel API error message
+    if response.status_code != 200:
+        raise Exception(f"Vercel API Error {response.status_code}: {response.text}")
     
     # Return the public URL of the uploaded resume
     return response.json().get('url')
@@ -81,7 +87,8 @@ def interns():
             try:
                 resume_url = upload_to_vercel_blob(resume_file)
             except Exception as e:
-                flash("Error uploading resume to cloud storage.", "error")
+                # Upgraded flash message to show the EXACT error reason
+                flash(f"Cloud Upload Failed: {str(e)}", "error")
                 print("Vercel Blob Upload Error:", e)
                 return redirect(url_for('public_pages.interns') + '#apply-internship')
         else:
@@ -129,7 +136,8 @@ def join_us():
             try:
                 resume_url = upload_to_vercel_blob(resume_file)
             except Exception as e:
-                flash("Error uploading resume to cloud storage.", "error")
+                # Upgraded flash message to show the EXACT error reason
+                flash(f"Cloud Upload Failed: {str(e)}", "error")
                 print("Vercel Blob Upload Error:", e)
                 return redirect(url_for('public_pages.join_us') + '#apply-form')
         else:
@@ -234,14 +242,11 @@ def terms():
 @public_pages.route('/setup-admin')
 def setup_admin():
     try:
-        # 1. Expand the database column to fit the long password hash
         db.session.execute(text('ALTER TABLE "user" ALTER COLUMN password TYPE VARCHAR(255);'))
         db.session.commit()
 
-        # 2. Check if admin already exists
         admin_exists = User.query.filter_by(username='admin').first()
         if not admin_exists:
-            # Securely hash the password
             hashed_pw = generate_password_hash('admin123')
             new_admin = User(username='admin', email='admin@ist.com', password=hashed_pw)
             db.session.add(new_admin)
@@ -251,9 +256,8 @@ def setup_admin():
         return "<h3>Admin already exists.</h3><a href='/login'>Go to Login</a>"
     
     except Exception as e:
-        db.session.rollback() # Safely rollback if something goes wrong
+        db.session.rollback()
         return f"<h3>Database Error:</h3><p>{str(e)}</p>"
-
 
 
 @public_pages.route('/login', methods=['GET', 'POST'])
