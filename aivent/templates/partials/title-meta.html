@@ -1,9 +1,33 @@
 <head>
-    <title>Inovate Solution Technology</title>
-    <link rel="icon" href="/static/assets/images/icon.png" type="image/gif" sizes="16x16">
-    <meta content="text/html;charset=utf-8" http-equiv="Content-Type">
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" >
-    <meta content="IST" name="description" >
-    <meta content="" name="keywords" >
-    <meta content="" name="author" >
+    <!-- Character set and mobile viewport -->
+<meta content="text/html;charset=utf-8" http-equiv="Content-Type">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+<!-- Favicon -->
+<link rel="icon" href="/static/assets/images/icon.png" type="image/gif" sizes="16x16">
+
+<!-- Google Search Console Verification -->
+<meta name="google-site-verification" content="iSONZiMs46kus7cnioi9vqOT6Es7pz44W0tLZpy9ZV0" />
+
+<!-- DYNAMIC SEO TITLE, DESCRIPTION, & KEYWORDS -->
+<!-- If a page doesn't send a title/desc from Python, it falls back to the default values inside the single quotes -->
+<title>{{ page_title | default('Inovate Solution Technology | IT Solutions') }}</title>
+<meta name="description" content="{{ page_desc | default('Inovate Solution Technology provides expert Cloud, DevOps, and custom software solutions to elevate your business.') }}">
+<meta name="keywords" content="{{ page_keywords | default('IT solutions, Cloud infrastructure, DevOps, Software development, Madurai IT company') }}">
+<meta name="author" content="Inovate Solution Technology">
+<meta name="robots" content="index, follow">
+
+<!-- Open Graph (For Facebook, LinkedIn, WhatsApp previews) -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="{{ request.url }}">
+<meta property="og:title" content="{{ page_title | default('Inovate Solution Technology') }}">
+<meta property="og:description" content="{{ page_desc | default('Expert Cloud, DevOps, and custom software solutions.') }}">
+<meta property="og:image" content="https://www.inovatesolutiontechnology.in/static/assets/images/social-preview.jpg">
+
+<!-- Twitter Card -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:url" content="{{ request.url }}">
+<meta name="twitter:title" content="{{ page_title | default('Inovate Solution Technology') }}">
+<meta name="twitter:description" content="{{ page_desc | default('Expert Cloud, DevOps, and custom software solutions.') }}">
+<meta name="twitter:image" content="https://www.inovatesolutiontechnology.in/static/assets/images/social-preview.jpg">
   

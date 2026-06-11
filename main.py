@@ -1,7 +1,7 @@
 import os
 import requests
+from flask import send_from_directory # Ensure this is imported!
 from aivent import create_app, db
-# Add InternshipApplication to your imports
 from aivent.models import User, Contact, ProjectRequest, JobApplication, InternshipApplication
 
 from flask import redirect, url_for, request, render_template, flash
@@ -12,7 +12,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
 app = create_app()
-app.secret_key = os.environ.get('SECRET_KEY', 'super_secret_key_change_this_later') # Pulls from environment variables on Vercel
+app.secret_key = os.environ.get('SECRET_KEY', 'super_secret_key_change_this_later') # Pulls from env on Vercel
 
 # ==========================================
 # VERCEL BLOB STORAGE CORE UPLOAD FUNCTION
@@ -27,20 +27,16 @@ def upload_to_vercel_blob(file_obj):
         print("Error: BLOB_READ_WRITE_TOKEN is missing from Vercel environment variables.")
         return None
 
-    # Secure the filename to prevent security vulnerabilities
     filename = secure_filename(file_obj.filename)
-    
-    # Vercel Blob HTTP API endpoint configuration
     url = f"https://blob.vercel-storage.com/{filename}"
     headers = {
         "authorization": f"Bearer {token}"
     }
     
     try:
-        # Stream the file bytes directly over HTTP PUT
         response = requests.put(url, headers=headers, data=file_obj.read())
         if response.status_code == 200:
-            return response.json().get('url') # Return the public web URL
+            return response.json().get('url') 
         else:
             print(f"Vercel Blob API Error: {response.text}")
             return None
@@ -48,7 +44,6 @@ def upload_to_vercel_blob(file_obj):
         print(f"Exception during file cloud upload: {str(e)}")
         return None
 
-# Export the function context so your other blueprint/route files can import it if needed
 app.upload_to_vercel_blob = upload_to_vercel_blob
 
 
@@ -67,7 +62,6 @@ def load_user(user_id):
 # ==========================================
 # 2. SECURE THE FLASK-ADMIN VIEWS
 # ==========================================
-# This protects the main /admin dashboard
 class SecureAdminIndexView(AdminIndexView):
     def is_accessible(self):
         return current_user.is_authenticated
@@ -75,7 +69,6 @@ class SecureAdminIndexView(AdminIndexView):
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('login', next=request.url))
 
-# This protects the individual database tables (User, Contact, etc.)
 class SecureModelView(ModelView):
     def is_accessible(self):
         return current_user.is_authenticated
@@ -102,7 +95,6 @@ admin.add_view(SecureModelView(InternshipApplication, db))
 # ==========================================
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    # If the user is already logged in, send them straight to the admin panel
     if current_user.is_authenticated:
         return redirect('/admin')
 
@@ -110,10 +102,8 @@ def login():
         username = request.form.get('username')
         password = request.form.get('password')
         
-        # Look for the user in the database
         user = User.query.filter_by(username=username).first()
         
-        # Check if user exists and the password matches the hashed password
         if user and check_password_hash(user.password, password):
             login_user(user)
             return redirect('/admin')
@@ -127,13 +117,10 @@ def logout():
     logout_user()
     return redirect(url_for('login'))
 
-
-# --- TEMPORARY ROUTE TO CREATE YOUR FIRST PASSWORD ---
 @app.route('/setup-admin')
 def setup_admin():
     admin_exists = User.query.filter_by(username='admin').first()
     if not admin_exists:
-        # Securely hash the password 'admin123'
         hashed_pw = generate_password_hash('admin123')
         new_admin = User(username='admin', email='admin@ist.com', password=hashed_pw)
         db.session.add(new_admin)
@@ -143,7 +130,44 @@ def setup_admin():
 
 
 # ==========================================
-# 5. START APP & CREATE TABLES
+# 5. FRONTEND ROUTES & SEO CONFIGURATION
+# ==========================================
+@app.route('/')
+def home():
+    return render_template('index.html', 
+                           page_title="Inovate Solution Technology | Madurai IT Experts",
+                           page_desc="Leading IT firm in Madurai providing custom software, Cloud, and DevOps solutions.",
+                           page_keywords="IT company Madurai, software development, DevOps services, cloud solutions")
+
+@app.route('/about')
+def about():
+    return render_template('about.html', 
+                           page_title="About Us | Inovate Solution Technology",
+                           page_desc="Learn more about our mission to deliver cutting-edge digital solutions.",
+                           page_keywords="about IST, tech company Madurai, IT experts India")
+
+@app.route('/services')
+def services():
+    return render_template('services.html', 
+                           page_title="Cloud & DevOps Services | IST",
+                           page_desc="Explore our specialized services in cloud infrastructure and DevOps automation.",
+                           page_keywords="cloud infrastructure, DevOps automation, IT consulting Madurai")
+
+@app.route('/contact')
+def contact():
+    return render_template('contact.html', 
+                           page_title="Contact Us | Inovate Solution Technology",
+                           page_desc="Get in touch with our team to start your next big tech project.",
+                           page_keywords="contact IT company, software agency contact")
+
+@app.route('/sitemap.xml')
+def sitemap():
+    # Serves the XML file directly to Google bots
+    return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'sitemap.xml')
+
+
+# ==========================================
+# 6. START APP & CREATE TABLES
 # ==========================================
 with app.app_context():
     db.create_all()

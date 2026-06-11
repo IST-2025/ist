@@ -1,16 +1,14 @@
-{% extends "partials/layouts/main.html" %} 
-
-{% block content %}
+{% extends "partials/layouts/main.html" %} {% block content %}
 
 <style>
-  #back-to-top, 
-  .scroll-to-top, 
+  #back-to-top,
+  .scroll-to-top,
   .back-to-top,
   #totop {
     color: #ffffff !important;
   }
-  #back-to-top i, 
-  .scroll-to-top i, 
+  #back-to-top i,
+  .scroll-to-top i,
   .back-to-top i,
   #totop i {
     color: #ffffff !important;
@@ -20,12 +18,11 @@
 <section
   id="section-welcome"
   class="bg-dark section-dark text-light pb-80"
-  style="padding-top: 160px;"
+  style="padding-top: 160px"
 >
   <div class="container">
     <div class="row gx-5 align-items-center justify-content-between">
       <div class="col-lg-6 mb-sm-30 wow fadeInLeft" data-wow-delay=".2s">
-       
         <h2 class="mb-4">Innovating Solutions for Tomorrow's Challenges</h2>
         <p class="fs-16 text-white-50">
           Founded on the principles of innovation and excellence, IST is a
@@ -66,32 +63,49 @@
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-9 wow fadeInUp" data-wow-delay=".2s">
-        
         <!-- Section Header -->
         <div class="text-center mb-5">
-           
-            <h2 class="mb-0">Message from the Founder</h2>
+          <h2 class="mb-0">Message from the Founder</h2>
         </div>
 
         <!-- Founder Message Card -->
-        <div class="bg-dark p-5 rounded-4 shadow-lg border border-secondary border-opacity-10 position-relative overflow-hidden">
-            
-            <!-- Applied the custom purple color to the text and the left border -->
-            <blockquote class="blockquote fs-5 border-start border-4 ps-4 mb-4" style="font-style: italic; color: #7A5AF8; border-color: #7A5AF8 !important;">
-              "Our vision has always been to build scalable, highly reliable, and automated infrastructure that drives real business growth. At IST, we view every client's challenge as our opportunity to innovate and scale securely."
-            </blockquote>
-            
-            <p class="fs-16 text-white-50">
-              With extensive experience as a Lead DevOps Engineer—specializing in AWS, CI/CD, Terraform, and Kubernetes—my mission has been to empower businesses with forward-thinking digital solutions. By automating complex deployments and maintaining a relentless focus on system reliability, we help our partners optimize performance, reduce costs, and stay ahead in a highly competitive landscape.
-            </p>
-            
-            <div class="mt-5 pt-4 border-top border-secondary border-opacity-10 text-center">
-              <h3 class="text-white mb-1">Shalini B</h3>
-              <!-- Applied the custom purple color to the job title -->
-              <p class="mb-0" style="color: #7A5AF8;">Founder & Lead DevOps Engineer, Inovate Solution Technology</p>
-            </div>
-        </div>
+        <div
+          class="bg-dark p-5 rounded-4 shadow-lg border border-secondary border-opacity-10 position-relative overflow-hidden"
+        >
+          <!-- Applied the custom purple color to the text and the left border -->
+          <blockquote
+            class="blockquote fs-5 border-start border-4 ps-4 mb-4"
+            style="
+              font-style: italic;
+              color: white;
+              border-color: #7a5af8 !important;
+            "
+          >
+            "Our vision has always been to build scalable, highly reliable, and
+            automated infrastructure that drives real business growth. At IST,
+            we view every client's challenge as our opportunity to innovate and
+            scale securely."
+          </blockquote>
 
+          <p class="fs-16 text-white-50">
+            With extensive experience as a Lead DevOps Engineer—specializing in
+            AWS, CI/CD, Terraform, and Kubernetes—my mission has been to empower
+            businesses with forward-thinking digital solutions. By automating
+            complex deployments and maintaining a relentless focus on system
+            reliability, we help our partners optimize performance, reduce
+            costs, and stay ahead in a highly competitive landscape.
+          </p>
+
+          <div
+            class="mt-5 pt-4 border-top border-secondary border-opacity-10 text-center"
+          >
+            <h3 class="text-white mb-1">Shalini B</h3>
+            <!-- Applied the custom purple color to the job title -->
+            <p class="mb-0" style="color: white">
+              Founder & Lead DevOps Engineer, Inovate Solution Technology
+            </p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -104,7 +118,6 @@
   <div class="container">
     <div class="row mb-5 text-center">
       <div class="col-md-8 offset-md-2">
-        
         <h2 class="wow fadeInUp" data-wow-delay=".2s">Our Core Philosophy</h2>
         <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">
           The principles that guide our daily execution and our long-term goals.
@@ -245,7 +258,6 @@
   <div class="container relative z-4">
     <div class="row mb-5 text-center">
       <div class="col-md-8 offset-md-2">
-        
         <h2 class="wow fadeInUp" data-wow-delay=".2s">Why Partner with IST?</h2>
         <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">
           Discover the strategic advantages of choosing Innovate Solution
@@ -336,20 +348,29 @@
   </div>
 </section>
 
-<section class="bg-color text-light pt-60 pb-60 position-relative z-1">
+<section class="bg-dark text-light pt-60 pb-60 position-relative z-1 jarallax">
+  <img
+    src="/static/assets/images/background/3.webp"
+    class="jarallax-img"
+    alt=""
+  />
+  <div class="gradient-edge-top"></div>
+  <div class="gradient-edge-bottom"></div>
+  <div class="sw-overlay op-8"></div>
+
   <div class="container position-relative z-2">
     <div class="row align-items-center">
       <div class="col-lg-8 mb-sm-30 text-center text-lg-start wow fadeInLeft">
         <h3 class="mb-0">Ready to transform your cloud infrastructure?</h3>
         <p class="mb-0 text-white-50 mt-2">
-          Let's discuss how our expert DevOps and Cloud team can help you achieve your
-          technological ambitions.
+          Let's discuss how our expert DevOps and Cloud team can help you
+          achieve your technological ambitions.
         </p>
       </div>
       <div class="col-lg-4 text-center text-lg-end wow fadeInRight">
-        <a href="contact" class="btn-main btn-line bg-white text-dark fx-slide"
-          ><span>Contact Us Today</span></a
-        >
+        <a href="contact" class="btn-main btn-line bg-white text-dark fx-slide">
+          <span>Contact Us Today</span>
+        </a>
       </div>
     </div>
   </div>
