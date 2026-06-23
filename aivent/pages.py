@@ -1,4 +1,7 @@
 import os
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
 from flask import Blueprint, render_template, request, flash, redirect, url_for
 from werkzeug.utils import secure_filename
 from werkzeug.security import generate_password_hash, check_password_hash  
@@ -14,9 +17,39 @@ from . import db
 public_pages = Blueprint('public_pages', __name__, template_folder='templates', static_folder='static')
 
 # -----------------------------------------------------------
+# EMAIL NOTIFICATION HELPER
+# -----------------------------------------------------------
+def send_admin_notification(subject, body):
+    sender_email = os.environ.get('MAIL_USERNAME')
+    sender_password = os.environ.get('MAIL_APP_PASSWORD')
+    recipient_email = "inovatesolutiontechnology@gmail.com"
+
+    if not sender_email or not sender_password:
+        print("Warning: Email credentials not found in environment variables.")
+        return
+
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = recipient_email
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body, 'plain'))
+
+    try:
+        # Connect to Gmail's SMTP server
+        server = smtplib.SMTP('smtp.gmail.com', 587)
+        server.starttls()
+        server.login(sender_email, sender_password)
+        server.send_message(msg)
+        server.quit()
+        print("Admin notification email sent successfully!")
+    except Exception as e:
+        print(f"Failed to send email notification: {e}")
+
+# -----------------------------------------------------------
 # VERCEL BLOB UPLOAD HELPER
 # -----------------------------------------------------------
 def upload_to_vercel_blob(file_obj):
+    # ... (Keep your existing Vercel blob code here) ...
     token = os.getenv('BLOB_READ_WRITE_TOKEN')
     if not token:
         raise Exception("Vercel Blob Token is missing from Environment Variables.")
@@ -24,23 +57,15 @@ def upload_to_vercel_blob(file_obj):
     clean_filename = secure_filename(file_obj.filename)
     unique_filename = f"{str(uuid.uuid4())[:8]}_{clean_filename}"
     
-    # Vercel Blob REST API endpoint
     url = f"https://blob.vercel-storage.com/{unique_filename}"
-    
-    # CRITICAL FIX: Vercel's API strictly requires the 'x-api-version' header
     headers = {
         "authorization": f"Bearer {token}",
         "x-api-version": "7"
     }
     
-    # Push the file to Vercel Storage
     response = requests.put(url, data=file_obj.read(), headers=headers)
-    
-    # If the upload fails, raise the exact Vercel API error message
     if response.status_code != 200:
         raise Exception(f"Vercel API Error {response.status_code}: {response.text}")
-    
-    # Return the public URL of the uploaded resume
     return response.json().get('url')
 
 # -----------------------------------------------------------
@@ -75,27 +100,22 @@ def interns():
         college = request.form.get('college')
         
         resume_file = request.files.get('resume')
-        resume_url = "" # Will hold the Vercel URL
+        resume_url = ""
 
-        # Validate inputs
         if not name or not email or not phone or not domain or not college:
             flash("Please fill out all required fields.", "error")
             return redirect(url_for('public_pages.interns') + '#apply-internship')
 
-        # Handle File Upload to Vercel Blob
         if resume_file and resume_file.filename != '':
             try:
                 resume_url = upload_to_vercel_blob(resume_file)
             except Exception as e:
-                # Upgraded flash message to show the EXACT error reason
                 flash(f"Cloud Upload Failed: {str(e)}", "error")
-                print("Vercel Blob Upload Error:", e)
                 return redirect(url_for('public_pages.interns') + '#apply-internship')
         else:
             flash("Please upload a valid resume (PDF or DOC).", "error")
             return redirect(url_for('public_pages.interns') + '#apply-internship')
 
-        # Save to database using the Vercel URL
         new_intern = InternshipApplication(
             name=name, email=email, phone=phone, 
             domain=domain, college=college, resume_filename=resume_url
@@ -104,11 +124,16 @@ def interns():
         try:
             db.session.add(new_intern)
             db.session.commit()
+            
+            # --- EMAIL TRIGGER ADDED HERE ---
+            email_body = f"New Internship Application Received:\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nDomain: {domain}\nCollege: {college}\nResume Link: {resume_url}"
+            send_admin_notification("New Internship Application - IST", email_body)
+            # --------------------------------
+            
             flash("Your internship application has been submitted successfully!", "success")
         except Exception as e:
             db.session.rollback()
             flash("There was an error submitting your application. Please try again.", "error")
-            print(f"Database error: {e}")
             
         return redirect(url_for('public_pages.interns') + '#apply-internship')
 
@@ -124,27 +149,22 @@ def join_us():
         message = request.form.get('message')
         
         resume_file = request.files.get('resume')
-        resume_url = "" # Will hold the Vercel URL
+        resume_url = ""
 
-        # Validate inputs
         if not name or not email or not phone or not position:
             flash("Please fill out all required fields.", "error")
             return redirect(url_for('public_pages.join_us') + '#apply-form')
 
-        # Handle File Upload securely to Vercel Blob
         if resume_file and resume_file.filename != '':
             try:
                 resume_url = upload_to_vercel_blob(resume_file)
             except Exception as e:
-                # Upgraded flash message to show the EXACT error reason
                 flash(f"Cloud Upload Failed: {str(e)}", "error")
-                print("Vercel Blob Upload Error:", e)
                 return redirect(url_for('public_pages.join_us') + '#apply-form')
         else:
             flash("Please upload a valid resume (PDF or DOC).", "error")
             return redirect(url_for('public_pages.join_us') + '#apply-form')
 
-        # Save to database using the Vercel URL
         new_app = JobApplication(
             name=name, email=email, phone=phone, 
             position=position, resume_filename=resume_url, message=message
@@ -153,11 +173,16 @@ def join_us():
         try:
             db.session.add(new_app)
             db.session.commit()
+            
+            # --- EMAIL TRIGGER ADDED HERE ---
+            email_body = f"New Job Application Received:\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nPosition: {position}\nMessage: {message}\nResume Link: {resume_url}"
+            send_admin_notification("New Job Application - IST", email_body)
+            # --------------------------------
+            
             flash("Your application has been submitted successfully! We will review it shortly.", "success")
         except Exception as e:
             db.session.rollback()
             flash("There was an error submitting your application. Please try again.", "error")
-            print(f"Database error: {e}")
             
         return redirect(url_for('public_pages.join_us') + '#apply-form')
 
@@ -188,11 +213,16 @@ def projects():
         try:
             db.session.add(new_project)
             db.session.commit()
+            
+            # --- EMAIL TRIGGER ADDED HERE ---
+            email_body = f"New Project Request:\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nCollege: {college}\nDomain: {domain}\nDescription: {description}"
+            send_admin_notification("New Project Request - IST", email_body)
+            # --------------------------------
+            
             flash("Your project request has been submitted successfully! Our mentors will contact you soon.", "success")
         except Exception as e:
             db.session.rollback()
             flash("There was an error submitting your request. Please try again.", "error")
-            print(f"Database error: {e}")
             
         return redirect(url_for('public_pages.projects') + '#request-project')
 
@@ -215,15 +245,21 @@ def contact():
         try:
             db.session.add(new_contact)
             db.session.commit()
+            
+            # --- EMAIL TRIGGER ADDED HERE ---
+            email_body = f"New Contact Message Received:\n\nName: {name}\nEmail: {email}\nPhone: {phone}\nMessage: {message}"
+            send_admin_notification("New Contact Message - IST", email_body)
+            # --------------------------------
+            
             flash("Your message has been sent successfully!", "success")
         except Exception as e:
             db.session.rollback()
             flash("There was an error sending your message. Please try again.", "error")
-            print(f"Database error: {e}") 
             
         return redirect(url_for('public_pages.contact'))
 
     return render_template('contact.html')
+
 
 # -----------------------------------------------------------
 # Legal Routes
