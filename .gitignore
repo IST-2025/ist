@@ -1,6 +1,15 @@
+# Python Virtual Environment
 venv/
+
+# Python Cache & Compiled Files
 __pycache__/
 *.pyc
+
+# Flask Local Instance Folder (often contains local DBs)
 instance/
+
+# VS Code Workspace Settings
 .vscode/
+
+# Local Environment Variables 
 .flaskenv
