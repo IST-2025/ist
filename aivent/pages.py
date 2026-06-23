@@ -43,13 +43,12 @@ def send_admin_notification(subject, body):
         server.quit()
         print("Admin notification email sent successfully!")
     except Exception as e:
-        print(f"Failed to send email notification: {e}")
+        print(f"Failed to send email notification: {str(e)}")
 
 # -----------------------------------------------------------
 # VERCEL BLOB UPLOAD HELPER
 # -----------------------------------------------------------
 def upload_to_vercel_blob(file_obj):
-    # ... (Keep your existing Vercel blob code here) ...
     token = os.getenv('BLOB_READ_WRITE_TOKEN')
     if not token:
         raise Exception("Vercel Blob Token is missing from Environment Variables.")
@@ -133,7 +132,10 @@ def interns():
             flash("Your internship application has been submitted successfully!", "success")
         except Exception as e:
             db.session.rollback()
-            flash("There was an error submitting your application. Please try again.", "error")
+            error_msg = str(e)
+            print(f"CRITICAL DB ERROR in /interns: {error_msg}")
+            # EXPLICIT ERROR EXPOSED FOR DEBUGGING
+            flash(f"System Error (Database): {error_msg}", "error")
             
         return redirect(url_for('public_pages.interns') + '#apply-internship')
 
@@ -182,7 +184,10 @@ def join_us():
             flash("Your application has been submitted successfully! We will review it shortly.", "success")
         except Exception as e:
             db.session.rollback()
-            flash("There was an error submitting your application. Please try again.", "error")
+            error_msg = str(e)
+            print(f"CRITICAL DB ERROR in /join-us: {error_msg}")
+            # EXPLICIT ERROR EXPOSED FOR DEBUGGING
+            flash(f"System Error (Database): {error_msg}", "error")
             
         return redirect(url_for('public_pages.join_us') + '#apply-form')
 
@@ -222,7 +227,10 @@ def projects():
             flash("Your project request has been submitted successfully! Our mentors will contact you soon.", "success")
         except Exception as e:
             db.session.rollback()
-            flash("There was an error submitting your request. Please try again.", "error")
+            error_msg = str(e)
+            print(f"CRITICAL DB ERROR in /projects: {error_msg}")
+            # EXPLICIT ERROR EXPOSED FOR DEBUGGING
+            flash(f"System Error (Database): {error_msg}", "error")
             
         return redirect(url_for('public_pages.projects') + '#request-project')
 
@@ -254,7 +262,10 @@ def contact():
             flash("Your message has been sent successfully!", "success")
         except Exception as e:
             db.session.rollback()
-            flash("There was an error sending your message. Please try again.", "error")
+            error_msg = str(e)
+            print(f"CRITICAL DB ERROR in /contact: {error_msg}")
+            # EXPLICIT ERROR EXPOSED FOR DEBUGGING
+            flash(f"System Error (Database): {error_msg}", "error")
             
         return redirect(url_for('public_pages.contact'))
 
