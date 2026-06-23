@@ -292,13 +292,15 @@ def setup_admin():
         db.session.execute(text('ALTER TABLE "user" ALTER COLUMN password TYPE VARCHAR(255);'))
         db.session.commit()
 
-        admin_exists = User.query.filter_by(username='admin').first()
+        # FIXED: Check for 'ammu' since that is the user you are creating below
+        admin_exists = User.query.filter_by(username='ammu').first()
+        
         if not admin_exists:
-            hashed_pw = generate_password_hash('admin123')
-            new_admin = User(username='admin', email='admin@ist.com', password=hashed_pw)
+            hashed_pw = generate_password_hash('Shalini0810*')
+            new_admin = User(username='ammu', email='inovatesolutiontechnology@gmail.com', password=hashed_pw)
             db.session.add(new_admin)
             db.session.commit()
-            return "<h3>Admin user created!</h3><p>Username: <b>admin</b> | Password: <b>admin123</b></p><br><a href='/login'>Go to Login</a>"
+            return "<h3>Admin user created!</h3><p>Username: <b>ammu</b> | Password: <b>Shalini0810*</b></p><br><a href='/login'>Go to Login</a>"
         
         return "<h3>Admin already exists.</h3><a href='/login'>Go to Login</a>"
     
