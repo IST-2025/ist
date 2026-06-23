@@ -1,3 +1,0 @@
-export FLASK_APP=main
-MAIL_USERNAME=inovatesolutiontechnology@gmail.com
-MAIL_APP_PASSWORD=jhgwrrkflfqptojg
