@@ -2,79 +2,151 @@
 
 {% block content %}
 
-<!-- Custom CSS for Premium Project List UI -->
+<!-- Custom CSS for Premium Product Grid UI -->
 <style>
-    .custom-project-row {
-        background-color: transparent;
-        border-radius: 12px;
-        transition: all 0.3s ease;
-        padding: 24px;
-        margin: 0;
+    .custom-product-card {
+        background-color: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 16px;
+        transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+        padding: 30px 24px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
     }
-    .custom-project-row:hover {
-        background-color: rgba(122, 90, 248, 0.03);
-        transform: translateY(-2px);
-        border-color: rgba(122, 90, 248, 0.2) !important;
+    
+    .custom-product-card:hover {
+        background-color: rgba(122, 90, 248, 0.04);
+        transform: translateY(-6px);
+        border-color: rgba(122, 90, 248, 0.3);
+        box-shadow: 0 12px 30px -10px rgba(122, 90, 248, 0.15);
+    }
+    
+    .domain-tag {
+        color: #7A5AF8;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 1.5px;
+        font-weight: 700;
+        margin-bottom: 12px;
+        display: inline-block;
     }
     
     .tech-badge {
-        background-color: rgba(255, 255, 255, 0.05);
-        border: 1px solid rgba(255, 255, 255, 0.1);
+        background-color: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.08);
         color: #a1a1a1;
-        font-size: 11px;
-        padding: 4px 12px;
+        font-size: 10px;
+        padding: 4px 10px;
         border-radius: 20px;
         font-weight: 500;
         text-transform: uppercase;
         letter-spacing: 0.5px;
+        transition: all 0.2s ease;
+    }
+
+    .custom-product-card:hover .tech-badge {
+        border-color: rgba(122, 90, 248, 0.2);
+        color: #cfcfcf;
     }
 </style>
 
-<!-- Completed Projects Portfolio -->
+<!-- Completed Products & Domains Portfolio -->
 <section id="section-portfolio" class="bg-dark-2 section-dark text-light pb-80" style="padding-top: 160px;">
     <div class="container">
         
         <div class="row mb-5 text-center">
             <div class="col-md-8 offset-md-2">
-                <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Completed Projects</h2>
+                <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Our Product Domains</h2>
                 <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">
-                    A directory of platforms and solutions engineered by our team.
+                    A comprehensive directory of scalable platforms, solutions, and digital products engineered by our team.
                 </p>
             </div>
         </div>
 
-        <div class="border-top border-secondary border-opacity-25 mt-2">
+        <div class="row g-4 mt-2">
 
-            <!-- Helper function to generate rows (Logic represents your items) -->
-            {% set projects = [
-                {"cat": "Banking Mobile App", "title": "SBI", "desc": "A highly secure, robust mobile banking software service featuring seamless financial transactions and multi-factor authentication."},
-                {"cat": "School Exam App", "title": "GOVT School", "desc": "A comprehensive digital assessment platform supporting real-time grading, secure anti-cheat environments, and analytics."},
-                {"cat": "Corporate Website", "title": "Firstchoice Supplies", "tech": ["Next.js", "Tailwind CSS", "Google App Script"]},
-                {"cat": "Robotica Event", "title": "Event Evaluation", "tech": ["Flask", "Python", "Neon DB", "User Auth", "Admin Panel"]},
-                {"cat": "Academy Portal", "title": "Qbee Academy", "tech": ["React.js", "Bootstrap 5", "Google App Script"]},
-                {"cat": "Play School", "title": "SK Kids School", "tech": ["HTML5", "CSS3", "JavaScript", "Tailwind"]},
-                {"cat": "AI/ML Solution", "title": "Fruit Quality Detection", "tech": ["Flask", "Python", "Admin Panel", "User Auth"]},
-                {"cat": "Event Portal", "title": "Dreamland Entertainment", "tech": ["Flask", "Python", "Admin Panel", "User Auth"]},
-                {"cat": "Community Platform", "title": "Eco Challenge Hub", "tech": ["Flask", "Python", "Admin Panel"]},
-                {"cat": "Car Service", "title": "Mech Zone", "tech": ["Flask", "Python", "Admin Panel", "User Auth"]}
+            <!-- Dynamic Product Dataset with uniform Descriptions and Tech Stacks -->
+            {% set products = [
+                {
+                    "domain": "Banking & Finance", 
+                    "title": "Secure Mobile Banking App", 
+                    "desc": "A highly secure, robust fintech infrastructure featuring seamless cross-border transactions, instant peer-to-peer transfers, and multi-factor biometric authentication.",
+                    "tech": ["React Native", "Node.js", "AWS"]
+                },
+                {
+                    "domain": "EdTech Solutions", 
+                    "title": "Digital Examination Platform", 
+                    "desc": "A secure web portal designed for educational institutions to host online examinations with automated real-time grading, anti-cheat monitoring, and deep performance analytics.",
+                    "tech": ["Vue.js", "Python", "PostgreSQL"]
+                },
+                {
+                    "domain": "Corporate Enterprise", 
+                    "title": "B2B Supply Chain Portal", 
+                    "desc": "An automated procurement management tool engineered to simplify complex logistics, streamline bulk order invoicing, and manage vendor interactions effortlessly.",
+                    "tech": ["Next.js", "Tailwind CSS", "App Script"]
+                },
+                {
+                    "domain": "Event Management", 
+                    "title": "Tech Olympiad Evaluation System", 
+                    "desc": "A dynamic scoring dashboard built for live competitions, providing judges with rapid evaluation tools and audience members with real-time leaderboard updates.",
+                    "tech": ["Flask", "Python", "Neon DB", "Admin Panel"]
+                },
+                {
+                    "domain": "E-Learning", 
+                    "title": "Professional Training LMS", 
+                    "desc": "A comprehensive cloud learning management system featuring progress pipelines, custom interactive multimedia courses, and instant automated certifications.",
+                    "tech": ["React.js", "Bootstrap 5", "App Script"]
+                },
+                {
+                    "domain": "Early Education", 
+                    "title": "Interactive School Web Hub", 
+                    "desc": "A responsive, high-speed website template built for early education academies, complete with parental notification systems, event management, and inquiry collection forms.",
+                    "tech": ["HTML5", "CSS3", "JavaScript", "Tailwind"]
+                },
+                {
+                    "domain": "AI / Machine Learning", 
+                    "title": "Computer Vision Grading Engine", 
+                    "desc": "An edge AI framework paired with a user dashboard capable of analyzing optical feeds to automatically detect imperfections and grade products based on visual quality.",
+                    "tech": ["Flask", "Python", "PyTorch", "User Auth"]
+                },
+                {
+                    "domain": "Entertainment", 
+                    "title": "Live Ticket Booking Application", 
+                    "desc": "A high-concurrency event registration and ticketing system optimized for massive traffic spikes, complete with interactive layout maps and encrypted QR ticket passes.",
+                    "tech": ["Flask", "Python", "Admin Panel", "User Auth"]
+                },
+                {
+                    "domain": "Community & Social", 
+                    "title": "Eco-Engagement Hub", 
+                    "desc": "A gamified tracking portal aimed at modern communities, leveraging user challenges, collaborative milestone rewards, and personal metric logs to drive real-world impact.",
+                    "tech": ["Flask", "Python", "Admin Panel"]
+                },
+                {
+                    "domain": "Automotive Services", 
+                    "title": "On-Demand Service Marketplace", 
+                    "desc": "A digital scheduling application matching car owners with verified mechanical professionals, providing live diagnostics timelines and maintenance histories.",
+                    "tech": ["Flask", "Python", "Admin Panel", "User Auth"]
+                }
             ] %}
 
-            {% for p in projects %}
-            <div class="row py-4 border-bottom border-secondary border-opacity-25 align-items-center custom-project-row wow fadeInUp" data-wow-delay=".1s">
-                <div class="col-lg-3">
-                    <div class="fs-12 text-uppercase letter-spacing-1 mb-1 fw-bold" style="color: #7A5AF8;">{{ p.cat }}</div>
-                    <h4 class="fs-20 mb-0 text-white">{{ p.title }}</h4>
-                </div>
-                <div class="col-lg-9 mt-3 mt-lg-0">
-                    {% if p.desc %}
-                        <p class="text-white-50 fs-15 mb-0 lh-lg">{{ p.desc }}</p>
-                    {% else %}
+            {% for p in products %}
+            <div class="col-12 col-md-6 col-lg-4 wow fadeInUp" data-wow-delay=".{{ loop.index % 5 }}s">
+                <div class="custom-product-card">
+                    <div class="domain-tag">{{ p.domain }}</div>
+                    <h4 class="fs-22 mb-3 text-white fw-bold">{{ p.title }}</h4>
+                    
+                    <!-- Description Block -->
+                    <p class="text-white-50 fs-14 mb-4 lh-lg">{{ p.desc }}</p>
+                    
+                    <!-- Technology Badges aligned neatly at the base of every card -->
+                    <div class="mt-auto pt-2">
                         <div class="d-flex flex-wrap gap-2">
                             {% for tech in p.tech %}
                                 <span class="tech-badge">{{ tech }}</span>
                             {% endfor %}
                         </div>
-                    {% endif %}
+                    </div>
                 </div>
             </div>
             {% endfor %}
@@ -90,7 +162,7 @@
     <div class="container position-relative z-2">
         <div class="row align-items-center">
             <div class="col-lg-8 mb-sm-30 text-center text-lg-start wow fadeInLeft">
-                <h3 class="mb-0">Ready to start your next project?</h3>
+                <h3 class="mb-0">Ready to build your next product?</h3>
                 <p class="mb-0 text-white-50 mt-2">Let our expert development team turn your vision into a reality.</p>
             </div>
             <div class="col-lg-4 text-center text-lg-end wow fadeInRight">
