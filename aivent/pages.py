@@ -78,6 +78,10 @@ def index():
 def about():
     return render_template('about.html')
 
+@public_pages.route('/journey')
+def journey():
+    return render_template('journey.html')
+
 @public_pages.route('/services')
 def services():
     return render_template('services.html')

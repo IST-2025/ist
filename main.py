@@ -145,6 +145,13 @@ def about():
                            page_title="About Us | Inovate Solution Technology",
                            page_desc="Learn more about our mission to deliver cutting-edge digital solutions.",
                            page_keywords="about IST, tech company Madurai, IT experts India")
+@app.route('/journey')
+def journey():
+    return render_template('journey.html', 
+                           page_title="Our Journey | Inovate Solution Technology",
+                           page_desc="Discover the story of our growth and achievements.",
+                           page_keywords="IST journey, tech company history, Madurai IT firm")
+
 
 @app.route('/services')
 def services():
