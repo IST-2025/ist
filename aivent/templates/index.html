@@ -1,6 +1,53 @@
 {% extends "partials/layouts/main.html" %}
 
 {% block content %}
+
+<style>
+    /* Custom Styling for Journey Timeline */
+    .journey-timeline {
+        position: relative;
+        border-left: 3px solid #7a5af8; /* Accent color */
+        padding-left: 30px;
+        margin-left: 15px;
+    }
+    .journey-item {
+        position: relative;
+        margin-bottom: 2.5rem;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 20px;
+        border-radius: 8px;
+        border: 1px solid rgba(255,255,255,0.05);
+        transition: transform 0.3s ease, background 0.3s ease;
+    }
+    .journey-item:hover {
+        transform: translateX(10px);
+        background: rgba(255, 255, 255, 0.08);
+        border-color: #7a5af8;
+    }
+    .journey-item::before {
+        content: "";
+        position: absolute;
+        left: -39px;
+        top: 25px;
+        width: 16px;
+        height: 16px;
+        border-radius: 50%;
+        background: #7a5af8;
+        border: 3px solid #1a1a1a;
+        transition: all 0.3s ease;
+    }
+    .journey-item:hover::before {
+        background: #ffffff;
+        box-shadow: 0 0 10px #7a5af8;
+    }
+    .journey-date {
+        color: #7a5af8;
+        font-weight: 700;
+        margin-bottom: 5px;
+        font-size: 1.1rem;
+    }
+</style>
+
 <section id="section-hero" class="section-dark no-top no-bottom text-light jarallax relative mh-800"
     data-video-src="mp4:static/assets/video/2.mp4">
     <div class="gradient-edge-top op-6 h-50 color"></div>
@@ -10,7 +57,6 @@
         <div class="container wow scaleIn" data-wow-duration="3s">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <!-- <div class="subtitle">Your Trusted Partner in IT Excellence</div> -->
                     <h1 class="fs-120 text-uppercase fs-sm-11vw mb-4 lh-1">Innovating from Imagination</h1>
 
                     <div class="d-block d-md-flex justify-content-center mt-3">
@@ -55,8 +101,7 @@
                         <div class="d-flex align-items-center">
                             <i class="fs-60 icofont-google-map id-color"></i>
                             <div class="ms-3">
-                                <h6 class="mb-0">
-Kadachanenthal,<br> Madurai, 625 107</h6>
+                                <h6 class="mb-0">Kadachanenthal,<br> Madurai, 625 107</h6>
                             </div>
                         </div>
                     </div>
@@ -69,11 +114,97 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
 
 
 
-<section id="section-services" class="bg-dark section-dark text-light">
+<!-- COMPANY JOURNEY TIMELINE SECTION (UPDATED) -->
+<section id="section-journey-timeline" class="bg-dark-2 section-dark text-light relative jarallax pt-80 pb-80">
+    <img src="/static/assets/images/background/6.webp" class="jarallax-img" alt="">
+    <div class="gradient-edge-top"></div>
+    <div class="gradient-edge-bottom"></div>
+    <div class="sw-overlay op-8"></div>
+    <div class="container relative z-4">
+        <div class="row mb-5 text-center">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="wow fadeInUp" data-wow-delay=".2s">The Road So Far</h2>
+                <p class="lead wow fadeInUp text-white-50" data-wow-delay=".4s">
+                    A timeline of our milestones, growth, and continuous commitment to excellence.
+                </p>
+            </div>
+        </div>
+
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-md-10">
+                <div class="journey-timeline">
+                    
+                    <div class="journey-item wow fadeInUp" data-wow-delay=".1s">
+                        <div class="journey-date">Jan 2025</div>
+                        <h4 class="text-white mb-0 fs-5">First Project Commitment (SBI)</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay=".2s">
+                        <div class="journey-date">Jan 2025</div>
+                        <h4 class="text-white mb-0 fs-5">Second Project Commitment (Event Management)</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay=".3s">
+                        <div class="journey-date">21 Feb 2025</div>
+                        <h4 class="text-white mb-0 fs-5">Company & Website Official Launch</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay=".4s">
+                        <div class="journey-date">Feb 2025</div>
+                        <h4 class="text-white mb-0 fs-5">First Client Project Delivered</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay=".5s">
+                        <div class="journey-date">Apr 2025</div>
+                        <h4 class="text-white mb-0 fs-5">Team Expanded to 10 Members</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay=".6s">
+                        <div class="journey-date">Jul 2025</div>
+                        <h4 class="text-white mb-0 fs-5">Professional Courses Launched</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay=".7s">
+                        <div class="journey-date">Aug 2025</div>
+                        <h4 class="text-white mb-0 fs-5">Internship Program Started</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay=".8s">
+                        <div class="journey-date">Oct 2025</div>
+                        <h4 class="text-white mb-0 fs-5">Startup Motivation Speech at Nandha College</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay=".9s">
+                        <div class="journey-date">Dec 2025</div>
+                        <h4 class="text-white mb-0 fs-5">Free AI & Technology Awareness Program Conducted</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay="1s">
+                        <div class="journey-date">Jan 2026</div>
+                        <h4 class="text-white mb-0 fs-5">First International Client Commitment (UAE)</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay="1.1s">
+                        <div class="journey-date">Mar 2026</div>
+                        <h4 class="text-white mb-0 fs-5">Business Expansion & Strategic Partnerships</h4>
+                    </div>
+
+                    <div class="journey-item wow fadeInUp" data-wow-delay="1.2s">
+                        <div class="journey-date">Jun 2026</div>
+                        <h4 class="text-white mb-0 fs-5">Continued Growth with Multiple Projects & Service Expansion</h4>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<section id="section-services" class="bg-dark section-dark text-light pt-80">
     <div class="container">
         <div class="row g-4">
             <div class="col-lg-6 offset-lg-3 text-center">
-                <!-- <div class="subtitle wow fadeInUp mb-3">Our Services</div> -->
                 <h2 class="wow fadeInUp" data-wow-delay=".2s">Our Core Services</h2>
                 <p class="lead mb-0 wow fadeInUp">Expert solutions to drive your business forward.</p>
             </div>
@@ -82,12 +213,9 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
         <div class="spacer-single"></div>
 
         <div class="row g-4">
-           
-
             <div class="col-lg-4 col-md-6">
                 <div class="hover">
-                    <div
-                        class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
+                    <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
                         <div class="abs p-40 bottom-0 z-2 w-100">
                             <div class="relative wow fadeInUp">
                                 <h4 class="d-flex align-items-center">
@@ -108,8 +236,7 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
 
             <div class="col-lg-4 col-md-6">
                 <div class="hover">
-                    <div
-                        class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
+                    <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
                         <div class="abs p-40 bottom-0 z-2 w-100">
                             <div class="relative wow fadeInUp">
                                 <h4 class="d-flex align-items-center">
@@ -130,8 +257,7 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
 
             <div class="col-lg-4 col-md-6">
                 <div class="hover">
-                    <div
-                        class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
+                    <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
                         <div class="abs p-40 bottom-0 z-2 w-100">
                             <div class="relative wow fadeInUp">
                                 <h4 class="d-flex align-items-center">
@@ -153,8 +279,7 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
 
             <div class="col-lg-4 col-md-6">
                 <div class="hover">
-                    <div
-                        class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
+                    <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
                         <div class="abs p-40 bottom-0 z-2 w-100">
                             <div class="relative wow fadeInUp">
                                 <h4 class="d-flex align-items-center">
@@ -176,8 +301,7 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
 
             <div class="col-lg-4 col-md-6">
                 <div class="hover">
-                    <div
-                        class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
+                    <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
                         <div class="abs p-40 bottom-0 z-2 w-100">
                             <div class="relative wow fadeInUp">
                                 <h4 class="d-flex align-items-center">
@@ -197,12 +321,9 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
                 </div>
             </div>
 
-          
-
             <div class="col-lg-4 col-md-6">
                 <div class="hover">
-                    <div
-                        class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
+                    <div class="bg-dark-2 relative rounded-1 overflow-hidden hover-bg-color hover-text-light wow scale-in-mask">
                         <div class="abs p-40 bottom-0 z-2 w-100">
                             <div class="relative wow fadeInUp">
                                 <h4 class="d-flex align-items-center">
@@ -226,107 +347,83 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
     </div>
 </section>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  <section class="bg-dark section-dark text-light pt-80 relative jarallax pb-80">
-     <img src="/static/assets/images/background/1.webp" class="jarallax-img" alt="">
+<section class="bg-dark section-dark text-light pt-80 relative jarallax pb-80">
+    <img src="/static/assets/images/background/1.webp" class="jarallax-img" alt="">
     <div class="gradient-edge-top"></div>
     <div class="gradient-edge-bottom"></div>
     <div class="sw-overlay op-8"></div>
     <div class="container relative z-4">
-            <div class="container">
-                <div class="row mb-5 text-center">
-                    <div class="col-md-12">
-                        <!-- <div class="subtitle wow fadeInUp mb-3">Our Expertise</div> -->
-                        <h2 class="wow fadeInUp" data-wow-delay=".2s">Industries We Serve</h2>
-                         <p class="lead mb-0 wow fadeInUp">Tailored technology solutions for diverse industries and business needs.</p>
-       
+        <div class="container">
+            <div class="row mb-5 text-center">
+                <div class="col-md-12">
+                    <h2 class="wow fadeInUp" data-wow-delay=".2s">Industries We Serve</h2>
+                    <p class="lead mb-0 wow fadeInUp">Tailored technology solutions for diverse industries and business needs.</p>
+                </div>
+            </div>
+
+            <div class="row g-4">
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
+                    <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
+                        <img src="https://i.pinimg.com/1200x/3c/13/74/3c1374c261b990ff74ab5b2f66cab1f2.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Retail & E-commerce">
+                        <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
+                        <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
+                            <h3 class="text-white mb-0 fs-24">Retail & E-commerce</h3>
+                        </div>
                     </div>
                 </div>
 
-                <div class="row g-4">
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
-                        <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
-                            <img src="https://i.pinimg.com/1200x/3c/13/74/3c1374c261b990ff74ab5b2f66cab1f2.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Retail & E-commerce">
-                            <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
-                            <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
-                                <h3 class="text-white mb-0 fs-24">Retail & E-commerce</h3>
-                            </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                    <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
+                        <img src="https://i.pinimg.com/1200x/18/09/aa/1809aadd8b5554064cf10b16c7d9577a.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Healthcare">
+                        <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
+                        <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
+                            <h3 class="text-white mb-0 fs-24">Healthcare</h3>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                        <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
-                            <img src="https://i.pinimg.com/1200x/18/09/aa/1809aadd8b5554064cf10b16c7d9577a.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Healthcare">
-                            <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
-                            <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
-                                <h3 class="text-white mb-0 fs-24">Healthcare</h3>
-                            </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                    <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
+                        <img src="https://i.pinimg.com/1200x/2f/93/12/2f931213a4340577ffa0d5fd4e2ae151.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Education">
+                        <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
+                        <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
+                            <h3 class="text-white mb-0 fs-24">Education</h3>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-                        <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
-                            <img src="https://i.pinimg.com/1200x/2f/93/12/2f931213a4340577ffa0d5fd4e2ae151.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Education">
-                            <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
-                            <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
-                                <h3 class="text-white mb-0 fs-24">Education</h3>
-                            </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
+                    <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
+                        <img src="https://i.pinimg.com/1200x/94/5f/72/945f7237a4da62d7a354bda5172f230a.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Finance & Banking">
+                        <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
+                        <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
+                            <h3 class="text-white mb-0 fs-24">Finance & Banking</h3>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                        <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
-                            <img src="https://i.pinimg.com/1200x/94/5f/72/945f7237a4da62d7a354bda5172f230a.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Finance & Banking">
-                            <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
-                            <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
-                                <h3 class="text-white mb-0 fs-24">Finance & Banking</h3>
-                            </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                    <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
+                        <img src="https://i.pinimg.com/1200x/6b/d8/06/6bd80608076329c5c7bb21cb147b59f7.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Manufacturing">
+                        <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
+                        <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
+                            <h3 class="text-white mb-0 fs-24">Manufacturing</h3>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-                        <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
-                            <img src="https://i.pinimg.com/1200x/6b/d8/06/6bd80608076329c5c7bb21cb147b59f7.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Manufacturing">
-                            <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
-                            <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
-                                <h3 class="text-white mb-0 fs-24">Manufacturing</h3>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                        <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
-                            <img src="https://i.pinimg.com/1200x/24/e1/1e/24e11e3e8bc7a3d374f055ff86eb6dc5.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Logistics & Supply Chain">
-                            <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
-                            <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
-                                <h3 class="text-white mb-0 fs-24">Logistics & Supply Chain</h3>
-                            </div>
+                <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
+                    <div class="relative rounded-3 overflow-hidden shadow hover-scale-1-1" style="height: 250px;">
+                        <img src="https://i.pinimg.com/1200x/24/e1/1e/24e11e3e8bc7a3d374f055ff86eb6dc5.jpg" class="w-100 h-100" style="object-fit: cover;" alt="Logistics & Supply Chain">
+                        <div class="abs w-100 h-100 top-0 start-0 bg-dark op-6"></div>
+                        <div class="abs w-100 h-100 top-0 start-0 d-flex align-items-center justify-content-center text-center p-3">
+                            <h3 class="text-white mb-0 fs-24">Logistics & Supply Chain</h3>
                         </div>
                     </div>
                 </div>
             </div>
-        </section>
-
-
-
-
-
+        </div>
+</section>
 
 <section id="ist-technologies" class="ist-technologies-section py-5 bg-dark section-dark text-light"> 
     <div class="container">
@@ -422,21 +519,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
         </div>
     </div>
 </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 <section id="section-testimonials" class="bg-dark section-dark text-light pt-80 relative jarallax" aria-label="section">
     <img src="/static/assets/images/background/7.webp" class="jarallax-img" alt="">
@@ -558,17 +640,10 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
     </div>
 </section>
 
-
-
-
-
-
-
 <section id="section-faq" class="bg-dark section-dark text-light">
     <div class="container">
         <div class="row g-4">
             <div class="col-lg-5">
-                <!-- <div class="subtitle wow fadeInUp" data-wow-delay=".0s">Everything You Need to Know</div> -->
                 <h2 class="wow fadeInUp" data-wow-delay=".2s">Frequently Asked Questions</h2>
             </div>
 
@@ -576,7 +651,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
                 <div class="accordion s2 wow fadeInUp">
                     <div class="accordion-section">
                         
-                        <!-- Question 1 -->
                         <div class="accordion-section-title" data-tab="#accordion-a1">
                             What core services does IST provide?
                         </div>
@@ -584,7 +658,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
                             IST offers a comprehensive range of technology solutions, including Custom Software Development, Cloud Solutions, Cybersecurity, Digital Transformation, Data Analytics & AI, and 24/7 Managed IT Services tailored to your business needs.
                         </div>
 
-                        <!-- Question 2 -->
                         <div class="accordion-section-title" data-tab="#accordion-a2">
                             How do you ensure the security of our company data?
                         </div>
@@ -592,7 +665,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
                             We take security seriously. Our cybersecurity experts employ industry-leading protocols, advanced encryption, regular vulnerability assessments, and continuous monitoring to ensure your data is protected against evolving digital threats.
                         </div>
 
-                        <!-- Question 3 -->
                         <div class="accordion-section-title" data-tab="#accordion-a3">
                             Can you help migrate our legacy systems to the cloud?
                         </div>
@@ -600,7 +672,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
                             Absolutely. We specialize in seamless cloud migrations. Our team assesses your current infrastructure and creates a tailored migration strategy to move your operations to scalable platforms like AWS or Azure with zero to minimal downtime.
                         </div>
 
-                        <!-- Question 4 -->
                         <div class="accordion-section-title" data-tab="#accordion-a4">
                             Do you build custom solutions or use off-the-shelf software?
                         </div>
@@ -608,7 +679,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
                             While we can integrate and manage existing enterprise software, our primary expertise lies in building fully custom, scalable software solutions from the ground up to perfectly align with your specific operational requirements.
                         </div>
 
-                        <!-- Question 5 -->
                         <div class="accordion-section-title" data-tab="#accordion-a5">
                             What industries do you have experience working with?
                         </div>
@@ -616,7 +686,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
                             We have successfully delivered technology solutions across a wide variety of sectors, primarily focusing on Healthcare, Retail & E-commerce, Education, Finance & Banking, Manufacturing, and Logistics & Supply Chain.
                         </div>
 
-                        <!-- Question 6 -->
                         <div class="accordion-section-title" data-tab="#accordion-a6">
                             Do you offer ongoing IT support after a project is completed?
                         </div>
@@ -631,34 +700,21 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
     </div>
 </section>
 
-
-
-
-
-
-
 <section id="section-venue" class="bg-dark section-dark text-light pt-80 relative jarallax" aria-label="section">
-    <!-- Optional: Keep your jarallax background image if you have one, or remove this img tag -->
     <img src="/static/assets/images/background/2.webp" class="jarallax-img" alt="">
     <div class="gradient-edge-top"></div>
     <div class="gradient-edge-bottom"></div>
     <div class="sw-overlay op-8"></div>
     
     <div class="container relative z-2">
-        <!-- Heading -->
         <div class="row g-4 justify-content-center mb-5">
             <div class="col-lg-8 text-center">
-                <!-- <div class="subtitle wow fadeInUp" data-wow-delay=".0s">Connect With Us</div> -->
                 <h2 class="wow fadeInUp" data-wow-delay=".2s">Visit Our Office or Get In Touch</h2>
             </div>
         </div>
 
-        <!-- Content Row: Left Side (Details) & Right Side (Map) -->
         <div class="row g-4 align-items-center mb-5">
-            
-            <!-- LEFT SIDE: Contact Information -->
             <div class="col-lg-4 col-md-12 pe-lg-4">
-                <!-- Address -->
                 <div class="d-flex justify-content-start mb-5 wow fadeInUp" data-wow-delay=".2s">
                     <i class="fs-60 id-color icofont-google-map"></i>
                     <div class="ms-3">
@@ -667,7 +723,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
                     </div>
                 </div>
 
-                <!-- Phone -->
                 <div class="d-flex justify-content-start mb-5 wow fadeInUp" data-wow-delay=".4s">
                     <i class="fs-60 id-color icofont-phone"></i>
                     <div class="ms-3">
@@ -676,18 +731,15 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
                     </div>
                 </div>
 
-                <!-- Email -->
                 <div class="d-flex justify-content-start wow fadeInUp" data-wow-delay=".6s">
                     <i class="fs-60 id-color icofont-envelope"></i>
                     <div class="ms-3">
                         <h4 class="mb-0">Email</h4>
-                        <!-- Using word-break so the long email doesn't break the layout on smaller screens -->
                         <p class="mb-0" style="word-break: break-word;"><a href="mailto:ist@inovatesolutiontechnology.in" class="text-light text-decoration-none">ist@inovatesolutiontechnology.in</a></p>
                     </div>
                 </div>
             </div>
 
-            <!-- RIGHT SIDE: Google Map -->
             <div class="col-lg-8 col-md-12 wow fadeInUp" data-wow-delay=".4s">
                 <div class="rounded-3 overflow-hidden shadow-sm" style="height: 400px; width: 100%;">
                     <iframe
@@ -706,7 +758,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
 
         <div class="clearfix"></div>
 
-        <!-- CTA Button -->
         <div class="row mt-5">
             <div class="col-12 text-center wow fadeInUp" data-wow-delay=".8s">
                 <a href="contact" class="btn-main fx-slide"><span>Contact Us Online</span></a>
@@ -715,12 +766,6 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
 
     </div>
 </section>
-
-
-
-
-
-
 
 <section class="bg-dark section-dark text-light pt-80 relative jarallax" aria-label="section">
     <img src="/static/assets/images/background/3.webp" class="jarallax-img" alt="">
@@ -751,22 +796,52 @@ Kadachanenthal,<br> Madurai, 625 107</h6>
     </div>
 </section>
 
-<!-- Add this script right below your section to handle the form submission -->
 <script>
     document.addEventListener("DOMContentLoaded", function() {
+        // --- Form Submission Logic ---
         const subscribeForm = document.getElementById("subscribe-form");
-        
         if (subscribeForm) {
             subscribeForm.addEventListener("submit", function(e) {
-                // This stops the page from reloading and throwing an error
                 e.preventDefault(); 
-                
-                // Show a success message (you can replace this with your own logic later)
                 alert("Thank you for subscribing to Innovate Solution Technology!");
-                
-                // Clear the form fields after successful submission
                 subscribeForm.reset();
             });
+        }
+
+        // --- Dynamic Journey Countdown Logic ---
+        const counterElement = document.getElementById("days-counter");
+        if (counterElement) {
+            // Launch Date: 21 Feb 2025
+            const launchDate = new Date("2025-02-21T00:00:00");
+            const today = new Date();
+            let diffTime = today - launchDate;
+            let targetDays = 0;
+
+            // Only calculate days if today is past the launch date
+            if (diffTime > 0) {
+                targetDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+            }
+
+            // Animate the counter from 0 to targetDays
+            let currentCount = 0;
+            const duration = 2000; // Total animation time (2s)
+            const intervalTime = 30; // Update every 30ms
+
+            if (targetDays > 0) {
+                const step = Math.ceil(targetDays / (duration / intervalTime));
+                
+                const timer = setInterval(() => {
+                    currentCount += step;
+                    if (currentCount >= targetDays) {
+                        counterElement.innerText = targetDays + "+";
+                        clearInterval(timer);
+                    } else {
+                        counterElement.innerText = currentCount + "+";
+                    }
+                }, intervalTime);
+            } else {
+                counterElement.innerText = "0+";
+            }
         }
     });
 </script>
