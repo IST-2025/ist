@@ -7,35 +7,41 @@
   #totop {
     color: #ffffff !important;
   }
+
   #back-to-top i,
   .scroll-to-top i,
   .back-to-top i,
   #totop i {
     color: #ffffff !important;
   }
-  
+
   /* Custom Team Card Hover */
   .team-card:hover img {
     transform: scale(1.05);
     transition: transform 0.3s ease-in-out;
   }
+
   .team-card img {
     transition: transform 0.3s ease-in-out;
   }
-  
+
   /* New Philosophy Card Improvements */
   .philosophy-card {
     transition: all 0.3s ease;
     border-top: 3px solid transparent !important;
   }
+
   .philosophy-card:hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
     transform: translateY(-5px);
-    border-top: 3px solid #7a5af8 !important; /* Brand purple accent on hover */
+    border-top: 3px solid #7a5af8 !important;
+    /* Brand purple accent on hover */
   }
+
   .philosophy-icon {
     transition: all 0.3s ease;
   }
+
   .philosophy-card:hover .philosophy-icon {
     transform: scale(1.1);
     color: #7a5af8 !important;
@@ -44,44 +50,92 @@
 
 <style>
   /* Custom Horizontal Scrollbar for the Team Section */
+  .team-carousel-wrapper {
+    position: relative;
+    padding: 0 10px;
+  }
+
   .team-scroll-container {
     display: flex;
     flex-wrap: nowrap;
     overflow-x: auto;
-    gap: 1.5rem; /* Matches Bootstrap g-4 spacing */
-    padding-bottom: 1.5rem; /* Space for the scrollbar */
-    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
-    scroll-snap-type: x mandatory; /* Snaps cards into place */
+    gap: 1.5rem;
+    /* Matches Bootstrap g-4 spacing */
+    padding-bottom: 1.5rem;
+    /* Space for the scrollbar */
+    -webkit-overflow-scrolling: touch;
+    /* Smooth scrolling on iOS */
+    scroll-snap-type: x mandatory;
+    /* Snaps cards into place */
+    scroll-behavior: smooth;
+    /* Enables smooth native scrolling */
+    /* Hide scrollbar on modern browsers for cleaner look with arrows */
+    scrollbar-width: none;
   }
-  
+
   .team-scroll-container::-webkit-scrollbar {
-    height: 8px;
+    display: none;
+    /* Hides scrollbar in webkit browsers */
   }
-  
-  .team-scroll-container::-webkit-scrollbar-track {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 10px;
-  }
-  
-  .team-scroll-container::-webkit-scrollbar-thumb {
-    background: #7a5af8; /* Uses your brand accent color */
-    border-radius: 10px;
-  }
-  
+
   .team-scroll-item {
-    min-width: 260px; /* Fixed width so they don't shrink */
+    min-width: 260px;
+    /* Fixed width so they don't shrink */
     flex: 0 0 auto;
-    scroll-snap-align: start; /* Alignment for scroll snapping */
+    scroll-snap-align: start;
+    /* Alignment for scroll snapping */
+  }
+
+  /* Navigation Arrows Styling */
+  .team-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-60%);
+    /* Adjusted slightly for visual balance */
+    width: 45px;
+    height: 45px;
+    background-color: #7a5af8;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 20px;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+    transition: all 0.3s ease;
+    opacity: 0.8;
+  }
+
+  .team-nav-btn:hover {
+    background-color: #5c3ce0;
+    transform: translateY(-60%) scale(1.1);
+    opacity: 1;
+  }
+
+  .team-nav-left {
+    left: -20px;
+  }
+
+  .team-nav-right {
+    right: -20px;
+  }
+
+  /* On smaller screens, keep arrows visible inside container */
+  @media (max-width: 768px) {
+    .team-nav-left {
+      left: 0;
+    }
+
+    .team-nav-right {
+      right: 0;
+    }
   }
 </style>
 
-
-
-<section
-  id="section-welcome"
-  class="bg-dark section-dark text-light pb-80"
-  style="padding-top: 160px"
->
+<section id="section-welcome" class="bg-dark section-dark text-light pb-80" style="padding-top: 160px">
   <div class="container">
     <div class="row gx-5 align-items-center justify-content-between">
       <div class="col-lg-6 mb-sm-30 wow fadeInLeft" data-wow-delay=".2s">
@@ -106,43 +160,29 @@
 
       <div class="col-lg-5">
         <div class="wow scaleIn" data-wow-delay=".4s">
-          <img
-            src="/static/assets/images/misc/c1.webp"
-            class="w-100 rotate-animation rounded-3"
-            alt="IST Professional Team"
-          />
+          <img src="/static/assets/images/misc/c1.webp" class="w-100 rotate-animation rounded-3"
+            alt="IST Professional Team" />
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Updated Founder Section -->
-<section
-  id="section-founder"
-  class="bg-dark-2 section-dark text-light pt-80 pb-80"
->
+<section id="section-founder" class="bg-dark-2 section-dark text-light pt-80 pb-80">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-lg-9 wow fadeInUp" data-wow-delay=".2s">
-        <!-- Section Header -->
         <div class="text-center mb-5">
           <h2 class="mb-0">Message from the Founder</h2>
         </div>
 
-        <!-- Founder Message Card -->
         <div
-          class="bg-dark p-5 rounded-4 shadow-lg border border-secondary border-opacity-10 position-relative overflow-hidden"
-        >
-          <!-- Applied the custom purple color to the text and the left border -->
-          <blockquote
-            class="blockquote fs-5 border-start border-4 ps-4 mb-4"
-            style="
+          class="bg-dark p-5 rounded-4 shadow-lg border border-secondary border-opacity-10 position-relative overflow-hidden">
+          <blockquote class="blockquote fs-5 border-start border-4 ps-4 mb-4" style="
               font-style: italic;
               color: white;
               border-color: #7a5af8 !important;
-            "
-          >
+            ">
             "Our vision has always been to build scalable, highly reliable, and
             automated infrastructure that drives real business growth. At IST,
             we view every client's challenge as our opportunity to innovate and
@@ -158,11 +198,8 @@
             costs, and stay ahead in a highly competitive landscape.
           </p>
 
-          <div
-            class="mt-5 pt-4 border-top border-secondary border-opacity-10 text-center"
-          >
+          <div class="mt-5 pt-4 border-top border-secondary border-opacity-10 text-center">
             <h3 class="text-white mb-1">Shalini B</h3>
-            <!-- Applied the custom purple color to the job title -->
             <p class="mb-0" style="color: white">
               Founder & Lead DevOps Engineer, Inovate Solution Technology
             </p>
@@ -173,11 +210,7 @@
   </div>
 </section>
 
-<!-- Completely Overwritten Core Philosophy Section -->
-<section
-  id="section-foundation"
-  class="bg-dark section-dark text-light pt-80 pb-80"
->
+<section id="section-foundation" class="bg-dark section-dark text-light pt-80 pb-80">
   <div class="container">
     <div class="row mb-5 text-center">
       <div class="col-md-8 offset-md-2">
@@ -188,38 +221,41 @@
       </div>
     </div>
 
-    <!-- TODAY -->
     <div class="mb-5 wow fadeInUp" data-wow-delay=".2s">
       <div class="d-flex align-items-center mb-4 border-bottom border-secondary border-opacity-25 pb-3">
         <h3 class="fs-30 mb-0 text-white">
           <span style="color: #7a5af8;">Today:</span> Our Purpose
         </h3>
       </div>
-      
+
       <div class="row g-4">
         <div class="col-lg-3 col-md-6">
-          <div class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
+          <div
+            class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
             <i class="icofont-server fs-40 text-white philosophy-icon mb-3 d-block"></i>
             <h5 class="text-white mb-2">Reliable IT</h5>
             <p class="text-white-50 fs-14 mb-0">Deliver highly reliable solutions that drive business growth.</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
-          <div class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
+          <div
+            class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
             <i class="icofont-expand fs-40 text-white philosophy-icon mb-3 d-block"></i>
             <h5 class="text-white mb-2">Effortless Scaling</h5>
             <p class="text-white-50 fs-14 mb-0">Equip businesses with tools to scale securely and quickly.</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
-          <div class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
+          <div
+            class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
             <i class="icofont-handshake-deal fs-40 text-white philosophy-icon mb-3 d-block"></i>
             <h5 class="text-white mb-2">Deep Trust</h5>
             <p class="text-white-50 fs-14 mb-0">Build enduring client partnerships rooted in integrity.</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
-          <div class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
+          <div
+            class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
             <i class="icofont-heart-beat fs-40 text-white philosophy-icon mb-3 d-block"></i>
             <h5 class="text-white mb-2">Positive Impact</h5>
             <p class="text-white-50 fs-14 mb-0">Drive meaningful social value through tech deployment.</p>
@@ -228,7 +264,6 @@
       </div>
     </div>
 
-    <!-- TOMORROW -->
     <div class="wow fadeInUp" data-wow-delay=".4s">
       <div class="d-flex align-items-center mb-4 border-bottom border-secondary border-opacity-25 pb-3">
         <h3 class="fs-30 mb-0 text-white">
@@ -238,28 +273,32 @@
 
       <div class="row g-4">
         <div class="col-lg-3 col-md-6">
-          <div class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
+          <div
+            class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
             <i class="icofont-globe fs-40 text-white philosophy-icon mb-3 d-block"></i>
             <h5 class="text-white mb-2">Global Partner</h5>
             <p class="text-white-50 fs-14 mb-0">Become a universally trusted tech leader and visionary.</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
-          <div class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
+          <div
+            class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
             <i class="icofont-read-book fs-40 text-white philosophy-icon mb-3 d-block"></i>
             <h5 class="text-white mb-2">Constant Learning</h5>
             <p class="text-white-50 fs-14 mb-0">Foster a culture of creativity and agile adaptation.</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
-          <div class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
+          <div
+            class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
             <i class="icofont-code-alt fs-40 text-white philosophy-icon mb-3 d-block"></i>
             <h5 class="text-white mb-2">Digital Evolution</h5>
             <p class="text-white-50 fs-14 mb-0">Uplift communities through transformative technology.</p>
           </div>
         </div>
         <div class="col-lg-3 col-md-6">
-          <div class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
+          <div
+            class="bg-dark-2 p-4 rounded-3 h-100 philosophy-card border border-secondary border-opacity-10 shadow-sm text-center">
             <i class="icofont-rocket fs-40 text-white philosophy-icon mb-3 d-block"></i>
             <h5 class="text-white mb-2">Tech Breakthroughs</h5>
             <p class="text-white-50 fs-14 mb-0">Inspire the next wave of cutting-edge industry innovations.</p>
@@ -271,14 +310,7 @@
   </div>
 </section>
 
-
-
-
-
-<section
-  id="section-team"
-  class="bg-dark-2 section-dark text-light pt-80 pb-80"
->
+<section id="section-team" class="bg-dark-2 section-dark text-light pt-80 pb-80">
   <div class="container">
     <div class="row mb-5 text-center">
       <div class="col-md-8 offset-md-2">
@@ -289,100 +321,125 @@
       </div>
     </div>
 
-    <!-- Single Row Horizontal Scroll Container -->
-    <div class="team-scroll-container">
-      
-      <div class="team-scroll-item wow fadeInUp" data-wow-delay=".1s">
-        <div class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
-          <!-- Changed to rounded-circle and increased size slightly for better proportions -->
-          <img src="/static/assets/images/team/shalini.jpg" alt="Shalini" class="img-fluid rounded-circle mb-3 border border-3 border-secondary" style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
-          <h5 class="mb-1 text-white">Shalini</h5>
-          <p class="mb-0 text-white-50 fs-14">Founder & CEO</p>
+    <div class="team-carousel-wrapper wow fadeInUp" data-wow-delay=".2s">
+
+      <button class="team-nav-btn team-nav-left" id="team-btn-left">
+        <i class="icofont-rounded-left"></i>
+      </button>
+
+      <div class="team-scroll-container">
+
+        <div class="team-scroll-item">
+          <div
+            class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
+            <img src="/static/assets/images/team/shalini.jpg" alt="Shalini"
+              class="img-fluid rounded-circle mb-3 border border-3 border-secondary"
+              style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
+            <h5 class="mb-1 text-white">Shalini</h5>
+            <p class="mb-0 text-white-50 fs-14">Founder & CEO</p>
+          </div>
         </div>
+
+        <div class="team-scroll-item">
+          <div
+            class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
+            <img src="/static/assets/images/team/bala.jpg" alt="Bala"
+              class="img-fluid rounded-circle mb-3 border border-3 border-secondary"
+              style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
+            <h5 class="mb-1 text-white">Bala</h5>
+            <p class="mb-0 text-white-50 fs-14">Technical Project Manager</p>
+          </div>
+        </div>
+        <div class="team-scroll-item">
+          <div
+            class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
+            <img src="/static/assets/images/team/sathish.jpg" alt="Sathish"
+              class="img-fluid rounded-circle mb-3 border border-3 border-secondary"
+              style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
+            <h5 class="mb-1 text-white">Sathish</h5>
+            <p class="mb-0 text-white-50 fs-14">Digital Marketing</p>
+          </div>
+        </div>
+
+        <div class="team-scroll-item">
+          <div
+            class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
+            <img src="/static/assets/images/team/ist.jpg" alt="Poornesh"
+              class="img-fluid rounded-circle mb-3 border border-3 border-secondary"
+              style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
+            <h5 class="mb-1 text-white">Poornesh</h5>
+            <p class="mb-0 text-white-50 fs-14">Cloud Engineer</p>
+          </div>
+        </div>
+
+        <div class="team-scroll-item">
+          <div
+            class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
+            <img src="/static/assets/images/team/ist.jpg" alt="Sabareesh"
+              class="img-fluid rounded-circle mb-3 border border-3 border-secondary"
+              style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
+            <h5 class="mb-1 text-white">Sabareesh</h5>
+            <p class="mb-0 text-white-50 fs-14">Full Stack Developer</p>
+          </div>
+        </div>
+
+        <div class="team-scroll-item">
+          <div
+            class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
+            <img src="/static/assets/images/team/ist.jpg" alt="Gayathri"
+              class="img-fluid rounded-circle mb-3 border border-3 border-secondary"
+              style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
+            <h5 class="mb-1 text-white">Gayathri</h5>
+            <p class="mb-0 text-white-50 fs-14">Software Engineer</p>
+          </div>
+        </div>
+
+        <div class="team-scroll-item">
+          <div
+            class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
+            <img src="/static/assets/images/team/ist.jpg" alt="Priya"
+              class="img-fluid rounded-circle mb-3 border border-3 border-secondary"
+              style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
+            <h5 class="mb-1 text-white">Priya</h5>
+            <p class="mb-0 text-white-50 fs-14">Data Analyst</p>
+          </div>
+        </div>
+
+        <div class="team-scroll-item">
+          <div
+            class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
+            <img src="/static/assets/images/team/ist.jpg" alt="Arun"
+              class="img-fluid rounded-circle mb-3 border border-3 border-secondary"
+              style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
+            <h5 class="mb-1 text-white">Arun</h5>
+            <p class="mb-0 text-white-50 fs-14">Sys Admin</p>
+          </div>
+        </div>
+
+
+        <div class="team-scroll-item">
+          <div
+            class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
+            <img src="/static/assets/images/team/ist.jpg" alt="Vinothini"
+              class="img-fluid rounded-circle mb-3 border border-3 border-secondary"
+              style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
+            <h5 class="mb-1 text-white">Vinothini</h5>
+            <p class="mb-0 text-white-50 fs-14">Technical Mentor</p>
+          </div>
+        </div>
+
       </div>
 
-      <div class="team-scroll-item wow fadeInUp" data-wow-delay=".2s">
-        <div class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
-          <img src="/static/assets/images/team/bala.jpg" alt="Bala" class="img-fluid rounded-circle mb-3 border border-3 border-secondary" style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
-          <h5 class="mb-1 text-white">Bala</h5>
-          <p class="mb-0 text-white-50 fs-14">Technical Project Manager</p>
-        </div>
-      </div>
-
-      <div class="team-scroll-item wow fadeInUp" data-wow-delay=".3s">
-        <div class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
-          <!-- Fixed the image name to match the team member -->
-          <img src="/static/assets/images/team/shalini.jpg" alt="Poornesh" class="img-fluid rounded-circle mb-3 border border-3 border-secondary" style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
-          <h5 class="mb-1 text-white">Poornesh</h5>
-          <p class="mb-0 text-white-50 fs-14">Cloud Engineer</p>
-        </div>
-      </div>
-
-      <div class="team-scroll-item wow fadeInUp" data-wow-delay=".4s">
-        <div class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
-          <img src="/static/assets/images/team/shalini.jpg" alt="Sabareesh" class="img-fluid rounded-circle mb-3 border border-3 border-secondary" style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
-          <h5 class="mb-1 text-white">Sabareesh</h5>
-          <p class="mb-0 text-white-50 fs-14">Full Stack Developer</p>
-        </div>
-      </div>
-
-      <div class="team-scroll-item wow fadeInUp" data-wow-delay=".5s">
-        <div class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
-          <img src="/static/assets/images/team/shalini.jpg" alt="Gayathri" class="img-fluid rounded-circle mb-3 border border-3 border-secondary" style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
-          <h5 class="mb-1 text-white">Gayathri</h5>
-          <p class="mb-0 text-white-50 fs-14">Software Engineer</p>
-        </div>
-      </div>
-
-      <div class="team-scroll-item wow fadeInUp" data-wow-delay=".6s">
-        <div class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
-          <img src="/static/assets/images/team/shalini.jpg" alt="Priya" class="img-fluid rounded-circle mb-3 border border-3 border-secondary" style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
-          <h5 class="mb-1 text-white">Priya</h5>
-          <p class="mb-0 text-white-50 fs-14">Data Analyst</p>
-        </div>
-      </div>
-
-      <div class="team-scroll-item wow fadeInUp" data-wow-delay=".7s">
-        <div class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
-          <img src="/static/assets/images/team/shalini.jpg" alt="Arun" class="img-fluid rounded-circle mb-3 border border-3 border-secondary" style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
-          <h5 class="mb-1 text-white">Arun</h5>
-          <p class="mb-0 text-white-50 fs-14">Sys Admin</p>
-        </div>
-      </div>
-
-      <div class="team-scroll-item wow fadeInUp" data-wow-delay=".8s">
-        <div class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
-          <img src="/static/assets/images/team/shalini.jpg" alt="Sathish" class="img-fluid rounded-circle mb-3 border border-3 border-secondary" style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
-          <h5 class="mb-1 text-white">Sathish</h5>
-          <p class="mb-0 text-white-50 fs-14">Digital Marketing</p>
-        </div>
-      </div>
-
-      <div class="team-scroll-item wow fadeInUp" data-wow-delay=".9s">
-        <div class="team-card bg-dark p-4 rounded-4 text-center h-100 shadow-sm border border-secondary border-opacity-10 hover-bg-color transition-all">
-          <img src="/static/assets/images/team/shalini.jpg" alt="Vinothini" class="img-fluid rounded-circle mb-3 border border-3 border-secondary" style="width: 120px; height: 120px; object-fit: cover; object-position: top;">
-          <h5 class="mb-1 text-white">Vinothini</h5>
-          <p class="mb-0 text-white-50 fs-14">Technical Mentor</p>
-        </div>
-      </div>
+      <button class="team-nav-btn team-nav-right" id="team-btn-right">
+        <i class="icofont-rounded-right"></i>
+      </button>
 
     </div>
   </div>
 </section>
 
-
-
-
-
-<section
-  id="section-difference"
-  class="bg-dark section-dark text-light pt-80 pb-80 relative jarallax"
->
-  <img
-    src="/static/assets/images/background/1.webp"
-    class="jarallax-img"
-    alt=""
-  />
+<section id="section-difference" class="bg-dark section-dark text-light pt-80 pb-80 relative jarallax">
+  <img src="/static/assets/images/background/1.webp" class="jarallax-img" alt="" />
   <div class="gradient-edge-top"></div>
   <div class="gradient-edge-bottom"></div>
   <div class="sw-overlay op-8"></div>
@@ -400,9 +457,7 @@
 
     <div class="row g-4">
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
-        <div
-          class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all"
-        >
+        <div class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all">
           <i class="fs-40 id-color mb-4 d-block icofont-light-bulb"></i>
           <h4 class="mb-3">Innovative Approach</h4>
           <p class="mb-0 text-white-50">
@@ -413,9 +468,7 @@
       </div>
 
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-        <div
-          class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all"
-        >
+        <div class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all">
           <i class="fs-40 id-color mb-4 d-block icofont-users-alt-5"></i>
           <h4 class="mb-3">Client-Centric Focus</h4>
           <p class="mb-0 text-white-50">
@@ -426,9 +479,7 @@
       </div>
 
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-        <div
-          class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all"
-        >
+        <div class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all">
           <i class="fs-40 id-color mb-4 d-block icofont-handshake-deal"></i>
           <h4 class="mb-3">Reliability & Trust</h4>
           <p class="mb-0 text-white-50">
@@ -439,9 +490,7 @@
       </div>
 
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-        <div
-          class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all"
-        >
+        <div class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all">
           <i class="fs-40 id-color mb-4 d-block icofont-worker"></i>
           <h4 class="mb-3">Expert Team</h4>
           <p class="mb-0 text-white-50">
@@ -452,9 +501,7 @@
       </div>
 
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-        <div
-          class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all"
-        >
+        <div class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all">
           <i class="fs-40 id-color mb-4 d-block icofont-chart-line"></i>
           <h4 class="mb-3">Results-Driven</h4>
           <p class="mb-0 text-white-50">
@@ -465,9 +512,7 @@
       </div>
 
       <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-        <div
-          class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all"
-        >
+        <div class="bg-dark-2 p-5 rounded-3 h-100 hover-bg-color hover-text-light transition-all">
           <i class="fs-40 id-color mb-4 d-block icofont-network"></i>
           <h4 class="mb-3">Collaborative Partnership</h4>
           <p class="mb-0 text-white-50">
@@ -481,11 +526,7 @@
 </section>
 
 <section class="bg-dark text-light pt-60 pb-60 position-relative z-1 jarallax">
-  <img
-    src="/static/assets/images/background/3.webp"
-    class="jarallax-img"
-    alt=""
-  />
+  <img src="/static/assets/images/background/3.webp" class="jarallax-img" alt="" />
   <div class="gradient-edge-top"></div>
   <div class="gradient-edge-bottom"></div>
   <div class="sw-overlay op-8"></div>
@@ -507,5 +548,82 @@
     </div>
   </div>
 </section>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const teamContainer = document.querySelector('.team-scroll-container');
+    const btnLeft = document.getElementById('team-btn-left');
+    const btnRight = document.getElementById('team-btn-right');
+
+    if (teamContainer) {
+      let isPaused = false;
+      let scrollInterval;
+
+      // Logic to advance the scroll automatically
+      function autoScroll() {
+        if (!isPaused) {
+          const firstCard = teamContainer.querySelector('.team-scroll-item');
+          if (!firstCard) return;
+
+          const scrollAmount = firstCard.offsetWidth + 24;
+
+          // If scrolled to the end, reset back to the start smoothly
+          if (teamContainer.scrollLeft + teamContainer.clientWidth >= teamContainer.scrollWidth - 10) {
+            teamContainer.scrollTo({ left: 0, behavior: 'smooth' });
+          } else {
+            teamContainer.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+          }
+        }
+      }
+
+      function startAutoScroll() {
+        scrollInterval = setInterval(autoScroll, 3000);
+      }
+
+      // Restarts timer when user manually interacts to prevent immediate jumping
+      function resetAutoScroll() {
+        clearInterval(scrollInterval);
+        startAutoScroll();
+      }
+
+      // --- Manual Navigation Arrow Events ---
+      if (btnRight) {
+        btnRight.addEventListener('click', () => {
+          const firstCard = teamContainer.querySelector('.team-scroll-item');
+          if (firstCard) {
+            teamContainer.scrollBy({ left: firstCard.offsetWidth + 24, behavior: 'smooth' });
+            resetAutoScroll();
+          }
+        });
+      }
+
+      if (btnLeft) {
+        btnLeft.addEventListener('click', () => {
+          const firstCard = teamContainer.querySelector('.team-scroll-item');
+          if (firstCard) {
+            teamContainer.scrollBy({ left: -(firstCard.offsetWidth + 24), behavior: 'smooth' });
+            resetAutoScroll();
+          }
+        });
+      }
+
+      // --- Pause Events (Hover & Touch) ---
+      const carouselWrapper = document.querySelector('.team-carousel-wrapper');
+
+      carouselWrapper.addEventListener('mouseenter', () => isPaused = true);
+      carouselWrapper.addEventListener('mouseleave', () => isPaused = false);
+
+      carouselWrapper.addEventListener('touchstart', () => isPaused = true, { passive: true });
+      carouselWrapper.addEventListener('touchend', () => {
+        setTimeout(() => {
+          isPaused = false;
+        }, 1500);
+      }, { passive: true });
+
+      // Initialize the auto-scroll
+      startAutoScroll();
+    }
+  });
+</script>
 
 {% endblock content %}
