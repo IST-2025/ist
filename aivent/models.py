@@ -53,3 +53,14 @@ class InternshipApplication(db.Model):
     college = db.Column(db.String(200), nullable=False)
     resume_filename = db.Column(db.String(200), nullable=False) # Stores the file path
     date_submitted = db.Column(db.DateTime, default=datetime.utcnow)
+
+class CertificateRecord(db.Model):
+    __tablename__ = 'certificate_record'
+    id = db.Column(db.Integer, primary_key=True)
+    student_name = db.Column(db.String(150), nullable=False)
+    email = db.Column(db.String(150), nullable=False)
+    certificate_id = db.Column(db.String(100), nullable=False, unique=True)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    def __repr__(self):
+        return f"<CertificateRecord {self.student_name} - {self.certificate_id}>"

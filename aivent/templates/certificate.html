@@ -1,0 +1,166 @@
+{% extends "partials/layouts/main.html" %}
+
+{% block content %}
+
+<style>
+    #certificate_form .form-control::placeholder {
+        color: rgba(255, 255, 255, 0.4) !important;
+        font-weight: 400 !important;
+        opacity: 1 !important; 
+    }
+    
+    #back-to-top, .scroll-to-top, .back-to-top, #totop {
+        color: #ffffff !important;
+    }
+    #back-to-top i, .scroll-to-top i, .back-to-top i, #totop i {
+        color: #ffffff !important;
+    }
+</style>
+
+<section id="section-workshop-intro" class="section-dark text-light pb-60 relative jarallax" style="padding-top: 160px;">
+    <img src="/static/assets/images/background/6.webp" class="jarallax-img" alt="AI Workshop">
+    <div class="gradient-edge-top"></div>
+    <div class="gradient-edge-bottom"></div>
+    <div class="sw-overlay op-8"></div>
+
+    <div class="container relative z-4">
+        <div class="row mb-5 text-center">
+            <div class="col-md-8 offset-md-2">
+                <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Build Your Own AI Agent</h2>
+                <h4 class="wow fadeInUp text-white-50" data-wow-delay=".3s">Workshop Certificate</h4>
+                <p class="lead wow fadeInUp text-white-50 mt-3" data-wow-delay=".4s">
+                    Thank you for participating in our free workshop! Enter your details below to generate, preview, and download your official MSME-verified certificate.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="certificate-form-section" class="section-dark text-light pt-80 pb-100 relative jarallax">
+    <img src="/static/assets/images/background/8.webp" class="jarallax-img" alt="">
+    <div class="gradient-edge-top"></div>
+    <div class="gradient-edge-bottom"></div>
+    <div class="sw-overlay op-8"></div>
+
+    <div class="container relative z-4">
+        <div class="row align-items-center justify-content-center g-5">
+
+            <div class="col-lg-6 wow fadeInRight" data-wow-delay=".4s">
+                <div class="p-5 rounded-4 shadow-lg position-relative overflow-hidden"
+                    style="background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1);">
+                    
+                    <form name="certificateForm" id="certificate_form" method="POST" action="{{ url_for('public_pages.generate_certificate') }}">
+                        <h3 class="mb-4 text-white text-center">Get Your Certificate</h3>
+
+                        <div class="row g-4">
+                            <div class="col-md-12">
+                                <div class="field-set">
+                                    <label class="text-white fs-14 mb-2 fw-bold">Full Name *</label>
+                                    <input type="text" name="student_name" id="student_name"
+                                        class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
+                                        placeholder="Enter your name" required>
+                                </div>
+                            </div>
+
+                            <div class="col-md-12">
+                                <div class="field-set">
+                                    <label class="text-white fs-14 mb-2 fw-bold">Email Address *</label>
+                                    <input type="email" name="email" id="email"
+                                        class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
+                                        placeholder="name@example.com" required>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-5 pt-3">
+                            <button type="submit" id="submit_certificate" class="btn-main w-100 py-3 fs-16 rounded-3 text-white border-0"
+                                style="background-color: #7A5AF8;">
+                                <i class="icofont-download me-2"></i> Generate Certificate
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            
+            <div class="col-lg-5">
+                <div class="bg-dark bg-opacity-50 p-4 rounded-4 border border-secondary border-opacity-25 wow fadeInUp" data-wow-delay=".4s">
+                    <h4 class="mb-3 fs-20 text-white">
+                        <i class="icofont-info-circle me-2" style="color: #7A5AF8;"></i> Certificate Instructions
+                    </h4>
+                    <p class="text-white-50 fs-15 lh-lg mb-3">
+                        To receive your valid e-certificate for the <strong>Build Your Own AI Agent</strong> workshop:
+                    </p>
+                    <ul class="text-white-50 fs-15 lh-lg mb-0 ps-3">
+                        <li>Ensure your name is spelled correctly.</li>
+                        <li>Clicking submit will <strong>automatically download</strong> the PDF to your device AND <strong>open a preview</strong> in a new tab.</li>
+                        <li>Your data is securely saved for validation.</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- JavaScript to handle both Download & Preview -->
+<script>
+document.getElementById('certificate_form').addEventListener('submit', function(e) {
+    e.preventDefault(); 
+    
+    const form = this;
+    const formData = new FormData(form);
+    const submitBtn = document.getElementById('submit_certificate');
+    const originalText = submitBtn.innerHTML;
+    
+    // Update button state
+    submitBtn.innerHTML = 'Processing... Please wait';
+    submitBtn.disabled = true;
+
+    // 1. Open blank tab immediately to bypass browser popup blockers
+    const previewWindow = window.open('', '_blank');
+    previewWindow.document.write("<h3 style='font-family:sans-serif; text-align:center; margin-top:20%; color:#333;'>Generating your certificate... Please wait.</h3>");
+
+    // 2. Send data to Python Backend
+    fetch(form.action, {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error("Failed to generate certificate.");
+        }
+        return response.blob();
+    })
+    .then(blob => {
+        // Format the student's name for the file
+        let studentName = formData.get('student_name').trim().replace(/ /g, '_');
+        const fileName = studentName + "_Certificate.pdf";
+        const blobUrl = URL.createObjectURL(blob);
+        
+        // 3. Inject the PDF into the new tab for Preview
+        previewWindow.location.href = blobUrl;
+        
+        // 4. Trigger Auto-Download in the background
+        const downloadLink = document.createElement('a');
+        downloadLink.href = blobUrl;
+        downloadLink.download = fileName;
+        document.body.appendChild(downloadLink);
+        downloadLink.click();
+        document.body.removeChild(downloadLink);
+        
+        // Reset form and button
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+        form.reset();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        previewWindow.close(); // Close the blank tab if it failed
+        alert("An error occurred. Please try again.");
+        submitBtn.innerHTML = originalText;
+        submitBtn.disabled = false;
+    });
+});
+</script>
+
+{% endblock content %}
