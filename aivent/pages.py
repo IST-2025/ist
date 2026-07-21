@@ -11,6 +11,7 @@ from sqlalchemy import inspect
 from fpdf import FPDF
 from .models import Contact, ProjectRequest, JobApplication, InternshipApplication, CertificateRecord
 from . import db
+import tempfile
 
 public_pages = Blueprint('public_pages', __name__, template_folder='templates', static_folder='static')
 
@@ -253,6 +254,7 @@ def contact():
 def workshop_certificate():
     return render_template('certificate.html')
 
+
 @public_pages.route('/generate-certificate', methods=['POST'])
 def generate_certificate():
     student_name = request.form.get('student_name')
@@ -375,14 +377,13 @@ def generate_certificate():
     pdf.set_font("Helvetica", size=10)
     pdf.cell(50, 5, "Authorized Signatory", align='C')
 
+    # FIX: Use the system temporary directory which Vercel allows write access to
     safe_student_name = student_name.replace(' ', '_')
     pdf_filename = f"{safe_student_name}_Certificate.pdf"
     
-    static_folder = os.path.join(os.path.dirname(__file__), 'static')
-    if not os.path.exists(static_folder):
-        os.makedirs(static_folder)
-        
-    file_path = os.path.join(static_folder, pdf_filename)
+    tmp_dir = tempfile.gettempdir()
+    file_path = os.path.join(tmp_dir, pdf_filename)
+    
     pdf.output(file_path)
 
     return send_file(file_path, mimetype='application/pdf')
