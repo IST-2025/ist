@@ -15,6 +15,45 @@
     #back-to-top i, .scroll-to-top i, .back-to-top i, #totop i {
         color: #ffffff !important;
     }
+
+    /* Custom Popup Styles */
+    .custom-popup-overlay {
+        display: none;
+        position: fixed;
+        top: 0; 
+        left: 0; 
+        width: 100%; 
+        height: 100%;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 9999;
+        align-items: center; 
+        justify-content: center;
+        backdrop-filter: blur(5px);
+    }
+    .custom-popup-box {
+        background: rgba(20, 20, 20, 0.95);
+        padding: 40px;
+        border-radius: 20px;
+        border: 1px solid rgba(122, 90, 248, 0.5);
+        text-align: center;
+        max-width: 400px;
+        width: 90%;
+        box-shadow: 0 10px 30px rgba(122, 90, 248, 0.2);
+        transform: scale(0.9);
+        animation: popUpAnim 0.3s forwards ease-out;
+    }
+    @keyframes popUpAnim {
+        to { transform: scale(1); }
+    }
+
+    /* Workshop Card Hover Effect */
+    .workshop-card {
+        transition: all 0.3s ease;
+    }
+    .workshop-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+    }
 </style>
 
 <section id="section-workshop-intro" class="section-dark text-light pb-60 relative jarallax" style="padding-top: 160px;">
@@ -26,16 +65,127 @@
     <div class="container relative z-4">
         <div class="row mb-5 text-center">
             <div class="col-md-8 offset-md-2">
-                <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Build Your Own AI Agent</h2>
-                <h4 class="wow fadeInUp text-white-50" data-wow-delay=".3s">Workshop Certificate</h4>
+                <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Workshop Certificates</h2>
                 <p class="lead wow fadeInUp text-white-50 mt-3" data-wow-delay=".4s">
-                    Thank you for participating in our free workshop! Enter your details below to generate, preview, and download your official MSME-verified certificate.
+                    Thank you for participating in our free workshops! Select your workshop below to generate, preview, and download your official MSME-verified certificate.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
+<!-- WORKSHOP SELECTION GRID -->
+<section id="workshop-selection" class="section-dark bg-dark-2 text-light pt-60 pb-60 border-bottom border-secondary border-opacity-25">
+    <div class="container">
+        <div class="row g-4">
+            
+            <!-- ACTIVE WORKSHOP -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
+                <div class="workshop-card bg-dark p-4 rounded-4 h-100 d-flex flex-column border border-primary" style="border-color: #7A5AF8 !important;">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge rounded-pill px-3 py-2" style="background-color: rgba(122, 90, 248, 0.2); color: #7A5AF8; border: 1px solid #7A5AF8;">Active</span>
+                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 30/07/2026</span>
+                    </div>
+                    <h4 class="text-white fs-22 mb-3">Build Your Own AI Agent</h4>
+                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
+                        Learn to build, deploy, and manage intelligent AI agents from scratch in this hands-on 2-hour session.
+                    </p>
+                    <a href="#certificate-form-section" class="btn-main w-100 text-center rounded-3 py-2 text-white border-0" style="background-color: #7A5AF8;">
+                        Generate Certificate
+                    </a>
+                </div>
+            </div>
+
+            <!-- PAST WORKSHOP 1 -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
+                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 12/06/2026</span>
+                    </div>
+                    <h4 class="text-white fs-22 mb-3">Mastering Prompt Engineering</h4>
+                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
+                        Advanced techniques for communicating effectively with Large Language Models.
+                    </p>
+                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
+                        Closed
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAST WORKSHOP 2 -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
+                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 25/05/2026</span>
+                    </div>
+                    <h4 class="text-white fs-22 mb-3">Intro to Generative AI</h4>
+                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
+                        A beginner's guide to text, image, and audio generation using cutting-edge AI tools.
+                    </p>
+                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
+                        Closed
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAST WORKSHOP 3 -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
+                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
+                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 10/04/2026</span>
+                    </div>
+                    <h4 class="text-white fs-22 mb-3">Automating Workflows with AI</h4>
+                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
+                        Streamlining business operations and daily tasks using intelligent AI automation.
+                    </p>
+                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
+                        Closed
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAST WORKSHOP 4 (Updated to Full Stack/AI) -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
+                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 18/03/2026</span>
+                    </div>
+                    <h4 class="text-white fs-22 mb-3">Full Stack AI Development</h4>
+                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
+                        Building end-to-end scalable web applications seamlessly integrated with powerful machine learning models.
+                    </p>
+                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
+                        Closed
+                    </button>
+                </div>
+            </div>
+
+            <!-- PAST WORKSHOP 5 (Updated to Full Stack/AI) -->
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
+                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
+                    <div class="d-flex justify-content-between align-items-start mb-3">
+                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
+                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 05/02/2026</span>
+                    </div>
+                    <h4 class="text-white fs-22 mb-3">AI-Powered Web Apps</h4>
+                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
+                        Enhancing frontend frameworks with intelligent AI features, APIs, and real-time data processing.
+                    </p>
+                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
+                        Closed
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- CERTIFICATE GENERATION FORM -->
 <section id="certificate-form-section" class="section-dark text-light pt-80 pb-100 relative jarallax">
     <img src="/static/assets/images/background/8.webp" class="jarallax-img" alt="">
     <div class="gradient-edge-top"></div>
@@ -50,7 +200,8 @@
                     style="background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1);">
                     
                     <form name="certificateForm" id="certificate_form" method="POST" action="{{ url_for('public_pages.generate_certificate') }}">
-                        <h3 class="mb-4 text-white text-center">Get Your Certificate</h3>
+                        <h4 class="mb-1 text-white text-center">Get Your Certificate</h4>
+                        <p class="text-center text-white-50 mb-4 fs-14">For: Build Your Own AI Agent (30/07/2026)</p>
 
                         <div class="row g-4">
                             <div class="col-md-12">
@@ -102,8 +253,31 @@
     </div>
 </section>
 
-<!-- JavaScript to handle both Download & Preview -->
+<!-- CUSTOM POPUP MODAL HTML -->
+<div id="pastWorkshopPopup" class="custom-popup-overlay">
+    <div class="custom-popup-box">
+        <i class="icofont-exclamation-circle text-warning d-block mb-3" style="font-size: 50px;"></i>
+        <h3 class="text-white mb-2">Workshop Closed</h3>
+        <p class="text-white-50 fs-15 lh-base mb-4">
+            This is a past workshop that has already concluded. Certificate generation is no longer available for this event.
+        </p>
+        <button onclick="hidePastWorkshopPopup()" class="btn-main w-100 rounded-3 text-white border-0 py-2" style="background-color: #7A5AF8;">
+            Understood
+        </button>
+    </div>
+</div>
+
+<!-- SCRIPTS -->
 <script>
+// Logic for Custom Popup Modal
+function showPastWorkshopPopup() {
+    document.getElementById('pastWorkshopPopup').style.display = 'flex';
+}
+function hidePastWorkshopPopup() {
+    document.getElementById('pastWorkshopPopup').style.display = 'none';
+}
+
+// Logic for generating certificate (Download + Preview)
 document.getElementById('certificate_form').addEventListener('submit', function(e) {
     e.preventDefault(); 
     
