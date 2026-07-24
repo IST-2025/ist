@@ -263,7 +263,7 @@ WORKSHOP_SCHEDULES = {
     'visualizing_intelligence': {
         'name': 'Visualising the Intelligence Pipeline',
         'date': datetime(2026, 7, 24, 10, 0, 0),
-        'availability_start': datetime(2026, 7, 24, 10, 0, 0),
+        'availability_start': datetime(2026, 7, 23, 10, 0, 0),
         'availability_end': datetime(2026, 7, 25, 10, 0, 0),
         'description': 'Learn how raw data is collected, integrated, processed, and transformed into meaningful insights',
         'order': 2
