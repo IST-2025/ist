@@ -3,61 +3,361 @@
 {% block content %}
 
 <style>
-    #certificate_form .form-control::placeholder {
-        color: rgba(255, 255, 255, 0.4) !important;
-        font-weight: 400 !important;
-        opacity: 1 !important; 
-    }
-    
-    #back-to-top, .scroll-to-top, .back-to-top, #totop {
-        color: #ffffff !important;
-    }
-    #back-to-top i, .scroll-to-top i, .back-to-top i, #totop i {
-        color: #ffffff !important;
-    }
-
-    /* Custom Popup Styles */
-    .custom-popup-overlay {
-        display: none;
-        position: fixed;
-        top: 0; 
-        left: 0; 
-        width: 100%; 
-        height: 100%;
-        background: rgba(0, 0, 0, 0.85);
-        z-index: 9999;
-        align-items: center; 
-        justify-content: center;
-        backdrop-filter: blur(5px);
-    }
-    .custom-popup-box {
-        background: rgba(20, 20, 20, 0.95);
-        padding: 40px;
-        border-radius: 20px;
-        border: 1px solid rgba(122, 90, 248, 0.5);
-        text-align: center;
-        max-width: 400px;
-        width: 90%;
-        box-shadow: 0 10px 30px rgba(122, 90, 248, 0.2);
-        transform: scale(0.9);
-        animation: popUpAnim 0.3s forwards ease-out;
-    }
-    @keyframes popUpAnim {
-        to { transform: scale(1); }
+    :root {
+        --primary: #4F46E5;
+        --primary-dark: #3730A3;
+        --success: #059669;
+        --warning: #D97706;
+        --danger: #DC2626;
+        --dark: #0F172A;
+        --darker: #020617;
+        --card: #1E293B;
+        --text: #F1F5F9;
+        --text-muted: #94A3B8;
+        --border: #334155;
     }
 
-    /* Workshop Card Hover Effect */
-    .workshop-card {
+    body {
+        background: var(--dark);
+    }
+
+    /* Form Styling */
+    #certificate_form .form-control {
+        background: rgba(30, 41, 59, 0.8) !important;
+        border: 1px solid var(--border) !important;
+        color: var(--text) !important;
+        border-radius: 10px !important;
+        padding: 14px 16px !important;
+        font-size: 15px !important;
         transition: all 0.3s ease;
     }
+    
+    #certificate_form .form-control:focus {
+        border-color: var(--primary) !important;
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15) !important;
+        background: rgba(30, 41, 59, 1) !important;
+    }
+    
+    #certificate_form .form-control::placeholder {
+        color: rgba(148, 163, 184, 0.5) !important;
+    }
+
+    /* Popup */
+    .popup-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.85);
+        z-index: 9999;
+        align-items: center;
+        justify-content: center;
+        backdrop-filter: blur(8px);
+    }
+    
+    .popup-overlay.show {
+        display: flex;
+    }
+    
+    .popup-box {
+        background: var(--card);
+        padding: 35px;
+        border-radius: 20px;
+        border: 1px solid var(--border);
+        text-align: center;
+        max-width: 420px;
+        width: 90%;
+        box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+        animation: popIn 0.3s ease;
+    }
+    
+    @keyframes popIn {
+        from { transform: scale(0.9); opacity: 0; }
+        to { transform: scale(1); opacity: 1; }
+    }
+
+    /* Workshop Cards */
+    .workshop-card {
+        background: var(--card) !important;
+        border-radius: 16px !important;
+        padding: 28px !important;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+    
     .workshop-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
+    }
+    
+    .workshop-card.border-available {
+        border: 2px solid #10B981 !important;
+        box-shadow: 0 0 20px rgba(16, 185, 129, 0.1);
+    }
+    
+    .workshop-card.border-upcoming {
+        border: 2px solid #F59E0B !important;
+        box-shadow: 0 0 20px rgba(245, 158, 11, 0.1);
+    }
+    
+    .workshop-card.border-past {
+        border: 1px solid var(--border) !important;
+        opacity: 0.75;
+    }
+
+    /* Badges */
+    .badge-status {
+        padding: 6px 14px;
+        border-radius: 50px;
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.3px;
+        display: inline-flex;
+        align-items: center;
+        gap: 5px;
+    }
+    
+    .badge-live {
+        background: rgba(16, 185, 129, 0.15);
+        color: #34D399;
+        border: 1px solid rgba(16, 185, 129, 0.3);
+        animation: pulse 2s infinite;
+    }
+    
+    .badge-upcoming {
+        background: rgba(245, 158, 11, 0.15);
+        color: #FBBF24;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    
+    .badge-done {
+        background: rgba(148, 163, 184, 0.1);
+        color: #94A3B8;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+    }
+    
+    @keyframes pulse {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.6; }
+    }
+
+    /* Filter Tabs */
+    .filter-tabs {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin-bottom: 35px;
+        flex-wrap: wrap;
+    }
+    
+    .filter-tab {
+        padding: 10px 22px;
+        border-radius: 50px;
+        border: 1px solid var(--border);
+        background: rgba(30, 41, 59, 0.5);
+        color: var(--text-muted);
+        cursor: pointer;
+        transition: all 0.3s ease;
+        font-size: 14px;
+        font-weight: 500;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .filter-tab:hover {
+        background: rgba(30, 41, 59, 0.8);
+        color: var(--text);
+    }
+    
+    .filter-tab.active {
+        background: var(--primary);
+        border-color: var(--primary);
+        color: white;
+    }
+
+    /* Form Wrapper */
+    .form-container {
+        background: rgba(30, 41, 59, 0.6);
+        backdrop-filter: blur(20px);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 40px;
+    }
+
+    /* Buttons */
+    .btn-generate {
+        background: linear-gradient(135deg, #4F46E5, #7C3AED);
+        color: white;
+        border: none;
+        padding: 14px 28px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 16px;
+        width: 100%;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+    }
+    
+    .btn-generate:hover:not(:disabled) {
+        transform: translateY(-2px);
+        box-shadow: 0 10px 30px rgba(79, 70, 229, 0.3);
+    }
+    
+    .btn-generate:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+    
+    .btn-available {
+        background: #059669;
+        color: white;
+        border: none;
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 15px;
+        width: 100%;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        text-decoration: none;
+    }
+    
+    .btn-available:hover {
+        background: #047857;
+        transform: translateY(-2px);
+        color: white;
+    }
+    
+    .btn-upcoming {
+        background: rgba(245, 158, 11, 0.15);
+        color: #FBBF24;
+        border: 1px solid rgba(245, 158, 11, 0.3);
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 15px;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+    
+    .btn-closed {
+        background: rgba(148, 163, 184, 0.08);
+        color: #94A3B8;
+        border: 1px solid rgba(148, 163, 184, 0.2);
+        padding: 12px 20px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 15px;
+        width: 100%;
+        cursor: pointer;
+        transition: all 0.3s ease;
+    }
+
+    /* Info Card */
+    .info-box {
+        background: rgba(30, 41, 59, 0.5);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 30px;
+    }
+    
+    .info-box .icon-wrap {
+        width: 48px;
+        height: 48px;
+        border-radius: 12px;
+        background: rgba(79, 70, 229, 0.1);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 16px;
+    }
+
+    /* Error */
+    .error-msg {
+        background: rgba(220, 38, 38, 0.08);
+        border: 1px solid rgba(220, 38, 38, 0.2);
+        color: #F87171;
+        padding: 12px 18px;
+        border-radius: 10px;
+        font-size: 14px;
+        margin-top: 16px;
+        display: none;
+    }
+    
+    .error-msg.show {
+        display: block;
+    }
+
+    /* Loading */
+    .loader-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        background: rgba(2, 6, 23, 0.95);
+        z-index: 10000;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
+    }
+    
+    .loader-overlay.show {
+        display: flex;
+    }
+    
+    .loader-ring {
+        width: 56px;
+        height: 56px;
+        border: 3px solid rgba(79, 70, 229, 0.2);
+        border-top-color: #4F46E5;
+        border-radius: 50%;
+        animation: spin 0.8s linear infinite;
+    }
+    
+    @keyframes spin {
+        to { transform: rotate(360deg); }
+    }
+    
+    .loader-text {
+        color: #F1F5F9;
+        font-size: 16px;
+        font-weight: 500;
+    }
+
+    /* Warning Alert */
+    .alert-warn {
+        background: rgba(245, 158, 11, 0.08);
+        border: 1px solid rgba(245, 158, 11, 0.2);
+        border-radius: 10px;
+        padding: 14px 18px;
+        color: #FBBF24;
+        font-size: 13px;
+    }
+
+    .workshop-grid-item {
+        transition: all 0.3s ease;
+    }
+    
+    .workshop-grid-item.hidden {
+        display: none;
     }
 </style>
 
+<!-- Header -->
+<!-- Header Section -->
 <section id="section-workshop-intro" class="section-dark text-light pb-60 relative jarallax" style="padding-top: 160px;">
-    <img src="/static/assets/images/background/6.webp" class="jarallax-img" alt="AI Workshop">
+    <img src="/static/assets/images/background/6.webp" class="jarallax-img" alt="Workshop Certificates">
     <div class="gradient-edge-top"></div>
     <div class="gradient-edge-bottom"></div>
     <div class="sw-overlay op-8"></div>
@@ -65,275 +365,383 @@
     <div class="container relative z-4">
         <div class="row mb-5 text-center">
             <div class="col-md-8 offset-md-2">
-                <h2 class="wow fadeInUp fs-40" data-wow-delay=".2s">Workshop Certificates</h2>
-                <p class="lead wow fadeInUp text-white-50 mt-3" data-wow-delay=".4s">
-                    Thank you for participating in our free workshops! Select your workshop below to generate, preview, and download your official MSME-verified certificate.
+                <h2 class="wow fadeInUp fs-40 fw-bold" data-wow-delay=".2s">
+                    <i class="fas fa-certificate me-3" style="color: #818CF8;"></i>Workshop Certificates
+                </h2>
+                <p class="lead wow fadeInUp mt-3" style="color: #94A3B8;" data-wow-delay=".4s">
+                    Download your official MSME-verified certificate for workshops you've attended.
                 </p>
             </div>
         </div>
     </div>
 </section>
 
-<!-- WORKSHOP SELECTION GRID -->
-<section id="workshop-selection" class="section-dark bg-dark-2 text-light pt-60 pb-60 border-bottom border-secondary border-opacity-25">
+<!-- Workshop Grid -->
+<section style="background: var(--dark); padding: 60px 0;">
     <div class="container">
-        <div class="row g-4">
-            
-            <!-- ACTIVE WORKSHOP -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".1s">
-                <div class="workshop-card bg-dark p-4 rounded-4 h-100 d-flex flex-column border border-primary" style="border-color: #7A5AF8 !important;">
+        <!-- Filters -->
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterWorkshops('all')">
+                <i class="fas fa-th-large"></i> All Workshops
+            </button>
+            <button class="filter-tab" onclick="filterWorkshops('available')">
+                <i class="fas fa-bolt" style="color: #34D399;"></i> Available
+            </button>
+            <button class="filter-tab" onclick="filterWorkshops('upcoming')">
+                <i class="fas fa-clock" style="color: #FBBF24;"></i> Upcoming
+            </button>
+            <button class="filter-tab" onclick="filterWorkshops('past')">
+                <i class="fas fa-check-double" style="color: #94A3B8;"></i> Completed
+            </button>
+        </div>
+
+        <!-- Cards -->
+        <div class="row g-4" id="workshops-grid">
+            {% for workshop_id, workshop in workshops.items() %}
+            <div class="col-lg-4 col-md-6 workshop-grid-item" 
+                 data-category="{{ workshop.category }}"
+                 data-id="{{ workshop_id }}">
+                <div class="workshop-card {% if workshop.is_available %}border-available{% elif workshop.is_upcoming %}border-upcoming{% else %}border-past{% endif %}">
+                    <!-- Header -->
                     <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge rounded-pill px-3 py-2" style="background-color: rgba(122, 90, 248, 0.2); color: #7A5AF8; border: 1px solid #7A5AF8;">Active</span>
-                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 30/07/2026</span>
+                        <span class="badge-status 
+                            {% if workshop.is_available %}badge-live{% elif workshop.is_upcoming %}badge-upcoming{% else %}badge-done{% endif %}">
+                            {% if workshop.is_available %}
+                                <i class="fas fa-circle" style="font-size: 7px;"></i> LIVE
+                            {% elif workshop.is_upcoming %}
+                                <i class="fas fa-hourglass-half"></i> Upcoming
+                            {% else %}
+                                <i class="fas fa-check"></i> Completed
+                            {% endif %}
+                        </span>
+                        <span style="color: #64748B; font-size: 13px;">
+                            <i class="far fa-calendar-alt me-1"></i> {{ workshop.date_formatted }}
+                        </span>
                     </div>
-                    <h4 class="text-white fs-22 mb-3">Build Your Own AI Agent</h4>
-                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
-                        Learn to build, deploy, and manage intelligent AI agents from scratch in this hands-on 2-hour session.
+                    
+                    <!-- Title -->
+                    <h4 style="color: #F1F5F9; font-size: 20px; font-weight: 600; margin-bottom: 10px; line-height: 1.4;">
+                        {{ workshop.name }}
+                    </h4>
+                    
+                    <!-- Description -->
+                    <p style="color: #94A3B8; font-size: 14px; line-height: 1.6; flex-grow: 1; margin-bottom: 16px;">
+                        {{ workshop.description }}
                     </p>
-                    <a href="#certificate-form-section" class="btn-main w-100 text-center rounded-3 py-2 text-white border-0" style="background-color: #7A5AF8;">
-                        Generate Certificate
+                    
+                    <!-- Button -->
+                    {% if workshop.is_available %}
+                    <a href="#certificate-form-section" class="btn-available" onclick="selectWorkshop('{{ workshop_id }}')">
+                        <i class="fas fa-download"></i> Generate Certificate
                     </a>
-                </div>
-            </div>
-
-            <!-- PAST WORKSHOP 1 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
-                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
-                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 12/06/2026</span>
-                    </div>
-                    <h4 class="text-white fs-22 mb-3">Mastering Prompt Engineering</h4>
-                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
-                        Advanced techniques for communicating effectively with Large Language Models.
-                    </p>
-                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
-                        Closed
+                    {% elif workshop.is_upcoming %}
+                    <button class="btn-upcoming" onclick="showPopup('upcoming', '{{ workshop.name }}', '{{ workshop.time_remaining }}')">
+                        <i class="fas fa-lock"></i> Not Available Yet
                     </button>
-                </div>
-            </div>
-
-            <!-- PAST WORKSHOP 2 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".3s">
-                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
-                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 25/05/2026</span>
-                    </div>
-                    <h4 class="text-white fs-22 mb-3">Building Software That Doesn't Break</h4>
-                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
-                        Master the fundamentals of creating robust and maintainable software.
-                    </p>
-                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
-                        Closed
+                    {% else %}
+                    <button class="btn-closed" onclick="showPopup('closed', '{{ workshop.name }}')">
+                        <i class="fas fa-archive"></i> Certificate Closed
                     </button>
+                    {% endif %}
                 </div>
             </div>
-
-            <!-- PAST WORKSHOP 3 -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
-                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
-                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 10/04/2026</span>
-                    </div>
-                    <h4 class="text-white fs-22 mb-3">Automating Workflows with AI</h4>
-                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
-                        Streamlining business operations and daily tasks using intelligent AI automation.
-                    </p>
-                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
-                        Closed
-                    </button>
-                </div>
-            </div>
-
-            <!-- PAST WORKSHOP 4 (Updated to Full Stack/AI) -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".5s">
-                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
-                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 18/03/2026</span>
-                    </div>
-                    <h4 class="text-white fs-22 mb-3">Full Stack AI Development</h4>
-                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
-                        Building end-to-end scalable web applications seamlessly integrated with powerful machine learning models.
-                    </p>
-                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
-                        Closed
-                    </button>
-                </div>
-            </div>
-
-            <!-- PAST WORKSHOP 5 (Updated to Full Stack/AI) -->
-            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
-                <div class="workshop-card bg-dark bg-opacity-50 p-4 rounded-4 h-100 d-flex flex-column border border-secondary border-opacity-25">
-                    <div class="d-flex justify-content-between align-items-start mb-3">
-                        <span class="badge bg-secondary bg-opacity-25 text-white-50 rounded-pill px-3 py-2 border border-secondary border-opacity-25">Completed</span>
-                        <span class="text-white-50 fs-14"><i class="icofont-calendar me-1"></i> 05/02/2026</span>
-                    </div>
-                    <h4 class="text-white fs-22 mb-3">AI-Powered Web Apps</h4>
-                    <p class="text-white-50 fs-14 mb-4 flex-grow-1 text-wrap" style="white-space: normal; word-wrap: break-word; line-height: 1.6;">
-                        Enhancing frontend frameworks with intelligent AI features, APIs, and real-time data processing.
-                    </p>
-                    <button onclick="showPastWorkshopPopup()" class="btn btn-dark w-100 text-center rounded-3 py-2 text-white-50 border border-secondary border-opacity-25">
-                        Closed
-                    </button>
-                </div>
-            </div>
-
+            {% endfor %}
         </div>
     </div>
 </section>
 
-<!-- CERTIFICATE GENERATION FORM -->
-<section id="certificate-form-section" class="section-dark text-light pt-80 pb-100 relative jarallax">
-    <img src="/static/assets/images/background/8.webp" class="jarallax-img" alt="">
-    <div class="gradient-edge-top"></div>
-    <div class="gradient-edge-bottom"></div>
-    <div class="sw-overlay op-8"></div>
-
-    <div class="container relative z-4">
-        <div class="row align-items-center justify-content-center g-5">
-
-            <div class="col-lg-6 wow fadeInRight" data-wow-delay=".4s">
-                <div class="p-5 rounded-4 shadow-lg position-relative overflow-hidden"
-                    style="background: rgba(20, 20, 20, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1);">
-                    
-                    <form name="certificateForm" id="certificate_form" method="POST" action="{{ url_for('public_pages.generate_certificate') }}">
-                        <h4 class="mb-1 text-white text-center">Get Your Certificate</h4>
-                        <p class="text-center text-white-50 mb-4 fs-14">For: Build Your Own AI Agent (30/07/2026)</p>
-
-                        <div class="row g-4">
-                            <div class="col-md-12">
-                                <div class="field-set">
-                                    <label class="text-white fs-14 mb-2 fw-bold">Full Name *</label>
-                                    <input type="text" name="student_name" id="student_name"
-                                        class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
-                                        placeholder="Enter your name" required>
-                                </div>
+<!-- Certificate Form -->
+<section id="certificate-form-section" style="background: var(--darker); padding: 80px 0;">
+    <div class="container">
+        <div class="row g-5 align-items-start">
+            <!-- Form Column -->
+            <div class="col-lg-6">
+                <div class="form-container">
+                    <form id="certificate_form" method="POST" action="{{ url_for('public_pages.generate_certificate') }}">
+                        <input type="hidden" name="workshop_id" id="workshop_id" value="visualizing_intelligence">
+                        
+                        <div class="text-center mb-4">
+                            <div style="width: 56px; height: 56px; border-radius: 14px; background: rgba(79, 70, 229, 0.1); display: inline-flex; align-items: center; justify-content: center; margin-bottom: 16px;">
+                                <i class="fas fa-file-pdf" style="color: #818CF8; font-size: 24px;"></i>
                             </div>
-
-                            <div class="col-md-12">
-                                <div class="field-set">
-                                    <label class="text-white fs-14 mb-2 fw-bold">Email Address *</label>
-                                    <input type="email" name="email" id="email"
-                                        class="form-control bg-dark bg-opacity-50 text-white border border-secondary border-opacity-25 rounded-3 py-3 px-4"
-                                        placeholder="name@example.com" required>
-                                </div>
-                            </div>
+                            <h4 style="color: #F1F5F9; font-weight: 600; margin-bottom: 6px;">Download Your Certificate</h4>
+                            <p style="color: #94A3B8; font-size: 14px;" id="active-workshop-name">
+                                <i class="fas fa-laptop-code me-1"></i> Visualising the Intelligence Pipeline (24/07/2026)
+                            </p>
                         </div>
 
-                        <div class="mt-5 pt-3">
-                            <button type="submit" id="submit_certificate" class="btn-main w-100 py-3 fs-16 rounded-3 text-white border-0"
-                                style="background-color: #7A5AF8;">
-                                <i class="icofont-download me-2"></i> Generate Certificate
-                            </button>
+                        <div class="mb-3">
+                            <label style="color: #CBD5E1; font-size: 14px; font-weight: 600; margin-bottom: 6px; display: block;">
+                                <i class="fas fa-user me-2" style="color: #818CF8;"></i>Full Name
+                            </label>
+                            <input type="text" name="student_name" id="student_name" class="form-control" 
+                                   placeholder="Enter your full name as it should appear" required>
                         </div>
+
+                        <div class="mb-4">
+                            <label style="color: #CBD5E1; font-size: 14px; font-weight: 600; margin-bottom: 6px; display: block;">
+                                <i class="fas fa-envelope me-2" style="color: #818CF8;"></i>Email Address
+                            </label>
+                            <input type="email" name="email" id="email" class="form-control" 
+                                   placeholder="Enter your registered email" required>
+                        </div>
+
+                        <div class="error-msg" id="error-message">
+                            <i class="fas fa-exclamation-circle me-2"></i>
+                            <span id="error-text"></span>
+                        </div>
+
+                        <button type="submit" id="submit_certificate" class="btn-generate">
+                            <i class="fas fa-download"></i> Generate & Download Certificate
+                        </button>
                     </form>
                 </div>
             </div>
-            
-            <div class="col-lg-5">
-                <div class="bg-dark bg-opacity-50 p-4 rounded-4 border border-secondary border-opacity-25 wow fadeInUp" data-wow-delay=".4s">
-                    <h4 class="mb-3 fs-20 text-white">
-                        <i class="icofont-info-circle me-2" style="color: #7A5AF8;"></i> Certificate Instructions
-                    </h4>
-                    <p class="text-white-50 fs-15 lh-lg mb-3">
-                        To receive your valid e-certificate for the <strong>Build Your Own AI Agent</strong> workshop:
-                    </p>
-                    <ul class="text-white-50 fs-15 lh-lg mb-0 ps-3">
-                        <li>Ensure your name is spelled correctly.</li>
-                        <li>Clicking submit will <strong>automatically download</strong> the PDF to your device AND <strong>open a preview</strong> in a new tab.</li>
-                        <li>Your data is securely saved for validation.</li>
+
+            <!-- Info Column -->
+            <div class="col-lg-5 offset-lg-1">
+                <div class="info-box">
+                    <div class="icon-wrap">
+                        <i class="fas fa-info-circle" style="color: #818CF8; font-size: 22px;"></i>
+                    </div>
+                    <h5 style="color: #F1F5F9; font-weight: 600; margin-bottom: 14px;">How It Works</h5>
+                    <ul style="color: #94A3B8; font-size: 14px; line-height: 2.2; padding-left: 18px; margin-bottom: 20px;">
+                        <li>Select an <strong style="color: #34D399;">available</strong> workshop from above</li>
+                        <li>Enter your <strong style="color: #CBD5E1;">full name</strong> and <strong style="color: #CBD5E1;">email</strong></li>
+                        <li>Click generate to <strong style="color: #CBD5E1;">download PDF</strong></li>
+                        <li>Certificate opens in <strong style="color: #CBD5E1;">new tab</strong> for preview</li>
                     </ul>
+                    <div class="alert-warn">
+                        <i class="fas fa-exclamation-triangle me-2"></i>
+                        Certificates are only available for <strong>24 hours</strong> after the workshop ends.
+                    </div>
                 </div>
             </div>
-
         </div>
     </div>
 </section>
 
-<!-- CUSTOM POPUP MODAL HTML -->
-<div id="pastWorkshopPopup" class="custom-popup-overlay">
-    <div class="custom-popup-box">
-        <i class="icofont-exclamation-circle text-warning d-block mb-3" style="font-size: 50px;"></i>
-        <h3 class="text-white mb-2">Workshop Closed</h3>
-        <p class="text-white-50 fs-15 lh-base mb-4">
-            This is a past workshop that has already concluded. Certificate generation is no longer available for this event.
-        </p>
-        <button onclick="hidePastWorkshopPopup()" class="btn-main w-100 rounded-3 text-white border-0 py-2" style="background-color: #7A5AF8;">
-            Understood
+<!-- Loading Overlay -->
+<div id="loaderOverlay" class="loader-overlay">
+    <div class="loader-ring"></div>
+    <div class="loader-text">
+        <i class="fas fa-sync-alt fa-spin me-2"></i> Generating your certificate...
+    </div>
+</div>
+
+<!-- Popup Modal -->
+<div id="popupModal" class="popup-overlay">
+    <div class="popup-box">
+        <i id="popup-icon" class="fas fa-info-circle d-block mb-3" style="font-size: 48px;"></i>
+        <h5 id="popup-title" style="color: #F1F5F9; font-weight: 600; margin-bottom: 10px;"></h5>
+        <p id="popup-message" style="color: #94A3B8; font-size: 14px; line-height: 1.6; margin-bottom: 22px;"></p>
+        <button type="button" onclick="closePopup()" class="btn w-100 py-3 text-white fw-semibold"
+                style="background: #4F46E5; border-radius: 10px; border: none; cursor: pointer;">
+            <i class="fas fa-check me-2"></i> Understood
         </button>
     </div>
 </div>
 
-<!-- SCRIPTS -->
 <script>
-// Logic for Custom Popup Modal
-function showPastWorkshopPopup() {
-    document.getElementById('pastWorkshopPopup').style.display = 'flex';
-}
-function hidePastWorkshopPopup() {
-    document.getElementById('pastWorkshopPopup').style.display = 'none';
+// Workshop data
+const workshopData = {
+    'build_ai_agent': { name: 'Build Your Own AI Agent', date: '30/07/2026' },
+    'visualizing_intelligence': { name: 'Visualising the Intelligence Pipeline', date: '24/07/2026' },
+    'prompt_engineering': { name: 'Mastering Prompt Engineering', date: '12/06/2026' },
+    'software_engineering': { name: 'Building Software That Doesn\'t Break', date: '25/05/2026' },
+    'ai_workflows': { name: 'Automating Workflows with AI', date: '10/04/2026' },
+    'fullstack_ai': { name: 'Full Stack AI Development', date: '18/03/2026' },
+    'ai_web_apps': { name: 'AI-Powered Web Apps', date: '05/02/2026' }
+};
+
+let currentWorkshop = 'visualizing_intelligence';
+
+// Select workshop
+function selectWorkshop(id) {
+    currentWorkshop = id;
+    document.getElementById('workshop_id').value = id;
+    
+    const w = workshopData[id];
+    document.getElementById('active-workshop-name').innerHTML = 
+        `<i class="fas fa-laptop-code me-1"></i> ${w.name} (${w.date})`;
+    
+    document.getElementById('certificate-form-section').scrollIntoView({ behavior: 'smooth' });
 }
 
-// Logic for generating certificate (Download + Preview)
+// Filter workshops
+function filterWorkshops(cat) {
+    document.querySelectorAll('.filter-tab').forEach(t => t.classList.remove('active'));
+    event.target.closest('.filter-tab').classList.add('active');
+    
+    document.querySelectorAll('.workshop-grid-item').forEach(item => {
+        item.classList.toggle('hidden', cat !== 'all' && item.dataset.category !== cat);
+    });
+}
+
+// Popup - Show
+function showPopup(type, name, time = null) {
+    const icon = document.getElementById('popup-icon');
+    const title = document.getElementById('popup-title');
+    const msg = document.getElementById('popup-message');
+    
+    if (type === 'closed') {
+        icon.style.color = '#94A3B8';
+        icon.className = 'fas fa-archive d-block mb-3';
+        title.textContent = 'Workshop Completed';
+        msg.innerHTML = `<strong style="color:#F1F5F9;">${name}</strong> has already finished.<br>Certificate generation is no longer available.`;
+    } else {
+        icon.style.color = '#FBBF24';
+        icon.className = 'fas fa-clock d-block mb-3';
+        title.textContent = 'Coming Soon';
+        msg.innerHTML = `<strong style="color:#F1F5F9;">${name}</strong><br>Certificates will be available on the workshop day.<br><br><span style="color:#FBBF24;">${time || 'Check back soon'}</span>`;
+    }
+    
+    document.getElementById('popupModal').classList.add('show');
+    document.body.style.overflow = 'hidden'; // Prevent background scroll
+}
+
+// Popup - Close
+function closePopup() {
+    document.getElementById('popupModal').classList.remove('show');
+    document.body.style.overflow = ''; // Restore scroll
+}
+
+// Close popup when clicking outside
+document.getElementById('popupModal').addEventListener('click', function(e) {
+    if (e.target === this) {
+        closePopup();
+    }
+});
+
+// Close popup with Escape key
+document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') {
+        closePopup();
+    }
+});
+
+// Form submit
 document.getElementById('certificate_form').addEventListener('submit', function(e) {
-    e.preventDefault(); 
+    e.preventDefault();
     
     const form = this;
     const formData = new FormData(form);
     const submitBtn = document.getElementById('submit_certificate');
-    const originalText = submitBtn.innerHTML;
+    const loader = document.getElementById('loaderOverlay');
+    const errDiv = document.getElementById('error-message');
+    const errText = document.getElementById('error-text');
     
-    // Update button state
-    submitBtn.innerHTML = 'Processing... Please wait';
+    errDiv.classList.remove('show');
+    
+    const name = formData.get('student_name').trim();
+    const email = formData.get('email').trim();
+    
+    if (!name || name.length < 2) {
+        errText.textContent = 'Please enter a valid full name.';
+        errDiv.classList.add('show');
+        return;
+    }
+    
+    if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+        errText.textContent = 'Please enter a valid email address.';
+        errDiv.classList.add('show');
+        return;
+    }
+    
+    // Show loader
+    loader.classList.add('show');
     submitBtn.disabled = true;
-
-    // 1. Open blank tab immediately to bypass browser popup blockers
-    const previewWindow = window.open('', '_blank');
-    previewWindow.document.write("<h3 style='font-family:sans-serif; text-align:center; margin-top:20%; color:#333;'>Generating your certificate... Please wait.</h3>");
-
-    // 2. Send data to Python Backend
+    submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
+    
     fetch(form.action, {
         method: 'POST',
-        body: formData
+        body: formData,
+        headers: { 'X-Requested-With': 'XMLHttpRequest' }
     })
-    .then(response => {
+    .then(async response => {
+        const ct = response.headers.get('content-type');
+        
         if (!response.ok) {
-            throw new Error("Failed to generate certificate.");
+            if (ct && ct.includes('application/json')) {
+                const data = await response.json();
+                throw new Error(data.message || data.error || 'Failed to generate certificate.');
+            }
+            throw new Error('Failed to generate certificate. Please try again.');
         }
-        return response.blob();
+        
+        if (ct && ct.includes('application/pdf')) {
+            return response.blob();
+        }
+        throw new Error('Unexpected response from server.');
     })
     .then(blob => {
-        // Format the student's name for the file
-        let studentName = formData.get('student_name').trim().replace(/ /g, '_');
-        const fileName = studentName + "_Certificate.pdf";
+        loader.classList.remove('show');
+        
+        const studentName = name.replace(/ /g, '_');
+        const fileName = `${studentName}_Certificate.pdf`;
         const blobUrl = URL.createObjectURL(blob);
         
-        // 3. Inject the PDF into the new tab for Preview
-        previewWindow.location.href = blobUrl;
+        // Preview in new tab
+        window.open(blobUrl, '_blank');
         
-        // 4. Trigger Auto-Download in the background
-        const downloadLink = document.createElement('a');
-        downloadLink.href = blobUrl;
-        downloadLink.download = fileName;
-        document.body.appendChild(downloadLink);
-        downloadLink.click();
-        document.body.removeChild(downloadLink);
+        // Auto download
+        setTimeout(() => {
+            const a = document.createElement('a');
+            a.href = blobUrl;
+            a.download = fileName;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            setTimeout(() => URL.revokeObjectURL(blobUrl), 2000);
+        }, 600);
         
-        // Reset form and button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-        form.reset();
+        // Success
+        submitBtn.innerHTML = '<i class="fas fa-check-circle"></i> Certificate Downloaded!';
+        submitBtn.style.background = 'linear-gradient(135deg, #059669, #047857)';
+        
+        setTimeout(() => {
+            submitBtn.innerHTML = '<i class="fas fa-download"></i> Generate & Download Certificate';
+            submitBtn.style.background = 'linear-gradient(135deg, #4F46E5, #7C3AED)';
+            submitBtn.disabled = false;
+            form.reset();
+        }, 3000);
     })
     .catch(error => {
-        console.error('Error:', error);
-        previewWindow.close(); // Close the blank tab if it failed
-        alert("An error occurred. Please try again.");
-        submitBtn.innerHTML = originalText;
+        loader.classList.remove('show');
+        errText.textContent = error.message;
+        errDiv.classList.add('show');
+        submitBtn.innerHTML = '<i class="fas fa-download"></i> Generate & Download Certificate';
         submitBtn.disabled = false;
     });
+});
+
+// Init
+document.addEventListener('DOMContentLoaded', () => {
+    const first = document.querySelector('[data-category="available"]');
+    if (first) selectWorkshop(first.dataset.id);
+    
+    // Auto check availability
+    setInterval(() => {
+        fetch(`/api/check-workshop-availability/${currentWorkshop}`)
+            .then(r => r.json())
+            .then(data => {
+                const btn = document.getElementById('submit_certificate');
+                const err = document.getElementById('error-message');
+                const txt = document.getElementById('error-text');
+                
+                if (!data.is_available) {
+                    btn.disabled = true;
+                    txt.textContent = data.is_upcoming ? 
+                        `Not available yet. ${data.time_remaining}` : 
+                        'Certificate window has closed.';
+                    err.classList.add('show');
+                } else {
+                    btn.disabled = false;
+                    err.classList.remove('show');
+                }
+            })
+            .catch(() => {});
+    }, 30000);
 });
 </script>
 

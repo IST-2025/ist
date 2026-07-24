@@ -2,12 +2,12 @@ import os
 import smtplib
 import uuid
 import requests
-from datetime import datetime
+from datetime import datetime, timedelta
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from flask import Blueprint, render_template, request, flash, redirect, url_for, send_file
+from flask import Blueprint, render_template, request, flash, redirect, url_for, send_file, jsonify
 from werkzeug.utils import secure_filename
-from sqlalchemy import inspect
+from sqlalchemy import inspect, text
 from fpdf import FPDF
 from .models import Contact, ProjectRequest, JobApplication, InternshipApplication, CertificateRecord
 from . import db
@@ -246,138 +246,399 @@ def contact():
                            page_desc="Get in touch with our team to start your next big tech project.",
                            page_keywords="contact IT company, software agency contact")
 
-
 # ==========================================
 # CERTIFICATE GENERATION ROUTES
 # ==========================================
+
+# Define workshop schedules
+WORKSHOP_SCHEDULES = {
+    'build_ai_agent': {
+        'name': 'Build Your Own AI Agent',
+        'date': datetime(2026, 7, 30, 10, 0, 0),
+        'availability_start': datetime(2026, 7, 29, 10, 0, 0),
+        'availability_end': datetime(2026, 7, 31, 10, 0, 0),
+        'description': 'Learn to build, deploy, and manage intelligent AI agents from scratch',
+        'order': 1
+    },
+    'visualizing_intelligence': {
+        'name': 'Visualising the Intelligence Pipeline',
+        'date': datetime(2026, 7, 24, 10, 0, 0),
+        'availability_start': datetime(2026, 7, 24, 10, 0, 0),
+        'availability_end': datetime(2026, 7, 25, 10, 0, 0),
+        'description': 'Learn how raw data is collected, integrated, processed, and transformed into meaningful insights',
+        'order': 2
+    },
+    'prompt_engineering': {
+        'name': 'Mastering Prompt Engineering',
+        'date': datetime(2026, 6, 12, 10, 0, 0),
+        'availability_start': datetime(2026, 6, 12, 10, 0, 0),
+        'availability_end': datetime(2026, 6, 13, 10, 0, 0),
+        'description': 'Advanced techniques for communicating effectively with Large Language Models',
+        'order': 3
+    },
+    'software_engineering': {
+        'name': 'Building Software That Doesn\'t Break',
+        'date': datetime(2026, 5, 25, 10, 0, 0),
+        'availability_start': datetime(2026, 5, 25, 10, 0, 0),
+        'availability_end': datetime(2026, 5, 26, 10, 0, 0),
+        'description': 'Master the fundamentals of creating robust and maintainable software',
+        'order': 4
+    },
+    'ai_workflows': {
+        'name': 'Automating Workflows with AI',
+        'date': datetime(2026, 4, 10, 10, 0, 0),
+        'availability_start': datetime(2026, 4, 10, 10, 0, 0),
+        'availability_end': datetime(2026, 4, 11, 10, 0, 0),
+        'description': 'Streamlining business operations using intelligent AI automation',
+        'order': 5
+    },
+    'fullstack_ai': {
+        'name': 'Full Stack AI Development',
+        'date': datetime(2026, 3, 18, 10, 0, 0),
+        'availability_start': datetime(2026, 3, 18, 10, 0, 0),
+        'availability_end': datetime(2026, 3, 19, 10, 0, 0),
+        'description': 'Building end-to-end scalable web applications with machine learning',
+        'order': 6
+    },
+    'ai_web_apps': {
+        'name': 'AI-Powered Web Apps',
+        'date': datetime(2026, 2, 5, 10, 0, 0),
+        'availability_start': datetime(2026, 2, 5, 10, 0, 0),
+        'availability_end': datetime(2026, 2, 6, 10, 0, 0),
+        'description': 'Enhancing frontend frameworks with intelligent AI features and APIs',
+        'order': 7
+    }
+}
+
 @public_pages.route('/workshop-certificate', methods=['GET'])
 def workshop_certificate():
-    return render_template('certificate.html')
+    """Display the workshop certificate page with availability status"""
+    workshops_status = {}
+    current_time = datetime.now()
+    
+    for key, workshop in WORKSHOP_SCHEDULES.items():
+        is_available = workshop['availability_start'] <= current_time <= workshop['availability_end']
+        is_upcoming = current_time < workshop['availability_start']
+        is_past = current_time > workshop['availability_end']
+        
+        if is_available:
+            category = 'available'
+            sort_order = 0
+        elif is_upcoming:
+            category = 'upcoming'
+            sort_order = 1
+        else:
+            category = 'past'
+            sort_order = 2
+        
+        workshops_status[key] = {
+            **workshop,
+            'is_available': is_available,
+            'is_upcoming': is_upcoming,
+            'is_past': is_past,
+            'category': category,
+            'sort_order': sort_order,
+            'date_formatted': workshop['date'].strftime('%d/%m/%Y'),
+            'time_remaining': None
+        }
+        
+        if is_upcoming:
+            time_diff = workshop['availability_start'] - current_time
+            days = time_diff.days
+            hours = time_diff.seconds // 3600
+            workshops_status[key]['time_remaining'] = f"Opens in {days}d {hours}h"
+        elif is_available:
+            time_diff = workshop['availability_end'] - current_time
+            hours = time_diff.seconds // 3600
+            minutes = (time_diff.seconds % 3600) // 60
+            workshops_status[key]['time_remaining'] = f"Closes in {hours}h {minutes}m"
+    
+    sorted_workshops = dict(sorted(
+        workshops_status.items(),
+        key=lambda x: (x[1]['sort_order'], -x[1]['date'].timestamp())
+    ))
+    
+    return render_template('certificate.html', workshops=sorted_workshops)
 
+@public_pages.route('/api/check-workshop-availability/<workshop_id>', methods=['GET'])
+def check_workshop_availability(workshop_id):
+    """API endpoint to check if a workshop certificate is available"""
+    if workshop_id not in WORKSHOP_SCHEDULES:
+        return jsonify({'error': 'Workshop not found'}), 404
+    
+    workshop = WORKSHOP_SCHEDULES[workshop_id]
+    current_time = datetime.now()
+    
+    is_available = workshop['availability_start'] <= current_time <= workshop['availability_end']
+    is_upcoming = current_time < workshop['availability_start']
+    
+    time_remaining = None
+    if is_upcoming:
+        time_diff = workshop['availability_start'] - current_time
+        time_remaining = f"{time_diff.days}d {time_diff.seconds // 3600}h {(time_diff.seconds % 3600) // 60}m"
+    elif is_available:
+        time_diff = workshop['availability_end'] - current_time
+        time_remaining = f"{time_diff.seconds // 3600}h {(time_diff.seconds % 3600) // 60}m"
+    
+    return jsonify({
+        'is_available': is_available,
+        'is_upcoming': is_upcoming,
+        'time_remaining': time_remaining,
+        'workshop_name': workshop['name']
+    })
 
 @public_pages.route('/generate-certificate', methods=['POST'])
 def generate_certificate():
+    """Generate and download certificate for a workshop"""
     student_name = request.form.get('student_name')
     email = request.form.get('email')
+    workshop_id = request.form.get('workshop_id', 'visualizing_intelligence')
     
     if not student_name or not email:
-        return "Missing details", 400
-
-    inspector = inspect(db.engine)
-    if not inspector.has_table('certificate_record'):
-        CertificateRecord.__table__.create(db.engine)
-
-    unique_id = f"IST-WS-2026-{str(uuid.uuid4().hex[:6]).upper()}"
-
-    new_certificate = CertificateRecord(student_name=student_name, email=email, certificate_id=unique_id)
+        return jsonify({'error': 'Missing details'}), 400
+    
+    if workshop_id not in WORKSHOP_SCHEDULES:
+        return jsonify({'error': 'Invalid workshop'}), 400
+    
+    workshop = WORKSHOP_SCHEDULES[workshop_id]
+    current_time = datetime.now()
+    
+    if current_time < workshop['availability_start']:
+        return jsonify({
+            'error': 'Certificate not yet available',
+            'message': f"Certificates will be available on {workshop['date'].strftime('%B %d, %Y at %I:%M %p')}"
+        }), 403
+    
+    if current_time > workshop['availability_end']:
+        return jsonify({
+            'error': 'Certificate generation closed',
+            'message': 'The certificate generation window has closed for this workshop.'
+        }), 403
+    
+    # Fix table if needed
     try:
+        inspector = inspect(db.engine)
+        if inspector.has_table('certificate_record'):
+            columns = [col['name'] for col in inspector.get_columns('certificate_record')]
+            if 'workshop_name' in columns or 'workshop_date' in columns:
+                db.session.execute(text('DROP TABLE IF EXISTS certificate_record'))
+                db.session.commit()
+                db.create_all()
+    except:
+        pass
+    
+    unique_id = f"IST-WS-{workshop['date'].strftime('%Y')}-{str(uuid.uuid4().hex[:6]).upper()}"
+    
+    try:
+        new_certificate = CertificateRecord(
+            student_name=student_name,
+            email=email,
+            certificate_id=unique_id
+        )
         db.session.add(new_certificate)
         db.session.commit()
     except Exception as e:
         db.session.rollback()
-        return f"Database Error: {str(e)}", 500
-
+        return jsonify({'error': f'Database Error: {str(e)}'}), 500
+    
+    # =============================================
+    # SINGLE PAGE A4 LANDSCAPE PDF CERTIFICATE
+    # =============================================
     pdf = FPDF(orientation='L', unit='mm', format='A4')
     pdf.add_page()
-    pdf.set_fill_color(250, 252, 255) 
-    pdf.rect(0, 0, 297, 210, 'F')
-    pdf.set_draw_color(31, 78, 121) 
+    
+    # CRITICAL: Prevent auto page break - FORCE SINGLE PAGE
+    pdf.set_auto_page_break(False)
+    
+    # Page dimensions: 297mm x 210mm (Landscape)
+    page_w = 297
+    page_h = 210
+    
+    # === BACKGROUND ===
+    pdf.set_fill_color(248, 250, 252)
+    pdf.rect(0, 0, page_w, page_h, 'F')
+    
+    # === OUTER BORDER - Navy Blue ===
+    pdf.set_draw_color(25, 45, 80)
     pdf.set_line_width(3)
-    pdf.rect(10, 10, 277, 190)
-    pdf.set_draw_color(212, 175, 55)
-    pdf.set_line_width(0.8)
-    pdf.rect(14, 14, 269, 182)
-
+    pdf.rect(8, 8, 281, 194)
+    
+    # === INNER BORDER - Gold ===
+    pdf.set_draw_color(200, 160, 50)
+    pdf.set_line_width(0.6)
+    pdf.rect(12, 12, 273, 186)
+    
+    # === WATERMARK LOGO ===
     icon_path = os.path.join(os.path.dirname(__file__), 'static', 'assets', 'images', 'icon.png')
-    watermark_size = 140
-    watermark_x = (297 - watermark_size) / 2
-    watermark_y = (210 - watermark_size) / 2
     try:
-        with pdf.local_context(fill_opacity=0.08):
-            pdf.image(icon_path, x=watermark_x, y=watermark_y, w=watermark_size)
-    except Exception:
+        with pdf.local_context(fill_opacity=0.04):
+            pdf.image(icon_path, x=78, y=35, w=140)
+    except:
         pass
-
-    pdf.set_font("Helvetica", style="B", size=10)
-    pdf.set_text_color(100, 100, 100)
-    pdf.set_xy(20, 18)
-    pdf.cell(100, 6, f"Certificate No: {unique_id}", align='L')
-
+    
+    # === CERTIFICATE NUMBER (Top Left) ===
+    pdf.set_xy(18, 15)
+    pdf.set_font("Helvetica", style="B", size=8)
+    pdf.set_text_color(120, 120, 120)
+    pdf.cell(80, 4, f"Ref: {unique_id}", align='L')
+    
+    # === ISSUE DATE (Top Right) ===
+    issue_date = datetime.now().strftime("%d %B %Y")
+    pdf.set_xy(200, 15)
+    pdf.set_font("Helvetica", style="B", size=8)
+    pdf.set_text_color(120, 120, 120)
+    pdf.cell(80, 4, f"Issued: {issue_date}", align='R')
+    
+    # === LOGO (Center Top) ===
     logo_url = "https://www.inovatesolutiontechnology.in/static/assets/images/logo.png"
-    logo_width = 85
-    logo_x = (297 - logo_width) / 2
     try:
-        pdf.image(logo_url, x=logo_x, y=16, w=logo_width)
-    except Exception:
-        pass 
-
-    pdf.set_y(54)
+        pdf.image(logo_url, x=111, y=15, w=75)
+    except:
+        pass
+    
+    # === MSME REGISTRATION ===
+    pdf.set_y(42)
+    pdf.set_font("Helvetica", style="I", size=9)
+    pdf.set_text_color(100, 100, 100)
+    pdf.cell(0, 4, "An MSME Registered Organization", align='C')
+    
+    pdf.set_y(47)
+    pdf.set_font("Helvetica", style="", size=8)
+    pdf.set_text_color(130, 130, 130)
+    pdf.cell(0, 3, "UDYAM-TN-12-0147998", align='C')
+    
+    # === DECORATIVE DIVIDER ===
+    pdf.set_y(55)
+    pdf.set_draw_color(200, 160, 50)
+    pdf.set_line_width(0.4)
+    pdf.line(60, pdf.get_y(), 237, pdf.get_y())
+    
+    # === MAIN TITLE ===
+    pdf.set_y(63)
+    pdf.set_font("Times", style="B", size=32)
+    pdf.set_text_color(25, 45, 80)
+    pdf.cell(0, 12, "CERTIFICATE OF PARTICIPATION", align='C')
+    
+    # === TITLE UNDERLINE ===
+    pdf.set_draw_color(200, 160, 50)
+    pdf.set_line_width(1.5)
+    pdf.line(95, 76, 202, 76)
+    
+    # === PRESENTED TO ===
+    pdf.set_y(84)
     pdf.set_font("Helvetica", style="I", size=11)
-    pdf.set_text_color(80, 80, 80)
-    pdf.cell(0, 5, "An MSME Registered Organization", align='C')
-
-    pdf.set_y(70)
-    pdf.set_font("Times", style="B", size=34)
-    pdf.set_text_color(31, 78, 121) 
-    pdf.cell(0, 15, "CERTIFICATE OF PARTICIPATION", align='C')
-    
-    pdf.set_y(90)
-    pdf.set_font("Helvetica", style="I", size=15)
     pdf.set_text_color(100, 100, 100)
-    pdf.cell(0, 10, "This is proudly presented to", align='C')
+    pdf.cell(0, 6, "This certificate is proudly presented to", align='C')
     
-    pdf.set_y(106)
-    pdf.set_font("Times", style="B", size=42)
-    pdf.set_text_color(212, 175, 55) 
-    pdf.cell(0, 15, student_name.title(), align='C')
+    # === STUDENT NAME ===
+    pdf.set_y(96)
+    pdf.set_font("Times", style="B", size=38)
+    pdf.set_text_color(200, 160, 50)
     
-    name_width = pdf.get_string_width(student_name.title()) + 20
-    start_x = (297 - name_width) / 2
-    pdf.set_line_width(0.5)
-    pdf.set_draw_color(200, 200, 200)
-    pdf.line(start_x, 124, start_x + name_width, 124)
-
-    pdf.set_y(130)
-    pdf.set_font("Helvetica", size=14)
+    # Truncate name if too long
+    display_name = student_name.title()
+    if pdf.get_string_width(display_name) > 250:
+        pdf.set_font("Times", style="B", size=30)
+    pdf.cell(0, 14, display_name, align='C')
+    
+    # === NAME UNDERLINE ===
+    name_w = pdf.get_string_width(display_name) + 30
+    name_x = (page_w - name_w) / 2
+    pdf.set_line_width(0.4)
+    pdf.set_draw_color(180, 180, 180)
+    pdf.line(name_x, 111, name_x + name_w, 111)
+    
+    # === WORKSHOP TEXT ===
+    pdf.set_y(119)
+    pdf.set_font("Helvetica", size=11)
     pdf.set_text_color(80, 80, 80)
-    pdf.cell(0, 8, "For successfully completing the 2-Hour Workshop on", align='C')
+    pdf.cell(0, 6, "for successfully participating in the Workshop on", align='C')
     
+    # === WORKSHOP NAME ===
+    pdf.set_y(128)
+    pdf.set_font("Helvetica", style="B", size=18)
+    pdf.set_text_color(25, 45, 80)
+    
+    workshop_title = f'"{workshop["name"]}"'
+    if pdf.get_string_width(workshop_title) > 260:
+        pdf.set_font("Helvetica", style="B", size=15)
+    pdf.cell(0, 8, workshop_title, align='C')
+    
+    # === ORGANIZED BY ===
     pdf.set_y(140)
-    pdf.set_font("Helvetica", style="B", size=22)
-    pdf.set_text_color(31, 78, 121)
-    pdf.cell(0, 10, '"Build Your Own AI Agent"', align='C')
-    
-    pdf.set_y(152)
-    pdf.set_font("Helvetica", size=12)
-    pdf.set_text_color(100, 100, 100)
-    pdf.cell(0, 8, "Organized and Conducted by Inovate Solution Technology", align='C')
-    
-    current_date = datetime.now().strftime("%B %d, %Y")
-    pdf.set_text_color(0, 0, 0)
-    pdf.set_font("Helvetica", style="B", size=12)
-    pdf.set_xy(40, 172)
-    pdf.cell(50, 8, current_date, align='C')
-    pdf.set_line_width(0.5)
-    pdf.set_draw_color(0, 0, 0)
-    pdf.line(40, 180, 90, 180)
-    pdf.set_xy(40, 181)
     pdf.set_font("Helvetica", size=10)
-    pdf.cell(50, 5, "Date", align='C')
+    pdf.set_text_color(100, 100, 100)
+    pdf.cell(0, 5, "organized and conducted by", align='C')
     
+    pdf.set_y(147)
+    pdf.set_font("Helvetica", style="B", size=13)
+    pdf.set_text_color(25, 45, 80)
+    pdf.cell(0, 6, "Inovate Solution Technology", align='C')
+    
+    pdf.set_y(154)
+    pdf.set_font("Helvetica", size=9)
+    pdf.set_text_color(100, 100, 100)
+    pdf.cell(0, 4, "Madurai, Tamil Nadu, India", align='C')
+    
+    # === DATE SECTION (Left) ===
+    pdf.set_draw_color(25, 45, 80)
+    pdf.set_line_width(0.4)
+    
+    cert_date = workshop['date'].strftime("%d %B %Y")
+    pdf.set_xy(45, 172)
+    pdf.set_font("Helvetica", style="B", size=10)
+    pdf.set_text_color(40, 40, 40)
+    pdf.cell(50, 5, cert_date, align='C')
+    pdf.line(45, 179, 95, 179)
+    pdf.set_xy(45, 180)
+    pdf.set_font("Helvetica", size=8)
+    pdf.set_text_color(120, 120, 120)
+    pdf.cell(50, 4, "Workshop Date", align='C')
+    
+    # === CERTIFICATE ID SECTION (Center) ===
+    pdf.set_xy(123, 172)
+    pdf.set_font("Helvetica", style="B", size=10)
+    pdf.set_text_color(40, 40, 40)
+    pdf.cell(50, 5, unique_id, align='C')
+    pdf.line(123, 179, 173, 179)
+    pdf.set_xy(123, 180)
+    pdf.set_font("Helvetica", size=8)
+    pdf.set_text_color(120, 120, 120)
+    pdf.cell(50, 4, "Certificate ID", align='C')
+    
+    # === SIGNATURE SECTION (Right) ===
     sig_path = os.path.join(os.path.dirname(__file__), 'static', 'assets', 'images', 'ist_sign.png')
     try:
-        pdf.image(sig_path, x=212, y=148, w=40)
-    except Exception:
+        pdf.image(sig_path, x=215, y=152, w=35)
+    except:
         pass
-
-    pdf.set_xy(207, 172)
-    pdf.set_line_width(0.5)
-    pdf.line(207, 180, 257, 180)
-    pdf.set_xy(207, 181)
-    pdf.set_font("Helvetica", size=10)
-    pdf.cell(50, 5, "Authorized Signatory", align='C')
-
-    # FIX: Use the system temporary directory which Vercel allows write access to
+    
+    pdf.set_xy(202, 172)
+    pdf.set_font("Helvetica", style="B", size=10)
+    pdf.set_text_color(40, 40, 40)
+    pdf.cell(50, 5, "", align='C')
+    pdf.line(202, 179, 252, 179)
+    pdf.set_xy(202, 180)
+    pdf.set_font("Helvetica", size=8)
+    pdf.set_text_color(120, 120, 120)
+    pdf.cell(50, 4, "Authorized Signatory", align='C')
+    
+    # === BOTTOM DIVIDER ===
+    pdf.set_draw_color(200, 160, 50)
+    pdf.set_line_width(0.3)
+    pdf.line(20, 190, 277, 190)
+    
+    # === VERIFICATION TEXT ===
+    pdf.set_y(193)
+    pdf.set_font("Helvetica", size=7)
+    pdf.set_text_color(150, 150, 150)
+    pdf.cell(0, 3, "This certificate can be verified at: www.inovatesolutiontechnology.in/verify", align='C')
+    
+    pdf.set_y(197)
+    pdf.set_font("Helvetica", size=7)
+    pdf.set_text_color(150, 150, 150)
+     
+    # === SAVE PDF ===
     safe_student_name = student_name.replace(' ', '_')
     pdf_filename = f"{safe_student_name}_Certificate.pdf"
     
@@ -385,5 +646,10 @@ def generate_certificate():
     file_path = os.path.join(tmp_dir, pdf_filename)
     
     pdf.output(file_path)
-
-    return send_file(file_path, mimetype='application/pdf')
+    
+    return send_file(
+        file_path,
+        mimetype='application/pdf',
+        as_attachment=True,
+        download_name=f"{safe_student_name}_Certificate.pdf"
+    )
