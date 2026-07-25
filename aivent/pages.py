@@ -263,8 +263,8 @@ WORKSHOP_SCHEDULES = {
     'visualizing_intelligence': {
         'name': 'Visualising the Intelligence Pipeline',
         'date': datetime(2026, 7, 24, 10, 0, 0),
-        'availability_start': datetime(2026, 7, 23, 10, 0, 0),
-        'availability_end': datetime(2026, 7, 25, 10, 0, 0),
+        'availability_start': datetime(2026, 7, 24, 10, 0, 0),
+        'availability_end': datetime(2026, 7, 27, 10, 0, 0),
         'description': 'Learn how raw data is collected, integrated, processed, and transformed into meaningful insights',
         'order': 2
     },
@@ -490,7 +490,7 @@ def generate_certificate():
     pdf.cell(80, 4, f"Issued: {issue_date}", align='R')
     
     # === LOGO (Center Top) ===
-    logo_url = "https://www.inovatesolutiontechnology.in/static/assets/images/logo.png"
+    logo_url = "https://www.inovatesolutiontechnology.in/static/assets/images/ist_no_bg.svg"
     try:
         pdf.image(logo_url, x=111, y=15, w=75)
     except:
@@ -505,7 +505,7 @@ def generate_certificate():
     pdf.set_y(47)
     pdf.set_font("Helvetica", style="", size=8)
     pdf.set_text_color(130, 130, 130)
-    pdf.cell(0, 3, "UDYAM-TN-12-0147998", align='C')
+    # pdf.cell(0, 3, "UDYAM-TN-12-0147998", align='C')
     
     # === DECORATIVE DIVIDER ===
     pdf.set_y(55)
