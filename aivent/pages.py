@@ -490,7 +490,7 @@ def generate_certificate():
     pdf.cell(80, 4, f"Issued: {issue_date}", align='R')
     
     # === LOGO (Center Top) ===
-    logo_url = "https://www.inovatesolutiontechnology.in/static/assets/images/ist_no_bg.svg"
+    logo_url = "https://www.inovatesolutiontechnology.in/static/assets/images/ist_no_bg.png"
     try:
         pdf.image(logo_url, x=111, y=15, w=75)
     except:
