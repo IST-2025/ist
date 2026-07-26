@@ -262,7 +262,7 @@ WORKSHOP_SCHEDULES = {
     },
     'visualizing_intelligence': {
         'name': 'Visualising the Intelligence Pipeline',
-        'date': datetime(2026, 7, 24, 10, 0, 0),
+        'date': datetime(2026, 7, 26, 10, 0, 0),
         'availability_start': datetime(2026, 7, 24, 10, 0, 0),
         'availability_end': datetime(2026, 7, 27, 10, 0, 0),
         'description': 'Learn how raw data is collected, integrated, processed, and transformed into meaningful insights',
@@ -415,18 +415,6 @@ def generate_certificate():
             'message': 'The certificate generation window has closed for this workshop.'
         }), 403
     
-    # Fix table if needed
-    try:
-        inspector = inspect(db.engine)
-        if inspector.has_table('certificate_record'):
-            columns = [col['name'] for col in inspector.get_columns('certificate_record')]
-            if 'workshop_name' in columns or 'workshop_date' in columns:
-                db.session.execute(text('DROP TABLE IF EXISTS certificate_record'))
-                db.session.commit()
-                db.create_all()
-    except:
-        pass
-    
     unique_id = f"IST-WS-{workshop['date'].strftime('%Y')}-{str(uuid.uuid4().hex[:6]).upper()}"
     
     try:
@@ -447,114 +435,90 @@ def generate_certificate():
     pdf = FPDF(orientation='L', unit='mm', format='A4')
     pdf.add_page()
     
-    # CRITICAL: Prevent auto page break - FORCE SINGLE PAGE
     pdf.set_auto_page_break(False)
     
-    # Page dimensions: 297mm x 210mm (Landscape)
     page_w = 297
     page_h = 210
     
-    # === BACKGROUND ===
     pdf.set_fill_color(248, 250, 252)
     pdf.rect(0, 0, page_w, page_h, 'F')
     
-    # === OUTER BORDER - Navy Blue ===
     pdf.set_draw_color(25, 45, 80)
     pdf.set_line_width(3)
     pdf.rect(8, 8, 281, 194)
     
-    # === INNER BORDER - Gold ===
     pdf.set_draw_color(200, 160, 50)
     pdf.set_line_width(0.6)
     pdf.rect(12, 12, 273, 186)
     
-    # === WATERMARK LOGO ===
     icon_path = os.path.join(os.path.dirname(__file__), 'static', 'assets', 'images', 'icon.png')
     try:
-        with pdf.local_context(fill_opacity=0.04):
+        with pdf.local_context(fill_opacity=0.08):
             pdf.image(icon_path, x=78, y=35, w=140)
     except:
         pass
     
-    # === CERTIFICATE NUMBER (Top Left) ===
     pdf.set_xy(18, 15)
     pdf.set_font("Helvetica", style="B", size=8)
     pdf.set_text_color(120, 120, 120)
     pdf.cell(80, 4, f"Ref: {unique_id}", align='L')
     
-    # === ISSUE DATE (Top Right) ===
     issue_date = datetime.now().strftime("%d %B %Y")
     pdf.set_xy(200, 15)
     pdf.set_font("Helvetica", style="B", size=8)
     pdf.set_text_color(120, 120, 120)
     pdf.cell(80, 4, f"Issued: {issue_date}", align='R')
     
-    # === LOGO (Center Top) ===
     logo_url = "https://www.inovatesolutiontechnology.in/static/assets/images/ist_no_bg.png"
     try:
         pdf.image(logo_url, x=111, y=15, w=75)
     except:
         pass
     
-    # === MSME REGISTRATION ===
     pdf.set_y(42)
     pdf.set_font("Helvetica", style="I", size=9)
     pdf.set_text_color(100, 100, 100)
     pdf.cell(0, 4, "An MSME Registered Organization", align='C')
     
-    pdf.set_y(47)
-    pdf.set_font("Helvetica", style="", size=8)
-    pdf.set_text_color(130, 130, 130)
-    # pdf.cell(0, 3, "UDYAM-TN-12-0147998", align='C')
-    
-    # === DECORATIVE DIVIDER ===
     pdf.set_y(55)
     pdf.set_draw_color(200, 160, 50)
     pdf.set_line_width(0.4)
     pdf.line(60, pdf.get_y(), 237, pdf.get_y())
     
-    # === MAIN TITLE ===
     pdf.set_y(63)
     pdf.set_font("Times", style="B", size=32)
     pdf.set_text_color(25, 45, 80)
     pdf.cell(0, 12, "CERTIFICATE OF PARTICIPATION", align='C')
     
-    # === TITLE UNDERLINE ===
     pdf.set_draw_color(200, 160, 50)
     pdf.set_line_width(1.5)
     pdf.line(95, 76, 202, 76)
     
-    # === PRESENTED TO ===
     pdf.set_y(84)
     pdf.set_font("Helvetica", style="I", size=11)
     pdf.set_text_color(100, 100, 100)
     pdf.cell(0, 6, "This certificate is proudly presented to", align='C')
     
-    # === STUDENT NAME ===
     pdf.set_y(96)
     pdf.set_font("Times", style="B", size=38)
     pdf.set_text_color(200, 160, 50)
     
-    # Truncate name if too long
     display_name = student_name.title()
     if pdf.get_string_width(display_name) > 250:
         pdf.set_font("Times", style="B", size=30)
     pdf.cell(0, 14, display_name, align='C')
     
-    # === NAME UNDERLINE ===
     name_w = pdf.get_string_width(display_name) + 30
     name_x = (page_w - name_w) / 2
     pdf.set_line_width(0.4)
     pdf.set_draw_color(180, 180, 180)
     pdf.line(name_x, 111, name_x + name_w, 111)
     
-    # === WORKSHOP TEXT ===
     pdf.set_y(119)
     pdf.set_font("Helvetica", size=11)
     pdf.set_text_color(80, 80, 80)
     pdf.cell(0, 6, "for successfully participating in the Workshop on", align='C')
     
-    # === WORKSHOP NAME ===
     pdf.set_y(128)
     pdf.set_font("Helvetica", style="B", size=18)
     pdf.set_text_color(25, 45, 80)
@@ -564,7 +528,6 @@ def generate_certificate():
         pdf.set_font("Helvetica", style="B", size=15)
     pdf.cell(0, 8, workshop_title, align='C')
     
-    # === ORGANIZED BY ===
     pdf.set_y(140)
     pdf.set_font("Helvetica", size=10)
     pdf.set_text_color(100, 100, 100)
@@ -580,7 +543,6 @@ def generate_certificate():
     pdf.set_text_color(100, 100, 100)
     pdf.cell(0, 4, "Madurai, Tamil Nadu, India", align='C')
     
-    # === DATE SECTION (Left) ===
     pdf.set_draw_color(25, 45, 80)
     pdf.set_line_width(0.4)
     
@@ -595,7 +557,6 @@ def generate_certificate():
     pdf.set_text_color(120, 120, 120)
     pdf.cell(50, 4, "Workshop Date", align='C')
     
-    # === CERTIFICATE ID SECTION (Center) ===
     pdf.set_xy(123, 172)
     pdf.set_font("Helvetica", style="B", size=10)
     pdf.set_text_color(40, 40, 40)
@@ -606,7 +567,6 @@ def generate_certificate():
     pdf.set_text_color(120, 120, 120)
     pdf.cell(50, 4, "Certificate ID", align='C')
     
-    # === SIGNATURE SECTION (Right) ===
     sig_path = os.path.join(os.path.dirname(__file__), 'static', 'assets', 'images', 'ist_sign.png')
     try:
         pdf.image(sig_path, x=215, y=152, w=35)
@@ -623,22 +583,15 @@ def generate_certificate():
     pdf.set_text_color(120, 120, 120)
     pdf.cell(50, 4, "Authorized Signatory", align='C')
     
-    # === BOTTOM DIVIDER ===
     pdf.set_draw_color(200, 160, 50)
     pdf.set_line_width(0.3)
     pdf.line(20, 190, 277, 190)
     
-    # === VERIFICATION TEXT ===
     pdf.set_y(193)
     pdf.set_font("Helvetica", size=7)
     pdf.set_text_color(150, 150, 150)
     pdf.cell(0, 3, "This certificate can be verified at: www.inovatesolutiontechnology.in/verify", align='C')
-    
-    pdf.set_y(197)
-    pdf.set_font("Helvetica", size=7)
-    pdf.set_text_color(150, 150, 150)
      
-    # === SAVE PDF ===
     safe_student_name = student_name.replace(' ', '_')
     pdf_filename = f"{safe_student_name}_Certificate.pdf"
     
