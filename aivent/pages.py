@@ -93,6 +93,10 @@ def services():
 def products():
     return render_template('products.html')
 
+@public_pages.route('/event')
+def event():
+    return render_template('event.html')
+
 @public_pages.route('/privacy-policy')
 def privacy_policy():
     return render_template('privacy-policy.html')
