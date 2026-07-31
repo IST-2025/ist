@@ -260,7 +260,7 @@ WORKSHOP_SCHEDULES = {
         'name': 'Build Your Own AI Agent',
         'date': datetime(2026, 7, 30, 10, 0, 0),
         'availability_start': datetime(2026, 7, 29, 10, 0, 0),
-        'availability_end': datetime(2026, 7, 31, 10, 0, 0),
+        'availability_end': datetime(2026, 8, 2, 10, 0, 0),
         'description': 'Learn to build, deploy, and manage intelligent AI agents from scratch',
         'order': 1
     },
