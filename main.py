@@ -7,7 +7,11 @@ os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
 from flask import send_from_directory, redirect, url_for, request, render_template, flash, session
 from aivent import create_app, db
 from flask_migrate import Migrate 
-from aivent.models import User, Contact, ProjectRequest, JobApplication, InternshipApplication, CertificateRecord, SeminarRegistration
+from aivent.models import (
+    User, Contact, ProjectRequest, JobApplication, 
+    InternshipApplication, CertificateRecord, 
+    SeminarRegistration, FeedbackRecord
+)
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_login import LoginManager, current_user, login_user, logout_user
@@ -72,6 +76,7 @@ admin.add_view(SecureModelView(JobApplication, db))
 admin.add_view(SecureModelView(InternshipApplication, db))
 admin.add_view(SecureModelView(CertificateRecord, db))
 admin.add_view(SecureModelView(SeminarRegistration, db))
+admin.add_view(SecureModelView(FeedbackRecord, db))  # <-- Feedback panel added here!
 
 @app.route('/google-login')
 def google_login():

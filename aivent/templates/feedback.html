@@ -1,0 +1,307 @@
+{% extends "partials/layouts/main.html" %}
+
+{% block content %}
+<style>
+    .feedback-container {
+        background: #ffffff;
+        border: 1px solid rgba(0, 0, 0, 0.08);
+        border-radius: 16px;
+        padding: 50px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+        margin-bottom: 50px; /* Added extra space at the bottom */
+    }
+
+    .role-select-card {
+        cursor: pointer;
+        background: #f8fafc;
+        border: 2px solid #e2e8f0;
+        border-radius: 12px;
+        padding: 25px;
+        text-align: center;
+        transition: all 0.3s ease;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .role-select-card:hover {
+        border-color: #14b8a6;
+        transform: translateY(-3px);
+    }
+
+    .role-select-card.selected {
+        background: rgba(20, 184, 166, 0.05);
+        border-color: #14b8a6;
+        box-shadow: 0 0 0 4px rgba(20, 184, 166, 0.15);
+    }
+
+    .role-select-card h4 {
+        color: #111827 !important; 
+        font-weight: 700;
+        margin-bottom: 0;
+        font-size: 1.2rem;
+    }
+
+    .question-section {
+        display: none;
+        animation: fadeIn 0.5s ease;
+        background: #f8fafc;
+        padding: 30px;
+        border-radius: 12px;
+        border: 1px solid #e2e8f0;
+        margin-bottom: 30px;
+    }
+
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    .form-control, .form-select {
+        border-radius: 8px;
+        padding: 12px 15px;
+        border: 1px solid #d1d5db;
+        background-color: #ffffff !important;
+        color: #111827 !important; 
+    }
+
+    .form-control::placeholder {
+        color: #9ca3af !important; 
+        opacity: 1;
+    }
+
+    .form-control:focus, .form-select:focus {
+        border-color: #14b8a6;
+        box-shadow: 0 0 0 3px rgba(20, 184, 166, 0.15);
+        outline: none;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #374151 !important; 
+        font-size: 0.95rem;
+        margin-bottom: 8px;
+    }
+
+    .submit-btn {
+        background: #14b8a6;
+        color: #fff;
+        border: none;
+        border-radius: 8px;
+        padding: 15px 30px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 14px;
+        width: 100%;
+        transition: background 0.3s ease;
+    }
+
+    .submit-btn:hover {
+        background: #0d9488;
+    }
+
+    .section-title {
+        color: #111827 !important; 
+        font-weight: 700;
+        font-size: 1.25rem;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e2e8f0;
+        padding-bottom: 10px;
+    }
+</style>
+
+<!-- FIX APPLIED HERE: Removed jarallax and used standard CSS fixed background -->
+<section class="section-dark text-light pb-80 relative" style="padding-top: 140px; min-height: 100vh; background: url('/static/assets/images/background/4.webp') center center / cover no-repeat fixed; overflow: visible;">
+    <div class="gradient-edge-top op-6 h-50 color"></div>
+    <div class="gradient-edge-bottom"></div>
+    <div class="sw-overlay op-8"></div>
+
+    <div class="container relative z-4">
+        <div class="row justify-content-center">
+            <div class="col-lg-9">
+                
+                <div class="text-center mb-5 wow fadeIn" data-wow-delay=".2s">
+                    <h2 class="fs-40 fw-bold mb-2">Share Your <span style="color: #14b8a6;">Feedback</span></h2>
+                    <p class="lead" style="color: #a1a1a1;">Help us improve our platform by telling us about your experience.</p>
+                </div>
+
+                <div class="feedback-container wow fadeInUp" data-wow-delay=".3s">
+                    
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="mb-4">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} py-2 px-4 mb-2" style="border-radius: 8px;">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+
+                    <form method="POST" action="{{ url_for('public_pages.feedback') }}" id="feedbackForm">
+                        
+                        <!-- HIDDEN INPUT TO STORE COMPILED ANSWERS -->
+                        <input type="hidden" name="specific_detail" id="compiled_answers">
+
+                        <!-- STEP 1: SELECT ROLE -->
+                        <h4 class="section-title">1. Select your primary role</h4>
+                        <div class="row g-3 mb-4">
+                            <div class="col-md-4">
+                                <div class="role-select-card" onclick="selectRole('student', this)">
+                                    <h4>Student</h4>
+                                    <input type="radio" name="user_type" value="student" id="role_student" class="d-none" required>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="role-select-card" onclick="selectRole('professional', this)">
+                                    <h4>Professional</h4>
+                                    <input type="radio" name="user_type" value="professional" id="role_professional" class="d-none">
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="role-select-card" onclick="selectRole('client', this)">
+                                    <h4>Client</h4>
+                                    <input type="radio" name="user_type" value="client" id="role_client" class="d-none">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STUDENT QUESTIONS -->
+                        <div id="student-questions" class="question-section">
+                            <h4 class="section-title">2. Industrial Seminar Survey</h4>
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">1. Which Industrial Seminar/Workshop did you attend?</label>
+                                    <input type="text" class="form-control student-input" data-q="Seminar Name" placeholder="e.g., AI & Tech Innovations Seminar">
+                                </div>
+                                <div class="col-md-6"><label class="form-label">2. Overall satisfaction with the Seminar?</label><select class="form-select student-input" data-q="Overall Satisfaction"><option value="">Select Rating</option><option value="5 - Excellent">5 - Excellent</option><option value="4 - Good">4 - Good</option><option value="3 - Average">3 - Average</option><option value="2 - Poor">2 - Poor</option><option value="1 - Very Poor">1 - Very Poor</option></select></div>
+                                <div class="col-md-6"><label class="form-label">3. Relevance of the topic to industry trends?</label><select class="form-select student-input" data-q="Topic Relevance"><option value="">Select Rating</option><option value="5 - Highly Relevant">5 - Highly Relevant</option><option value="4 - Relevant">4 - Relevant</option><option value="3 - Somewhat">3 - Somewhat</option><option value="2 - Not very">2 - Not very</option><option value="1 - Irrelevant">1 - Irrelevant</option></select></div>
+                                <div class="col-md-6"><label class="form-label">4. Speaker's presentation & knowledge?</label><select class="form-select student-input" data-q="Speaker Quality"><option value="">Select Rating (1-5)</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">5. Clarity of the concepts explained?</label><select class="form-select student-input" data-q="Concept Clarity"><option value="">Select Rating (1-5)</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">6. Usefulness of the Q&A session?</label><select class="form-select student-input" data-q="Q&A Usefulness"><option value="">Select Rating (1-5)</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">7. Quality of the material/presentation shared?</label><select class="form-select student-input" data-q="Material Quality"><option value="">Select Rating (1-5)</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">8. Organization & time management of the event?</label><select class="form-select student-input" data-q="Event Organization"><option value="">Select Rating (1-5)</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">9. How likely are you to attend future seminars?</label><select class="form-select student-input" data-q="Future Attendance"><option value="">Select...</option><option value="Very Likely">Very Likely</option><option value="Likely">Likely</option><option value="Not Sure">Not Sure</option><option value="Unlikely">Unlikely</option></select></div>
+                                <div class="col-md-12">
+                                    <label class="form-label">10. What specific topic would you like us to cover next?</label>
+                                    <input type="text" class="form-control student-input" data-q="Future Topic Request" placeholder="Your suggestion...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- PROFESSIONAL QUESTIONS -->
+                        <div id="professional-questions" class="question-section">
+                            <h4 class="section-title">2. Professional Experience Survey</h4>
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">1. What service/job role did you explore with us?</label>
+                                    <input type="text" class="form-control pro-input" data-q="Service/Role" placeholder="e.g., Cloud Architect Role / Corporate Training">
+                                </div>
+                                <div class="col-md-6"><label class="form-label">2. Overall Experience (1-5)</label><select class="form-select pro-input" data-q="Overall Experience"><option value="">Select Rating</option><option value="5 - Excellent">5 - Excellent</option><option value="4 - Good">4 - Good</option><option value="3 - Average">3 - Average</option><option value="2 - Poor">2 - Poor</option><option value="1 - Very Poor">1 - Very Poor</option></select></div>
+                                <div class="col-md-6"><label class="form-label">3. Clarity of Job/Service Details (1-5)</label><select class="form-select pro-input" data-q="Clarity of Details"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">4. Communication with HR/Team (1-5)</label><select class="form-select pro-input" data-q="HR Communication"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">5. Interview/Onboarding Process (1-5)</label><select class="form-select pro-input" data-q="Interview Process"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">6. Quality of Corporate Training (1-5)</label><select class="form-select pro-input" data-q="Training Quality"><option value="">Select Rating (N/A if not taken)</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option><option value="N/A">N/A</option></select></div>
+                                <div class="col-md-6"><label class="form-label">7. Alignment with Career Goals (1-5)</label><select class="form-select pro-input" data-q="Career Alignment"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">8. Platform User Experience (1-5)</label><select class="form-select pro-input" data-q="Platform UX"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">9. Would you recommend our services?</label><select class="form-select pro-input" data-q="Would Recommend"><option value="">Select...</option><option value="Yes">Yes, definitely</option><option value="Maybe">Maybe</option><option value="No">No</option></select></div>
+                                <div class="col-md-12">
+                                    <label class="form-label">10. How can we improve our professional services?</label>
+                                    <input type="text" class="form-control pro-input" data-q="Improvement Suggestion" placeholder="Your suggestion...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- CLIENT QUESTIONS -->
+                        <div id="client-questions" class="question-section">
+                            <h4 class="section-title">2. Client Project Survey</h4>
+                            <div class="row g-3">
+                                <div class="col-md-12">
+                                    <label class="form-label">1. What project or corporate solution did we build for you?</label>
+                                    <input type="text" class="form-control client-input" data-q="Project Name" placeholder="e.g., AI Agent System / E-commerce App">
+                                </div>
+                                <div class="col-md-6"><label class="form-label">2. Overall Satisfaction (1-5)</label><select class="form-select client-input" data-q="Overall Satisfaction"><option value="">Select Rating</option><option value="5 - Excellent">5 - Excellent</option><option value="4 - Good">4 - Good</option><option value="3 - Average">3 - Average</option><option value="2 - Poor">2 - Poor</option><option value="1 - Very Poor">1 - Very Poor</option></select></div>
+                                <div class="col-md-6"><label class="form-label">3. Understanding of Requirements (1-5)</label><select class="form-select client-input" data-q="Requirement Understanding"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">4. Quality of Deliverables (1-5)</label><select class="form-select client-input" data-q="Deliverable Quality"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">5. Timeliness of Delivery (1-5)</label><select class="form-select client-input" data-q="Timeliness"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">6. Communication & Updates (1-5)</label><select class="form-select client-input" data-q="Communication"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">7. Post-deployment Support (1-5)</label><select class="form-select client-input" data-q="Post-deployment Support"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">8. Value for Money (1-5)</label><select class="form-select client-input" data-q="Value for Money"><option value="">Select Rating</option><option value="5">5</option><option value="4">4</option><option value="3">3</option><option value="2">2</option><option value="1">1</option></select></div>
+                                <div class="col-md-6"><label class="form-label">9. Would you work with us again?</label><select class="form-select client-input" data-q="Work Again"><option value="">Select...</option><option value="Yes">Yes, definitely</option><option value="Maybe">Maybe</option><option value="No">No</option></select></div>
+                                <div class="col-md-12">
+                                    <label class="form-label">10. Additional comments on the project workflow?</label>
+                                    <input type="text" class="form-control client-input" data-q="Workflow Feedback" placeholder="Your comments...">
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- STEP 3: GENERAL FEEDBACK -->
+                        <div id="general-feedback-section" class="mt-4" style="display: none;">
+                            <h4 class="section-title">3. Final Thoughts</h4>
+                            <div class="mb-4">
+                                <label for="general_feedback" class="form-label">Any final comments or suggestions?</label>
+                                <textarea class="form-control" id="general_feedback" name="general_feedback" rows="4" placeholder="Tell us what you loved or how we can improve..." required></textarea>
+                            </div>
+                            <button type="submit" class="submit-btn">Submit Feedback</button>
+                        </div>
+
+                    </form>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+let currentRole = '';
+
+function selectRole(role, element) {
+    currentRole = role;
+
+    // Reset UI selections
+    document.querySelectorAll('.role-select-card').forEach(card => card.classList.remove('selected'));
+    element.classList.add('selected');
+    document.getElementById('role_' + role).checked = true;
+
+    // Hide all question sections
+    document.getElementById('student-questions').style.display = 'none';
+    document.getElementById('professional-questions').style.display = 'none';
+    document.getElementById('client-questions').style.display = 'none';
+
+    // Show selected section and the submit area
+    const activeSection = document.getElementById(role + '-questions');
+    activeSection.style.display = 'block';
+    document.getElementById('general-feedback-section').style.display = 'block';
+
+    setTimeout(() => {
+        const yOffset = -120;
+        const y = activeSection.getBoundingClientRect().top + window.scrollY + yOffset;
+        window.scrollTo({top: y, behavior: 'smooth'});
+    }, 100);
+}
+
+// Intercept form submission to compile all answered questions into a single string for the backend
+document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+    if(!currentRole) return; 
+
+    let compiledString = `--- ${currentRole.toUpperCase()} SURVEY ANSWERS ---\n`;
+    
+    let inputs;
+    if (currentRole === 'student') inputs = document.querySelectorAll('.student-input');
+    else if (currentRole === 'professional') inputs = document.querySelectorAll('.pro-input');
+    else if (currentRole === 'client') inputs = document.querySelectorAll('.client-input');
+
+    inputs.forEach(input => {
+        let questionLabel = input.getAttribute('data-q');
+        let answer = input.value || "No answer provided";
+        compiledString += `• ${questionLabel}: ${answer}\n`;
+    });
+
+    document.getElementById('compiled_answers').value = compiledString;
+});
+</script>
+{% endblock content %}

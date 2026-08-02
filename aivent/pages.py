@@ -11,7 +11,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import login_user, logout_user, login_required, current_user
 from sqlalchemy import inspect, text
 from fpdf import FPDF
-from .models import User, Contact, ProjectRequest, JobApplication, InternshipApplication, CertificateRecord, SeminarRegistration
+from .models import User, Contact, ProjectRequest, JobApplication, InternshipApplication, CertificateRecord, SeminarRegistration, FeedbackRecord
 from . import db
 import tempfile
 
@@ -728,3 +728,30 @@ def generate_certificate():
         as_attachment=True,
         download_name=f"{safe_student_name}_Certificate.pdf"
     )
+
+@public_pages.route('/feedback', methods=['GET', 'POST'])
+def feedback():
+    if request.method == 'POST':
+        user_type = request.form.get('user_type')
+        specific_detail = request.form.get('specific_detail')
+        general_feedback = request.form.get('general_feedback')
+
+        if not user_type or not general_feedback:
+            flash('Please select a role and enter your feedback.', 'error')
+            return redirect(url_for('public_pages.feedback'))
+
+        combined_feedback = f"[Role Specific Context: {specific_detail}]\n\nFeedback: {general_feedback}" if specific_detail else general_feedback
+
+        new_feedback = FeedbackRecord(
+            user_id=current_user.id if current_user.is_authenticated else None,
+            user_type=user_type,
+            general_feedback=combined_feedback
+        )
+        
+        db.session.add(new_feedback)
+        db.session.commit()
+
+        flash('Thank you! Your feedback has been successfully submitted.', 'success')
+        return redirect(url_for('public_pages.feedback'))
+
+    return render_template('feedback.html')

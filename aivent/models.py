@@ -65,3 +65,12 @@ class SeminarRegistration(db.Model):
     seminar_name = db.Column(db.String(150), nullable=False)
     domain = db.Column(db.String(100), nullable=False)
     date_registered = db.Column(db.DateTime, default=datetime.utcnow)
+
+class FeedbackRecord(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=True)
+    user_type = db.Column(db.String(50), nullable=False)  # 'student', 'professional', or 'client'
+    general_feedback = db.Column(db.Text, nullable=False)
+    created_at = db.Column(db.DateTime, default=datetime.utcnow)
+
+    user = db.relationship('User', backref=db.backref('feedbacks', lazy=True))
