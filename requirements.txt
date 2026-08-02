@@ -17,4 +17,5 @@ vercel-blob
 fpdf2
 pytz
 Flask-Migrate
-Authlib requests
+Authlib
+requests
