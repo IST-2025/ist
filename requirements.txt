@@ -19,3 +19,4 @@ pytz
 Flask-Migrate
 Authlib
 requests
+python-dotenv
