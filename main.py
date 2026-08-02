@@ -17,6 +17,18 @@ from authlib.integrations.flask_client import OAuth
 app = create_app()
 app.secret_key = os.environ.get('SECRET_KEY', 'super_secret_key_change_this_later') 
 
+# Fix for PostgreSQL SSL connection drops & serverless timeouts
+app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+    "pool_recycle": 300,
+    "pool_pre_ping": True,
+    "connect_args": {
+        "keepalives": 1,
+        "keepalives_idle": 30,
+        "keepalives_interval": 10,
+        "keepalives_count": 5
+    }
+}
+
 migrate = Migrate(app, db)
 
 login_manager = LoginManager()
