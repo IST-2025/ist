@@ -1,0 +1,103 @@
+{% extends "partials/layouts/main.html" %}
+
+{% block content %}
+<style>
+    .dashboard-card {
+        background: rgba(30, 41, 59, 0.85);
+        backdrop-filter: blur(10px);
+        border: 1px solid #334155;
+        border-top: 4px solid #7a5af8; /* Unified top border color */
+        border-radius: 16px;
+        padding: 30px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s, box-shadow 0.3s;
+    }
+    
+    .dashboard-card:hover { 
+        transform: translateY(-5px); 
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    }
+
+    .card-icon {
+        color: #7a5af8; /* Unified icon color */
+        font-size: 1.5rem;
+    }
+
+    .card-btn {
+        background: #7a5af8; /* Unified button color */
+        color: #ffffff;
+        border: none;
+        border-radius: 10px;
+        padding: 12px;
+        text-align: center;
+        display: block;
+        width: 100%;
+        font-weight: 600;
+        margin-top: auto; /* Pushes the button to the bottom evenly */
+        transition: all 0.3s ease;
+        text-decoration: none;
+    }
+
+    .card-btn:hover {
+        background: #6244d4;
+        color: #ffffff;
+    }
+</style>
+
+<section class="section-dark text-light pb-60 relative jarallax" style="padding-top: 160px; min-height: 100vh;">
+    <img src="/static/assets/images/background/4.webp" class="jarallax-img" alt="Background">
+    <div class="sw-overlay op-8"></div>
+
+    <div class="container relative z-4">
+        
+        <div class="row mb-5">
+            <div class="col-12">
+                <h2 class="fs-40 fw-bold">Professional Portal</h2>
+                <p class="lead" style="color: #94A3B8;">Welcome back, {{ user.username }}! Explore opportunities to advance your career.</p>
+                
+                {% with messages = get_flashed_messages(with_categories=true) %}
+                    {% if messages %}
+                        <div class="mt-4">
+                        {% for category, message in messages %}
+                            <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} d-inline-block py-2 px-4 mb-0" style="background: rgba(122, 90, 248, 0.1); border: 1px solid #7a5af8; color: #fff; border-radius: 8px;">
+                                {{ message }}
+                            </div>
+                        {% endfor %}
+                        </div>
+                    {% endif %}
+                {% endwith %}
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".2s">
+                <div class="dashboard-card">
+                    <h4 class="mb-4 text-white"><i class="fas fa-briefcase me-2 card-icon"></i> Job Offers</h4>
+                    <p style="color: #94A3B8; margin-bottom: 30px;">Looking for a career switch? Explore open positions at Inovate Solution Technology and join our growing team of experts.</p>
+                    <a href="{{ url_for('public_pages.join_us') }}" class="card-btn">Apply for Jobs</a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".4s">
+                <div class="dashboard-card">
+                    <h4 class="mb-4 text-white"><i class="fas fa-chalkboard-teacher me-2 card-icon"></i> Advanced Courses</h4>
+                    <p style="color: #94A3B8; margin-bottom: 30px;">Upskill with our corporate training programs. Master advanced Cloud, DevOps, and AI concepts tailored for working professionals.</p>
+                    <a href="{{ url_for('public_pages.contact') }}" class="card-btn">Enquire Now</a>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay=".6s">
+                <div class="dashboard-card">
+                    <h4 class="mb-4 text-white"><i class="fas fa-laptop-code me-2 card-icon"></i> Career Internships</h4>
+                    <p style="color: #94A3B8; margin-bottom: 30px;">Switching domains? Gain practical, hands-on experience through our specialized professional internship programs.</p>
+                    <a href="{{ url_for('public_pages.interns') }}" class="card-btn">Apply for Internship</a>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -1,7 +1,4 @@
 <style>
-    /* =========================
-       ACTIVE MENU STYLES
-    ========================== */
     #mainmenu ul ul li a.sub-active {
         color: #8b5cf6 !important;
         font-weight: 600 !important;
@@ -10,16 +7,10 @@
         box-shadow: none !important;
     }
 
-    /* =========================
-       DESKTOP
-    ========================== */
     .menu_side_area {
         display: none !important;
     }
 
-    /* =========================
-       HAMBURGER ICON
-    ========================== */
     #menu-btn {
         width: 24px;
         height: 24px;
@@ -45,19 +36,10 @@
         transform-origin: left center;
     }
 
-    #menu-btn span:nth-child(1) {
-        top: 4px;
-    }
+    #menu-btn span:nth-child(1) { top: 4px; }
+    #menu-btn span:nth-child(2) { top: 11px; }
+    #menu-btn span:nth-child(3) { top: 18px; }
 
-    #menu-btn span:nth-child(2) {
-        top: 11px;
-    }
-
-    #menu-btn span:nth-child(3) {
-        top: 18px;
-    }
-
-    /* OPEN STATE */
     #menu-btn.open span:nth-child(1) {
         transform: rotate(45deg);
         top: 3px;
@@ -75,20 +57,31 @@
         left: 4px;
     }
 
-    /* =========================
-       MOBILE
-    ========================== */
-    @media (max-width: 991px) {
+    .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 15px;
+    }
 
+    .btn-login {
+        background: #4F46E5 !important;
+        color: white !important;
+    }
+
+    .btn-logout {
+        background: #DC2626 !important;
+        color: white !important;
+    }
+
+    @media (max-width: 991px) {
         .menu_side_area {
             display: inline-block !important;
+            margin-left: 15px;
         }
-
         .header-col-mid {
             display: none;
         }
-
-        .btn-main {
+        .header-actions .btn-main {
             display: none;
         }
     }
@@ -100,112 +93,70 @@
             <div class="col-md-12">
                 <div class="de-flex justify-content-between w-100 align-items-center">
 
-                    <!-- LOGO -->
                     <div class="de-flex-col p-0 m-0">
                         <div id="logo">
                             <a href="/">
-                                <img class="logo-main"
-                                    src="/static/assets/images/logo.png"
-                                    alt="IST Logo">
-
-                                <img class="logo-scroll"
-                                    src="/static/assets/images/logo.png"
-                                    alt="IST Logo">
-
-                                <img class="logo-mobile"
-                                    src="/static/assets/images/logo.png"
-                                    alt="IST Logo">
+                                <img class="logo-main" src="/static/assets/images/logo.png" alt="IST Logo">
+                                <img class="logo-scroll" src="/static/assets/images/logo.png" alt="IST Logo">
+                                <img class="logo-mobile" src="/static/assets/images/logo.png" alt="IST Logo">
                             </a>
                         </div>
                     </div>
 
-                    <!-- MENU -->
                     <div class="de-flex-col header-col-mid">
                         <ul id="mainmenu" class="m-0 p-0">
-
+                            <li><a class="menu-item" href="/">Home</a></li>
                             <li>
-                                <a class="menu-item" href="/">Home</a>
-                            </li>
-
-                         
-
-
-
-                            <li>
-                                <a class="menu-item" href="about">About Us</a>
+                                <a class="menu-item" href="{{ url_for('public_pages.about') }}">About Us</a>
                                 <ul>
-                                    <li>
-                                        <a class="menu-item" href="about">
-                                            About
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-item" href="journey">
-                                            Our Journey
-                                        </a>
-                                    </li>
+                                    <li><a class="menu-item" href="{{ url_for('public_pages.about') }}">About</a></li>
+                                    <li><a class="menu-item" href="{{ url_for('public_pages.journey') }}">Our Journey</a></li>
                                 </ul>
                             </li>
-
-
-
                             <li>
                                 <a class="menu-item" href="#">Services</a>
                                 <ul>
-                                    <li>
-                                        <a class="menu-item" href="services">
-                                            Core Services
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-item" href="projects">
-                                            College - Final Year Projects
-                                        </a>
-                                    </li>
+                                    <li><a class="menu-item" href="{{ url_for('public_pages.services') }}">Core Services</a></li>
+                                    <li><a class="menu-item" href="{{ url_for('public_pages.projects') }}">College - Final Year Projects</a></li>
                                 </ul>
                             </li>
-
-                            <li>
-                                <a class="menu-item" href="products">
-                                    Products
-                                </a>
-                            </li>
-
+                            <li><a class="menu-item" href="{{ url_for('public_pages.products') }}">Products</a></li>
                             <li>
                                 <a class="menu-item" href="#">Careers</a>
                                 <ul>
-                                    <li>
-                                        <a class="menu-item" href="join-us">
-                                            Join Us
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a class="menu-item" href="interns">
-                                            Internship
-                                        </a>
-                                    </li>
+                                    <li><a class="menu-item" href="{{ url_for('public_pages.join_us') }}">Join Us</a></li>
+                                    <li><a class="menu-item" href="{{ url_for('public_pages.interns') }}">Internship</a></li>
                                 </ul>
                             </li>
-
                         </ul>
                     </div>
 
-                    <!-- RIGHT SIDE -->
                     <div class="de-flex-col p-0 m-0">
+                        <div class="header-actions">
+                            {% if current_user.is_authenticated %}
+                                <a class="btn-main fx-slide" href="{{ url_for('public_pages.portal') }}">
+                                    <span>Dashboard</span>
+                                </a>
+                                <a class="btn-main fx-slide btn-logout" href="{{ url_for('logout') }}">
+                                    <span>Logout</span>
+                                </a>
+                            {% else %}
+                                <a class="btn-main fx-slide btn-login" href="{{ url_for('public_pages.portal_login') }}">
+                                    <span>Login</span>
+                                </a>
+                                <a class="btn-main fx-slide" href="{{ url_for('public_pages.contact') }}">
+                                    <span>Get In Touch</span>
+                                </a>
+                            {% endif %}
 
-                        <a class="btn-main fx-slide" href="contact">
-                            <span>Get In Touch</span>
-                        </a>
-
-                        <!-- MOBILE HAMBURGER -->
-                        <div class="menu_side_area">
-                            <div id="menu-btn">
-                                <span></span>
-                                <span></span>
-                                <span></span>
+                            <div class="menu_side_area">
+                                <div id="menu-btn">
+                                    <span></span>
+                                    <span></span>
+                                    <span></span>
+                                </div>
                             </div>
                         </div>
-
                     </div>
 
                 </div>
@@ -216,50 +167,32 @@
 
 <script>
 document.addEventListener("DOMContentLoaded", function () {
-
-    /* =========================
-       ACTIVE MENU HIGHLIGHT
-    ========================== */
     const currentLocation = window.location.href;
     const menuItems = document.querySelectorAll("#mainmenu a.menu-item");
 
     menuItems.forEach(item => {
-
         if (item.href === currentLocation) {
-
             const parentUl = item.closest("ul");
-
             if (parentUl && parentUl.id !== "mainmenu") {
-
                 item.classList.add("sub-active");
-
                 const parentLi = parentUl.closest("li");
-
                 if (parentLi) {
-                    const parentLink =
-                        parentLi.querySelector("a.menu-item");
-
+                    const parentLink = parentLi.querySelector("a.menu-item");
                     if (parentLink) {
                         parentLink.classList.add("active");
                     }
                 }
-
             } else {
                 item.classList.add("active");
             }
         }
     });
 
-    /* =========================
-       HAMBURGER TOGGLE
-    ========================== */
     const menuBtn = document.getElementById("menu-btn");
-
     if (menuBtn) {
         menuBtn.addEventListener("click", function () {
             this.classList.toggle("open");
         });
     }
-
 });
 </script>

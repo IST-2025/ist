@@ -1,0 +1,182 @@
+{% extends "partials/layouts/main.html" %}
+
+{% block content %}
+<style>
+    .student-header {
+        position: relative;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        padding-bottom: 30px;
+        margin-bottom: 40px;
+    }
+
+    .dash-grid-item {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 40px;
+        position: relative;
+        overflow: hidden;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .dash-grid-item:hover {
+        transform: translateY(-5px);
+        border-color: rgba(122, 90, 248, 0.4);
+    }
+
+    .dash-content {
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .dash-content h4 {
+        color: #ffffff;
+        font-weight: 700;
+        margin-bottom: 20px;
+        font-size: 1.4rem;
+    }
+
+    .dash-content p {
+        color: #a1a1a1;
+        margin-bottom: 35px; /* Adds generous breathing room before the button */
+        line-height: 1.6;
+        font-size: 1.05rem;
+    }
+
+    .action-box {
+        margin-top: auto; /* Forces the button to always stick to the bottom */
+        width: 100%;
+    }
+
+    .action-box .btn-main {
+        white-space: nowrap;
+        padding: 15px 20px;
+        display: block;
+        width: 100%;
+        text-align: center;
+        border-radius: 8px;
+        font-weight: 700;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        font-size: 13px;
+        background: #7a5af8;
+        color: #fff;
+        border: 1px solid #7a5af8;
+        transition: all 0.3s ease;
+    }
+
+    .action-box .btn-main:hover {
+        background: #6244d4;
+        border-color: #6244d4;
+    }
+
+    /* Outlined Button Styles */
+    .action-box .btn-line {
+        background: transparent !important;
+        border: 1px solid #33334d !important; /* Darker outline matching your image */
+        color: #ffffff !important;
+    }
+
+    .action-box .btn-line:hover {
+        background: rgba(122, 90, 248, 0.1) !important;
+        border-color: #7a5af8 !important;
+    }
+</style>
+
+<section class="section-dark text-light pb-80 relative jarallax" style="padding-top: 140px; min-height: 100vh;">
+    <img src="/static/assets/images/background/6.webp" class="jarallax-img" alt="Student Dashboard Background">
+    <div class="gradient-edge-top op-6 h-50 color"></div>
+    <div class="gradient-edge-bottom"></div>
+    <div class="sw-overlay op-8"></div>
+
+    <div class="container relative z-4">
+        
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="student-header wow fadeIn" data-wow-delay=".2s">
+                    <h2 class="fs-40 fw-bold mb-2">Student <span style="color: #7a5af8;">Workspace</span></h2>
+                    <p class="lead mb-0" style="color: #a1a1a1;">
+                        Welcome back, {{ user.username }}. Select a module below to continue your journey.
+                    </p>
+                    
+                    {% with messages = get_flashed_messages(with_categories=true) %}
+                        {% if messages %}
+                            <div class="mt-4">
+                            {% for category, message in messages %}
+                                <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} d-inline-block py-2 px-4 mb-0" style="background: rgba(122, 90, 248, 0.1); border: 1px solid #7a5af8; color: #fff; border-radius: 8px;">
+                                    {{ message }}
+                                </div>
+                            {% endfor %}
+                            </div>
+                        {% endif %}
+                    {% endwith %}
+                </div>
+            </div>
+        </div>
+
+        <div class="row g-4">
+            
+            <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".3s">
+                <div class="dash-grid-item">
+                    <div class="dash-content">
+                        <h4>Seminars & Certificates</h4>
+                        <p>Register for upcoming industry workshops and securely download your MSME-verified participation certificates.</p>
+                    </div>
+                    <div class="action-box">
+                        <a href="{{ url_for('public_pages.workshop_certificate') }}" class="btn-main fx-slide">
+                            View Modules
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".4s">
+                <div class="dash-grid-item">
+                    <div class="dash-content">
+                        <h4>Internship Programs</h4>
+                        <p>Gain real-world experience. Explore domains like Full Stack, Cloud solutions, AI, and Digital Marketing.</p>
+                    </div>
+                    <div class="action-box">
+                        <a href="{{ url_for('public_pages.interns') }}" class="btn-main btn-line fx-slide">
+                            Apply Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".5s">
+                <div class="dash-grid-item">
+                    <div class="dash-content">
+                        <h4>Project Development</h4>
+                        <p>Need assistance with your final year project? Get expert architectural design and robust coding solutions.</p>
+                    </div>
+                    <div class="action-box">
+                        <a href="{{ url_for('public_pages.projects') }}" class="btn-main btn-line fx-slide">
+                            Request Support
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6 col-md-6 wow fadeInUp" data-wow-delay=".6s">
+                <div class="dash-grid-item">
+                    <div class="dash-content">
+                        <h4>Career Guidance</h4>
+                        <p>Schedule a 1-on-1 session with our industry experts for personalized mentorship and career roadmap planning.</p>
+                    </div>
+                    <div class="action-box">
+                        <a href="{{ url_for('public_pages.contact') }}" class="btn-main fx-slide">
+                            Book Session
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</section>
+{% endblock content %}

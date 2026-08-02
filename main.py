@@ -1,46 +1,55 @@
 import os
-from flask import send_from_directory, redirect, url_for, request, render_template, flash
+from dotenv import load_dotenv
+
+load_dotenv()
+os.environ["OAUTHLIB_INSECURE_TRANSPORT"] = "1"
+
+from flask import send_from_directory, redirect, url_for, request, render_template, flash, session
 from aivent import create_app, db
-from aivent.models import User, Contact, ProjectRequest, JobApplication, InternshipApplication, CertificateRecord
+from flask_migrate import Migrate 
+from aivent.models import User, Contact, ProjectRequest, JobApplication, InternshipApplication, CertificateRecord, SeminarRegistration
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
 from flask_login import LoginManager, current_user, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
+from authlib.integrations.flask_client import OAuth
 
 app = create_app()
 app.secret_key = os.environ.get('SECRET_KEY', 'super_secret_key_change_this_later') 
 
-# ==========================================
-# 1. SET UP FLASK-LOGIN
-# ==========================================
+migrate = Migrate(app, db)
+
 login_manager = LoginManager()
 login_manager.init_app(app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'public_pages.portal_login'
+
+oauth = OAuth(app)
+google = oauth.register(
+    name='google',
+    client_id=os.environ.get('GOOGLE_CLIENT_ID'),
+    client_secret=os.environ.get('GOOGLE_CLIENT_SECRET'),
+    server_metadata_url='https://accounts.google.com/.well-known/openid-configuration',
+    client_kwargs={'scope': 'openid email profile'}
+)
 
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
 
-# ==========================================
-# 2. SECURE THE FLASK-ADMIN VIEWS
-# ==========================================
 class SecureAdminIndexView(AdminIndexView):
     def is_accessible(self):
-        return current_user.is_authenticated
+        return current_user.is_authenticated and current_user.username == 'ammu'
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('login', next=request.url))
 
 class SecureModelView(ModelView):
     def is_accessible(self):
-        return current_user.is_authenticated
+        return current_user.is_authenticated and current_user.username == 'ammu'
 
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('login', next=request.url))
 
-# ==========================================
-# 3. INITIALIZE ADVANCED ADMIN PANEL UI
-# ==========================================
 app.config['FLASK_ADMIN_SWATCH'] = 'darkly' 
 
 admin = Admin(app, name='IST Admin Panel', index_view=SecureAdminIndexView())
@@ -50,13 +59,40 @@ admin.add_view(SecureModelView(ProjectRequest, db))
 admin.add_view(SecureModelView(JobApplication, db))
 admin.add_view(SecureModelView(InternshipApplication, db))
 admin.add_view(SecureModelView(CertificateRecord, db))
+admin.add_view(SecureModelView(SeminarRegistration, db))
 
-# ==========================================
-# 4. AUTHENTICATION ROUTES
-# ==========================================
+@app.route('/google-login')
+def google_login():
+    redirect_uri = url_for('authorize', _external=True)
+    return google.authorize_redirect(redirect_uri)
+
+@app.route('/authorize')
+def authorize():
+    try:
+        token = google.authorize_access_token()
+        user_info = token.get('userinfo')
+        if user_info:
+            email = user_info['email']
+            google_id = user_info['sub']
+            username = user_info.get('name', email.split('@')[0])
+            
+            user = User.query.filter_by(email=email).first()
+            if not user:
+                user = User(email=email, username=username, google_id=google_id, role='unassigned')
+                db.session.add(user)
+                db.session.commit()
+                
+            login_user(user)
+            return redirect(url_for('public_pages.portal'))
+    except Exception as e:
+        print(f"OAUTH ERROR: {str(e)}")
+        flash(f"Google login failed: {str(e)}", "error")
+        
+    return redirect(url_for('public_pages.portal_login'))
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    if current_user.is_authenticated:
+    if current_user.is_authenticated and current_user.username == 'ammu':
         return redirect('/admin')
 
     if request.method == 'POST':
@@ -65,9 +101,11 @@ def login():
         
         user = User.query.filter_by(username=username).first()
         
-        if user and check_password_hash(user.password, password):
+        if user and user.password and check_password_hash(user.password, password):
             login_user(user)
-            return redirect('/admin')
+            if user.username == 'ammu':
+                return redirect('/admin')
+            return redirect(url_for('public_pages.portal'))
         else:
             flash('Invalid username or password', 'error')
             
@@ -76,7 +114,7 @@ def login():
 @app.route('/logout')
 def logout():
     logout_user()
-    return redirect(url_for('login'))
+    return redirect(url_for('public_pages.portal_login'))
 
 @app.route('/setup-admin') 
 def setup_admin():
@@ -84,7 +122,7 @@ def setup_admin():
         admin_exists = User.query.filter_by(username='ammu').first()
         if not admin_exists:
             hashed_pw = generate_password_hash('Shalini0810*')
-            new_admin = User(username='ammu', email='inovatesolutiontechnology@gmail.com', password=hashed_pw)
+            new_admin = User(username='ammu', email='inovatesolutiontechnology@gmail.com', password=hashed_pw, role='admin')
             db.session.add(new_admin)
             db.session.commit()
             
@@ -96,16 +134,10 @@ def setup_admin():
         db.session.rollback()
         return f"<h3>Database Error:</h3><p>{str(e)}</p>"
 
-# ==========================================
-# 5. SITEMAP ROUTE
-# ==========================================
 @app.route('/sitemap.xml')
 def sitemap():
     return send_from_directory(os.path.dirname(os.path.abspath(__file__)), 'sitemap.xml')
 
-# ==========================================
-# 6. START APP & CREATE TABLES
-# ==========================================
 with app.app_context():
     db.create_all()
 

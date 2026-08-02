@@ -7,19 +7,20 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from flask import Blueprint, render_template, request, flash, redirect, url_for, send_file, jsonify
 from werkzeug.utils import secure_filename
+from werkzeug.security import generate_password_hash, check_password_hash
+from flask_login import login_user, logout_user, login_required, current_user
 from sqlalchemy import inspect, text
 from fpdf import FPDF
-from .models import Contact, ProjectRequest, JobApplication, InternshipApplication, CertificateRecord
+from .models import User, Contact, ProjectRequest, JobApplication, InternshipApplication, CertificateRecord, SeminarRegistration
 from . import db
 import tempfile
 
 public_pages = Blueprint('public_pages', __name__, template_folder='templates', static_folder='static')
 
-def send_admin_notification(subject, body):
+def send_email(subject, body, recipient_email):
     sender_email = os.environ.get('MAIL_USERNAME')
     sender_password = os.environ.get('MAIL_APP_PASSWORD')
-    recipient_email = "inovatesolutiontechnology@gmail.com"
-
+    
     if not sender_email or not sender_password:
         return
 
@@ -37,6 +38,9 @@ def send_admin_notification(subject, body):
         server.quit()
     except Exception:
         pass
+
+def send_admin_notification(subject, body):
+    send_email(subject, body, "inovatesolutiontechnology@gmail.com")
 
 def upload_to_vercel_blob(file_obj):
     token = os.getenv('BLOB_READ_WRITE_TOKEN')
@@ -57,10 +61,6 @@ def upload_to_vercel_blob(file_obj):
         raise Exception(f"Vercel API Error {response.status_code}: {response.text}")
     return response.json().get('url')
 
-
-# ==========================================
-# PUBLIC ROUTES & SEO
-# ==========================================
 @public_pages.route('/')
 def index():
     return render_template('index.html', 
@@ -105,10 +105,131 @@ def privacy_policy():
 def terms():
     return render_template('terms.html')
 
+@public_pages.route('/register', methods=['GET', 'POST'])
+def register():
+    if current_user.is_authenticated:
+        return redirect(url_for('public_pages.portal'))
 
-# ==========================================
-# FORM SUBMISSION ROUTES
-# ==========================================
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        role = request.form.get('role')
+        username = email.split('@')[0]
+
+        existing_user = User.query.filter_by(email=email).first()
+        if existing_user:
+            flash("Email already registered.", "error")
+            return redirect(url_for('public_pages.register'))
+
+        hashed_pw = generate_password_hash(password)
+        new_user = User(email=email, username=username, password=hashed_pw, role=role)
+        
+        try:
+            db.session.add(new_user)
+            db.session.commit()
+            
+            welcome_subject = "Welcome to Inovate Solution Technology Portal!"
+            welcome_body = f"Hello {username},\n\nThank you for registering on our portal as a {role}. Explore our events, internships, and services tailored for you!\n\nBest Regards,\nIST Team"
+            send_email(welcome_subject, welcome_body, email)
+            
+            login_user(new_user)
+            return redirect(url_for('public_pages.portal'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f"Error creating account: {str(e)}", "error")
+
+    return render_template('register.html')
+
+@public_pages.route('/portal/login', methods=['GET', 'POST'])
+def portal_login():
+    if current_user.is_authenticated:
+        return redirect(url_for('public_pages.portal'))
+
+    if request.method == 'POST':
+        email = request.form.get('email')
+        password = request.form.get('password')
+        user = User.query.filter_by(email=email).first()
+
+        if user and check_password_hash(user.password, password):
+            login_user(user)
+            return redirect(url_for('public_pages.portal'))
+        flash("Invalid email or password", "error")
+
+    return render_template('portal_login.html')
+
+
+@public_pages.route('/portal')
+@login_required
+def portal():
+    if current_user.role == 'student':
+        return redirect(url_for('public_pages.student_dashboard'))
+    elif current_user.role == 'professional':
+        return redirect(url_for('public_pages.professional_dashboard'))
+    elif current_user.role == 'client':
+        return redirect(url_for('public_pages.client_dashboard'))
+    else:
+        return render_template('portal_role_selection.html', user=current_user)
+
+@public_pages.route('/update-role', methods=['POST'])
+@login_required
+def update_role():
+    role = request.form.get('role')
+    if role in ['student', 'professional', 'client']:
+        current_user.role = role
+        db.session.commit()
+        flash(f"Profile updated! Welcome to your {role.capitalize()} dashboard.", "success")
+    return redirect(url_for('public_pages.portal'))
+
+@public_pages.route('/portal/student')
+@login_required
+def student_dashboard():
+    if current_user.role != 'student':
+        return redirect(url_for('public_pages.portal'))
+    return render_template('dashboard_student.html', user=current_user)
+
+@public_pages.route('/portal/professional')
+@login_required
+def professional_dashboard():
+    if current_user.role != 'professional':
+        return redirect(url_for('public_pages.portal'))
+    return render_template('dashboard_professional.html', user=current_user)
+
+@public_pages.route('/portal/client')
+@login_required
+def client_dashboard():
+    if current_user.role != 'client':
+        return redirect(url_for('public_pages.portal'))
+    return render_template('dashboard_client.html', user=current_user)
+
+@public_pages.route('/seminar-register', methods=['POST'])
+@login_required
+def seminar_register():
+    seminar_name = request.form.get('seminar_name')
+    domain = request.form.get('domain')
+    
+    if not seminar_name or not domain:
+        flash("All fields are required.", "error")
+        return redirect(url_for('public_pages.portal'))
+
+    registration = SeminarRegistration(user_id=current_user.id, seminar_name=seminar_name, domain=domain)
+    
+    try:
+        db.session.add(registration)
+        db.session.commit()
+        
+        subject = f"Registration Confirmed: {seminar_name}"
+        body = f"Dear {current_user.username},\n\nYou have successfully registered for the {seminar_name} ({domain}) seminar. We look forward to seeing you!\n\nBest Regards,\nIST Team"
+        send_email(subject, body, current_user.email)
+        
+        send_admin_notification("New Seminar Registration", f"User {current_user.email} registered for {seminar_name}.")
+        
+        flash("Successfully registered for the seminar! Confirmation email sent.", "success")
+    except Exception as e:
+        db.session.rollback()
+        flash("Error processing registration.", "error")
+
+    return redirect(url_for('public_pages.portal'))
+
 @public_pages.route('/interns', methods=['GET', 'POST'])
 def interns():
     if request.method == 'POST':
@@ -250,12 +371,15 @@ def contact():
                            page_desc="Get in touch with our team to start your next big tech project.",
                            page_keywords="contact IT company, software agency contact")
 
-# ==========================================
-# CERTIFICATE GENERATION ROUTES
-# ==========================================
-
-# Define workshop schedules
 WORKSHOP_SCHEDULES = {
+    'cloud_computing': {
+        'name': 'Cloud Computing in Practice: From Architecture to Deployment',
+        'date': datetime(2026, 8, 8, 10, 0, 0),
+        'availability_start': datetime(2026, 1, 8, 10, 0, 0),
+        'availability_end': datetime(2026, 8, 10, 10, 0, 0),
+        'description': 'Learn comprehensive cloud architecture strategies and practical deployment workflows.',
+        'order': 0
+    },
     'build_ai_agent': {
         'name': 'Build Your Own AI Agent',
         'date': datetime(2026, 7, 30, 10, 0, 0),
@@ -316,7 +440,6 @@ WORKSHOP_SCHEDULES = {
 
 @public_pages.route('/workshop-certificate', methods=['GET'])
 def workshop_certificate():
-    """Display the workshop certificate page with availability status"""
     workshops_status = {}
     current_time = datetime.now()
     
@@ -366,7 +489,6 @@ def workshop_certificate():
 
 @public_pages.route('/api/check-workshop-availability/<workshop_id>', methods=['GET'])
 def check_workshop_availability(workshop_id):
-    """API endpoint to check if a workshop certificate is available"""
     if workshop_id not in WORKSHOP_SCHEDULES:
         return jsonify({'error': 'Workshop not found'}), 404
     
@@ -393,7 +515,6 @@ def check_workshop_availability(workshop_id):
 
 @public_pages.route('/generate-certificate', methods=['POST'])
 def generate_certificate():
-    """Generate and download certificate for a workshop"""
     student_name = request.form.get('student_name')
     email = request.form.get('email')
     workshop_id = request.form.get('workshop_id', 'visualizing_intelligence')
@@ -433,9 +554,6 @@ def generate_certificate():
         db.session.rollback()
         return jsonify({'error': f'Database Error: {str(e)}'}), 500
     
-    # =============================================
-    # SINGLE PAGE A4 LANDSCAPE PDF CERTIFICATE
-    # =============================================
     pdf = FPDF(orientation='L', unit='mm', format='A4')
     pdf.add_page()
     
