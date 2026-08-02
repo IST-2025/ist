@@ -14,6 +14,7 @@ from aivent.models import (
 )
 from flask_admin import Admin, AdminIndexView
 from flask_admin.contrib.sqla import ModelView
+from flask_admin.theme import Bootstrap4Theme 
 from flask_login import LoginManager, current_user, login_user, logout_user
 from werkzeug.security import generate_password_hash, check_password_hash
 from authlib.integrations.flask_client import OAuth
@@ -66,17 +67,28 @@ class SecureModelView(ModelView):
     def inaccessible_callback(self, name, **kwargs):
         return redirect(url_for('login', next=request.url))
 
-app.config['FLASK_ADMIN_SWATCH'] = 'darkly' 
 
-admin = Admin(app, name='IST Admin Panel', index_view=SecureAdminIndexView())
-admin.add_view(SecureModelView(User, db))
-admin.add_view(SecureModelView(Contact, db))
-admin.add_view(SecureModelView(ProjectRequest, db))
-admin.add_view(SecureModelView(JobApplication, db))
-admin.add_view(SecureModelView(InternshipApplication, db))
-admin.add_view(SecureModelView(CertificateRecord, db))
-admin.add_view(SecureModelView(SeminarRegistration, db))
-admin.add_view(SecureModelView(FeedbackRecord, db))  # <-- Feedback panel added here!
+# FIX: Changed swatch from 'darkly' to 'flatly' for a clean, modern white theme!
+admin = Admin(
+    app, 
+    name='IST Admin Panel', 
+    theme=Bootstrap4Theme(swatch='flatly'), 
+    index_view=SecureAdminIndexView()
+)
+
+# Group 1: Accounts & Contacts 
+admin.add_view(SecureModelView(User, db, category='Accounts & Info'))
+admin.add_view(SecureModelView(Contact, db, category='Accounts & Info'))
+
+# Group 2: Applications 
+admin.add_view(SecureModelView(ProjectRequest, db, category='Applications'))
+admin.add_view(SecureModelView(JobApplication, db, category='Applications'))
+admin.add_view(SecureModelView(InternshipApplication, db, category='Applications'))
+
+# Group 3: Records & Data 
+admin.add_view(SecureModelView(SeminarRegistration, db, category='Records & Data'))
+admin.add_view(SecureModelView(CertificateRecord, db, category='Records & Data'))
+admin.add_view(SecureModelView(FeedbackRecord, db, category='Records & Data'))
 
 @app.route('/google-login')
 def google_login():
