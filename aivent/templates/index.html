@@ -109,12 +109,77 @@
         word-break: break-all;
     }
 
+    /* Auto-scroll Carousel Styles */
+    .auto-scroll-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+    }
+
+    .auto-scroll-track {
+        display: flex;
+        width: fit-content;
+        animation: scrollLeft 30s linear infinite;
+    }
+
+    .auto-scroll-track:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes scrollLeft {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .auto-scroll-item {
+        flex-shrink: 0;
+        padding: 0 15px;
+    }
+
+    /* Testimonials Auto-scroll Styles */
+    .testimonials-scroll-container {
+        overflow: hidden;
+        position: relative;
+        width: 100%;
+        padding: 20px 0;
+    }
+
+    .testimonials-scroll-track {
+        display: flex;
+        width: fit-content;
+        animation: scrollTestimonials 40s linear infinite;
+    }
+
+    .testimonials-scroll-track:hover {
+        animation-play-state: paused;
+    }
+
+    @keyframes scrollTestimonials {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(-50%);
+        }
+    }
+
+    .testimonial-scroll-item {
+        flex-shrink: 0;
+        padding: 0 15px;
+        width: 450px;
+    }
+
     /* Client Logo Styling - Updated for dark background */
     .client-logo-item {
         background: white;
         border-radius: 12px;
         padding: 20px;
         height: 140px;
+        width: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -152,6 +217,7 @@
         border-radius: 16px;
         padding: 25px;
         height: 180px;
+        width: 200px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -184,6 +250,80 @@
     .cert-logo-wrapper:hover i {
         color: #ffffff;
         transform: scale(1.1);
+    }
+
+    /* Equal Height Testimonial Cards */
+    .testimonial-card {
+        background: rgba(30, 30, 30, 0.95);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+        border-radius: 16px;
+        padding: 35px 30px;
+        height: 450px;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        transition: all 0.3s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .testimonial-card:hover {
+        background: rgba(122, 90, 248, 0.1);
+        border-color: #7a5af8;
+        transform: translateY(-5px);
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.5);
+    }
+
+    .testimonial-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #7a5af8, transparent);
+        opacity: 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .testimonial-card:hover::before {
+        opacity: 1;
+    }
+
+    .testimonial-content {
+        flex: 1;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .testimonial-text {
+        color: rgba(255, 255, 255, 0.7);
+        line-height: 1.8;
+        font-size: 0.95rem;
+        flex: 1;
+        overflow: hidden;
+        display: -webkit-box;
+        -webkit-line-clamp: 10;
+        -webkit-box-orient: vertical;
+    }
+
+    .testimonial-author {
+        margin-top: 25px;
+        padding-top: 20px;
+        border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .testimonial-author h5 {
+        color: #ffffff;
+        font-size: 1.1rem;
+        margin-bottom: 5px;
+    }
+
+    .testimonial-author span {
+        color: #7a5af8;
+        font-size: 0.9rem;
+        font-weight: 500;
     }
 </style>
 
@@ -606,119 +746,188 @@
             </div>
         </div>
 
-      <div class="row g-4 justify-content-center align-items-center">
-
-    <!-- Government / Banking -->
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay=".1s">
-        <div class="client-logo-item">
-            <img src="https://logos-world.net/wp-content/uploads/2023/02/SBI-Logo.png"
-                alt="State Bank of India">
+        <!-- Auto-scrolling Clients Carousel -->
+        <div class="auto-scroll-container wow fadeInUp" data-wow-delay=".5s">
+            <div class="auto-scroll-track" id="clients-track">
+                <!-- Original set of logos -->
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://logos-world.net/wp-content/uploads/2023/02/SBI-Logo.png"
+                            alt="State Bank of India">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://nandhapolytechnic.org/wp-content/uploads/2024/07/logo-black.png"
+                            alt="Nandha Polytechnic">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://dfhe5ze0n4pxu.cloudfront.net/College/Logos/Logo-1720449066328.jfif"
+                            alt="College Logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://www.aishwaryaacademy.in/images/logo3.png"
+                            alt="Aishwarya Academy">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://skkids.wingslms.com/wp-content/uploads/2025/09/SK-Kids-Play-School-png-1.png"
+                            alt="SK Kids">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://www.sharveshtoursandtravels.com/images/logo.jpg"
+                            alt="Sharvesh Tours and Travels">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://firstchoice.supplies/assets/images/logo/logo.png"
+                            alt="First Choice Supplies">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://www.mechzoneautomotive.shop/static/img/logo1.png"
+                            alt="Mech Zone Automotive">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://media.licdn.com/dms/image/v2/D560BAQEM5DYffnV-dg/company-logo_200_200/company-logo_200_200/0/1697479615210?e=2147483647&v=beta&t=HTXSfS63ze5XGLTkfuOtXmwvQWAXxWMqsSQJP9xgsRc"
+                            alt="Navigo Care">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="/static/assets/images/client/navogoofficial_logo.jpg"
+                            alt="Navogo Official">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="/static/assets/images/client/glitter.jpeg"
+                            alt="Glitter">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://www.robotica.org.in/assets/img/logo.svg"
+                            alt="Robotica">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://dreamlandentertainment.org/static/media/dle_logo.b798894c89ebf0bd2613.webp"
+                            alt="Dreamland Entertainment">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://d242nlqul83u9g.cloudfront.net/NB_Media/15.05.2025/web_size_2.png"
+                            alt="NV Media">
+                    </div>
+                </div>
+                
+                <!-- Duplicate set for seamless scrolling -->
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://logos-world.net/wp-content/uploads/2023/02/SBI-Logo.png"
+                            alt="State Bank of India">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://nandhapolytechnic.org/wp-content/uploads/2024/07/logo-black.png"
+                            alt="Nandha Polytechnic">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://dfhe5ze0n4pxu.cloudfront.net/College/Logos/Logo-1720449066328.jfif"
+                            alt="College Logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://www.aishwaryaacademy.in/images/logo3.png"
+                            alt="Aishwarya Academy">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://skkids.wingslms.com/wp-content/uploads/2025/09/SK-Kids-Play-School-png-1.png"
+                            alt="SK Kids">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://www.sharveshtoursandtravels.com/images/logo.jpg"
+                            alt="Sharvesh Tours and Travels">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://firstchoice.supplies/assets/images/logo/logo.png"
+                            alt="First Choice Supplies">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://www.mechzoneautomotive.shop/static/img/logo1.png"
+                            alt="Mech Zone Automotive">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://media.licdn.com/dms/image/v2/D560BAQEM5DYffnV-dg/company-logo_200_200/company-logo_200_200/0/1697479615210?e=2147483647&v=beta&t=HTXSfS63ze5XGLTkfuOtXmwvQWAXxWMqsSQJP9xgsRc"
+                            alt="Navigo Care">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="/static/assets/images/client/navogoofficial_logo.jpg"
+                            alt="Navogo Official">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="/static/assets/images/client/glitter.jpeg"
+                            alt="Glitter">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://www.robotica.org.in/assets/img/logo.svg"
+                            alt="Robotica">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://dreamlandentertainment.org/static/media/dle_logo.b798894c89ebf0bd2613.webp"
+                            alt="Dreamland Entertainment">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="client-logo-item">
+                        <img src="https://d242nlqul83u9g.cloudfront.net/NB_Media/15.05.2025/web_size_2.png"
+                            alt="NV Media">
+                    </div>
+                </div>
+            </div>
         </div>
-    </div>
-
-    <!-- Educational Institutions -->
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay=".2s">
-        <div class="client-logo-item">
-            <img src="https://nandhapolytechnic.org/wp-content/uploads/2024/07/logo-black.png"
-                alt="Nandha Polytechnic">
-        </div>
-    </div>
-
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay=".3s">
-        <div class="client-logo-item">
-            <img src="https://dfhe5ze0n4pxu.cloudfront.net/College/Logos/Logo-1720449066328.jfif"
-                alt="College Logo">
-        </div>
-    </div>
-
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay=".4s">
-        <div class="client-logo-item">
-            <img src="https://www.aishwaryaacademy.in/images/logo3.png"
-                alt="Aishwarya Academy">
-        </div>
-    </div>
-
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay=".5s">
-        <div class="client-logo-item">
-            <img src="https://skkids.wingslms.com/wp-content/uploads/2025/09/SK-Kids-Play-School-png-1.png"
-                alt="SK Kids">
-        </div>
-    </div>
-
-    <!-- Corporate Clients -->
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay=".6s">
-        <div class="client-logo-item">
-            <img src="https://www.sharveshtoursandtravels.com/images/logo.jpg"
-                alt="Sharvesh Tours and Travels">
-        </div>
-    </div>
-
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay=".7s">
-        <div class="client-logo-item">
-            <img src="https://firstchoice.supplies/assets/images/logo/logo.png"
-                alt="First Choice Supplies">
-        </div>
-    </div>
-
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay=".8s">
-        <div class="client-logo-item">
-            <img src="https://www.mechzoneautomotive.shop/static/img/logo1.png"
-                alt="Mech Zone Automotive">
-        </div>
-    </div>
-
-    <!-- Startups / Technology -->
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay=".9s">
-        <div class="client-logo-item">
-            <img src="https://media.licdn.com/dms/image/v2/D560BAQEM5DYffnV-dg/company-logo_200_200/company-logo_200_200/0/1697479615210?e=2147483647&v=beta&t=HTXSfS63ze5XGLTkfuOtXmwvQWAXxWMqsSQJP9xgsRc"
-                alt="Navigo Care">
-        </div>
-    </div>
-
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay="1.0s">
-        <div class="client-logo-item">
-            <img src="/static/assets/images/client/navogoofficial_logo.jpg"
-                alt="Navogo Official">
-        </div>
-    </div>
-
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay="1.1s">
-        <div class="client-logo-item">
-            <img src="/static/assets/images/client/glitter.jpeg"
-                alt="Glitter">
-        </div>
-    </div>
-
-    <!-- Events / Media -->
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay="1.2s">
-        <div class="client-logo-item">
-            <img src="https://www.robotica.org.in/assets/img/logo.svg"
-                alt="Robotica">
-        </div>
-    </div>
-
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay="1.3s">
-        <div class="client-logo-item">
-            <img src="https://dreamlandentertainment.org/static/media/dle_logo.b798894c89ebf0bd2613.webp"
-                alt="Dreamland Entertainment">
-        </div>
-    </div>
-
-    <div class="col-6 col-md-4 col-lg-3 col-xl-2 wow fadeInUp" data-wow-delay="1.4s">
-        <div class="client-logo-item">
-            <img src="https://d242nlqul83u9g.cloudfront.net/NB_Media/15.05.2025/web_size_2.png"
-                alt="NV Media">
-        </div>
-    </div>
-
-</div>
     </div>
 </section>
 
 
 
-<!-- Updated Certificates Section with Logos Only -->
-<!-- Updated Certificates Section - Logos Only -->
+<!-- Updated Certificates Section with Auto-scroll -->
 <section id="section-certificates" class="bg-dark section-dark text-light pt-80 pb-80">
     <div class="container">
         <div class="row mb-5 text-center">
@@ -729,210 +938,116 @@
             </div>
         </div>
 
-      <div class="row g-4 justify-content-center align-items-center">
-
-    <!-- Ministry of Corporate Affairs -->
-    <div class="col-6 col-md-4 col-lg-3 wow fadeInUp" data-wow-delay=".2s">
-        <div class="cert-logo-wrapper">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Ministry_of_Corporate_Affairs_India.svg/330px-Ministry_of_Corporate_Affairs_India.svg.png?_=20220329164413"
-                alt="Ministry of Corporate Affairs (MCA)" class="cert-logo">
-        </div>
-    </div>
-
-    <!-- MSME Udyam -->
-    <div class="col-6 col-md-4 col-lg-3 wow fadeInUp" data-wow-delay=".3s">
-        <div class="cert-logo-wrapper">
-            <img src="https://5.imimg.com/data5/SELLER/Default/2021/7/VK/QI/QA/130657537/msme-udhyam-registration-service.jpg"
-                alt="MSME Udyam Registration" class="cert-logo">
-        </div>
-    </div>
-
-    <!-- Startup India (DPIIT) -->
-    <div class="col-6 col-md-4 col-lg-3 wow fadeInUp" data-wow-delay=".4s">
-        <div class="cert-logo-wrapper">
-            <img src="https://www.startupindia.gov.in/content/dam/invest-india/newhomepage/DPIIT-header.png"
-                alt="Startup India DPIIT Recognition" class="cert-logo">
-        </div>
-    </div>
-
-    <!-- StartupTN -->
-    <div class="col-6 col-md-4 col-lg-3 wow fadeInUp" data-wow-delay=".5s">
-        <div class="cert-logo-wrapper">
-            <img src="https://startuptn.in/images/blue%20horizontal.png"
-                alt="StartupTN" class="cert-logo">
-        </div>
-    </div>
-
-    <!-- Naan Mudhalvan -->
-    <div class="col-6 col-md-4 col-lg-3 wow fadeInUp" data-wow-delay=".6s">
-        <div class="cert-logo-wrapper">
-            <img src="https://vajiramias.sgp1.cdn.digitaloceanspaces.com/wp/current-affairs/2025/03/naan_mudhalvan_scheme.jpg?v=2"
-                alt="Naan Mudhalvan Scheme" class="cert-logo">
-        </div>
-    </div>
-
-    <!-- Skill India -->
-    <div class="col-6 col-md-4 col-lg-3 wow fadeInUp" data-wow-delay=".7s">
-        <div class="cert-logo-wrapper">
-            <img src="https://www.nsdcindia.org/assets/svgs/skill-india-logo.svg"
-                alt="Skill India" class="cert-logo">
-        </div>
-    </div>
-
-    <!-- NSDC -->
-    <div class="col-6 col-md-4 col-lg-3 wow fadeInUp" data-wow-delay=".8s">
-        <div class="cert-logo-wrapper">
-            <img src="https://www.nsdcindia.org/assets/svgs/final_logo.svg"
-                alt="National Skill Development Corporation (NSDC)" class="cert-logo">
-        </div>
-    </div>
-
-    <!-- Registration Portal -->
-    <div class="col-6 col-md-4 col-lg-3 wow fadeInUp" data-wow-delay=".9s">
-        <div class="cert-logo-wrapper">
-            <img src="https://india.registrationportalindia.org/uploads/logo/logo.jpeg"
-                alt="Registration Portal India" class="cert-logo">
-        </div>
-    </div>
-
-</div>
-    </div>
-</section>
-
-
-
-<section id="section-testimonials" class="bg-dark section-dark text-light pt-80 relative jarallax" aria-label="section">
-    <img src="/static/assets/images/background/7.webp" class="jarallax-img" alt="">
-    <div class="gradient-edge-top"></div>
-    <div class="gradient-edge-bottom"></div>
-    <div class="sw-overlay op-7"></div>
-
-    <div class="container relative z-2">
-        <div class="row g-4 gx-5 justify-content-center">
-            <div class="col-lg-6 text-center">
-                <h2 class="wow fadeInUp" data-wow-delay=".2s">What Our Partners Say</h2>
-                <p class="lead wow fadeInUp" data-wow-delay=".4s">Don't just take our word for it. Hear from the
-                    businesses we've helped transform through innovative IT solutions.</p>
-            </div>
-        </div>
-
-        <div class="row g-4 justify-content-center mt-3">
-            <div class="col-lg-12">
-                <div class="owl-carousel owl-theme owl-3-dots wow mask-right">
-
-                    <div class="item">
-                        <div class="bg-dark-2 p-4 p-md-5 rounded-3 h-100 position-relative">
-                            <i
-                                class="fa fa-quote-left fs-1 text-white op-1 position-absolute top-0 start-0 ms-4 mt-4"></i>
-                            <div class="z-2 relative">
-                                <ul class="list-unstyled d-flex mb-3">
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                </ul>
-                                <h4 class="mb-3 lh-base">"Reliable, proactive technical support."</h4>
-                                <p class="mb-4 text-white-50">Their managed IT services let us focus on teaching while
-                                    they handle the tech perfectly.</p>
-                                <div class="d-flex align-items-center">
-                                    <img src="https://i.pinimg.com/736x/71/29/ca/7129ca1ff74ba44b9dda205b7425cb76.jpg"
-                                        class="rounded-circle w-60px me-3" alt="Dr. Aishwarya">
-                                    <div>
-                                        <h5 class="mb-0 text-white">Dr. Aishwarya</h5>
-                                        <span class="fs-14 text-white-50">MD, Aiswarya Academy</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+        <!-- Auto-scrolling Certificates Carousel -->
+        <div class="auto-scroll-container wow fadeInUp" data-wow-delay=".5s">
+            <div class="auto-scroll-track" id="certificates-track" style="animation-direction: reverse;">
+                <!-- Original set of certificates -->
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Ministry_of_Corporate_Affairs_India.svg/330px-Ministry_of_Corporate_Affairs_India.svg.png?_=20220329164413"
+                            alt="Ministry of Corporate Affairs (MCA)" class="cert-logo">
                     </div>
-
-                    <div class="item">
-                        <div class="bg-dark-2 p-4 p-md-5 rounded-3 h-100 position-relative">
-                            <i
-                                class="fa fa-quote-left fs-1 text-white op-1 position-absolute top-0 start-0 ms-4 mt-4"></i>
-                            <div class="z-2 relative">
-                                <ul class="list-unstyled d-flex mb-3">
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                </ul>
-                                <h4 class="mb-3 lh-base">"A true game-changer"</h4>
-                                <p class="mb-4 text-white-50">— seamlessly migrated our tools to the cloud with zero
-                                    downtime. Highly recommended.</p>
-                                <div class="d-flex align-items-center">
-                                    <img src="https://i.pinimg.com/736x/71/29/ca/7129ca1ff74ba44b9dda205b7425cb76.jpg"
-                                        class="rounded-circle w-60px me-3" alt="Karthik Natarajan">
-                                    <div>
-                                        <h5 class="mb-0 text-white">Karthik Natarajan</h5>
-                                        <span class="fs-14 text-white-50">Director, Mech Zone</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://5.imimg.com/data5/SELLER/Default/2021/7/VK/QI/QA/130657537/msme-udhyam-registration-service.jpg"
+                            alt="MSME Udyam Registration" class="cert-logo">
                     </div>
-
-                    <div class="item">
-                        <div class="bg-dark-2 p-4 p-md-5 rounded-3 h-100 position-relative">
-                            <i
-                                class="fa fa-quote-left fs-1 text-white op-1 position-absolute top-0 start-0 ms-4 mt-4"></i>
-                            <div class="z-2 relative">
-                                <ul class="list-unstyled d-flex mb-3">
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star-half-alt text-warning"></i></li>
-                                </ul>
-                                <h4 class="mb-3 lh-base">"The perfect technology integration partners."</h4>
-                                <p class="mb-4 text-white-50">IST built a robust, high-performing mobile application our
-                                    users absolutely love.</p>
-                                <div class="d-flex align-items-center">
-                                    <img src="https://i.pinimg.com/736x/71/29/ca/7129ca1ff74ba44b9dda205b7425cb76.jpg"
-                                        class="rounded-circle w-60px me-3" alt="Rajesh Balasubramanian">
-                                    <div>
-                                        <h5 class="mb-0 text-white">Rajesh Balasubramanian</h5>
-                                        <span class="fs-14 text-white-50">CEO, Dreamland Entertainment</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://www.startupindia.gov.in/content/dam/invest-india/newhomepage/DPIIT-header.png"
+                            alt="Startup India DPIIT Recognition" class="cert-logo">
                     </div>
-
-                    <div class="item">
-                        <div class="bg-dark-2 p-4 p-md-5 rounded-3 h-100 position-relative">
-                            <i
-                                class="fa fa-quote-left fs-1 text-white op-1 position-absolute top-0 start-0 ms-4 mt-4"></i>
-                            <div class="z-2 relative">
-                                <ul class="list-unstyled d-flex mb-3">
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                    <li><i class="fa fa-star text-warning"></i></li>
-                                </ul>
-                                <h4 class="mb-3 lh-base">"Exceptional custom platform development."</h4>
-                                <p class="mb-4 text-white-50">Delivered a scalable LMS built from scratch on a tight
-                                    deadline.</p>
-                                <div class="d-flex align-items-center">
-                                    <img src="https://i.pinimg.com/736x/71/29/ca/7129ca1ff74ba44b9dda205b7425cb76.jpg"
-                                        class="rounded-circle w-60px me-3" alt="Priya Ramanathan">
-                                    <div>
-                                        <h5 class="mb-0 text-white">Priya Ramanathan</h5>
-                                        <span class="fs-14 text-white-50">Founder, SK Kids</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://startuptn.in/images/blue%20horizontal.png"
+                            alt="StartupTN" class="cert-logo">
                     </div>
-
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://vajiramias.sgp1.cdn.digitaloceanspaces.com/wp/current-affairs/2025/03/naan_mudhalvan_scheme.jpg?v=2"
+                            alt="Naan Mudhalvan Scheme" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://www.nsdcindia.org/assets/svgs/skill-india-logo.svg"
+                            alt="Skill India" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://www.nsdcindia.org/assets/svgs/final_logo.svg"
+                            alt="National Skill Development Corporation (NSDC)" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://india.registrationportalindia.org/uploads/logo/logo.jpeg"
+                            alt="Registration Portal India" class="cert-logo">
+                    </div>
+                </div>
+                
+                <!-- Duplicate set for seamless scrolling -->
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Ministry_of_Corporate_Affairs_India.svg/330px-Ministry_of_Corporate_Affairs_India.svg.png?_=20220329164413"
+                            alt="Ministry of Corporate Affairs (MCA)" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://5.imimg.com/data5/SELLER/Default/2021/7/VK/QI/QA/130657537/msme-udhyam-registration-service.jpg"
+                            alt="MSME Udyam Registration" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://www.startupindia.gov.in/content/dam/invest-india/newhomepage/DPIIT-header.png"
+                            alt="Startup India DPIIT Recognition" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://startuptn.in/images/blue%20horizontal.png"
+                            alt="StartupTN" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://vajiramias.sgp1.cdn.digitaloceanspaces.com/wp/current-affairs/2025/03/naan_mudhalvan_scheme.jpg?v=2"
+                            alt="Naan Mudhalvan Scheme" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://www.nsdcindia.org/assets/svgs/skill-india-logo.svg"
+                            alt="Skill India" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://www.nsdcindia.org/assets/svgs/final_logo.svg"
+                            alt="National Skill Development Corporation (NSDC)" class="cert-logo">
+                    </div>
+                </div>
+                <div class="auto-scroll-item">
+                    <div class="cert-logo-wrapper">
+                        <img src="https://india.registrationportalindia.org/uploads/logo/logo.jpeg"
+                            alt="Registration Portal India" class="cert-logo">
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </section>
+
+
+
+
 
 <section id="section-faq" class="bg-dark section-dark text-light">
     <div class="container">
@@ -1149,6 +1264,33 @@
                 counterElement.innerText = "0+";
             }
         }
+
+        // --- Auto-scroll Carousel Logic ---
+        function initAutoScroll() {
+            const clientsTrack = document.getElementById("clients-track");
+            const certificatesTrack = document.getElementById("certificates-track");
+            const testimonialsTrack = document.getElementById("testimonials-track");
+            
+            // Pause animation on hover for all tracks
+            function addHoverPause(track) {
+                if (track) {
+                    track.addEventListener("mouseenter", function() {
+                        this.style.animationPlayState = "paused";
+                    });
+                    
+                    track.addEventListener("mouseleave", function() {
+                        this.style.animationPlayState = "running";
+                    });
+                }
+            }
+            
+            addHoverPause(clientsTrack);
+            addHoverPause(certificatesTrack);
+            addHoverPause(testimonialsTrack);
+        }
+        
+        // Initialize auto-scroll functionality
+        initAutoScroll();
     });
 </script>
 
