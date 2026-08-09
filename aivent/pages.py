@@ -376,7 +376,7 @@ WORKSHOP_SCHEDULES = {
         'name': 'Cloud Computing in Practice: From Architecture to Deployment',
         'date': datetime(2026, 8, 8, 10, 0, 0),
         'availability_start': datetime(2026, 7, 8, 10, 0, 0),
-        'availability_end': datetime(2026, 8, 9, 10, 0, 0),
+        'availability_end': datetime(2026, 8, 10, 10, 0, 0),
         'description': 'Learn comprehensive cloud architecture strategies and practical deployment workflows.',
         'order': 0
     },
