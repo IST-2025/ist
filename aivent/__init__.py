@@ -39,7 +39,7 @@ def create_app():
 
     # Initialize extensions AFTER setting configs
     db.init_app(app)
-    migrate.init_app(app, db)
+    migrate.init_app(app, db, compare_type=True)
     
     login_manager.init_app(app)
     login_manager.login_view = 'login'
