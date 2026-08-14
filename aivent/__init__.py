@@ -19,12 +19,25 @@ def create_app():
     if raw_db_url:
         # Vercel/Supabase URLs often start with postgres://, but SQLAlchemy requires postgresql://
         app.config['SQLALCHEMY_DATABASE_URI'] = raw_db_url.replace("postgres://", "postgresql://", 1)
+        
+        # FIX: Added Engine Options specifically for PostgreSQL (Prevents SSL drops)
+        app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
+            "pool_recycle": 300,
+            "pool_pre_ping": True,
+            "connect_args": {
+                "keepalives": 1,
+                "keepalives_idle": 30,
+                "keepalives_interval": 10,
+                "keepalives_count": 5,
+                "sslmode": "require"
+            }
+        }
     else:
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///database.db'
         
     app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-    # Initialize extensions
+    # Initialize extensions AFTER setting configs
     db.init_app(app)
     migrate.init_app(app, db)
     

@@ -22,18 +22,6 @@ from authlib.integrations.flask_client import OAuth
 app = create_app()
 app.secret_key = os.environ.get('SECRET_KEY', 'super_secret_key_change_this_later') 
 
-# Fix for PostgreSQL SSL connection drops & serverless timeouts
-app.config["SQLALCHEMY_ENGINE_OPTIONS"] = {
-    "pool_recycle": 300,
-    "pool_pre_ping": True,
-    "connect_args": {
-        "keepalives": 1,
-        "keepalives_idle": 30,
-        "keepalives_interval": 10,
-        "keepalives_count": 5
-    }
-}
-
 migrate = Migrate(app, db)
 
 login_manager = LoginManager()
@@ -112,6 +100,7 @@ def authorize():
                 db.session.commit()
                 
             login_user(user)
+            # Make sure 'public_pages.portal' blueprint is correctly registered in create_app
             return redirect(url_for('public_pages.portal'))
     except Exception as e:
         print(f"OAUTH ERROR: {str(e)}")
